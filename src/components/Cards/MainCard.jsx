@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Box,makeStyles} from "@material-ui/core";
 import Card from './Card';
+import axios from 'axios';
+import { url } from '../../config';
 
 const useStyles = makeStyles((theme) =>({
     box:{
@@ -26,14 +28,27 @@ const useStyles = makeStyles((theme) =>({
 
 export default function MainCard() {
     const classes = useStyles();
+    const [categoryData, setCategoryData] = useState([]);
+    const [recordData, setRecordData] = useState([]);
+
+    useEffect(() => {
+        axios.get(url+"/categories").then(res => {
+            setCategoryData(res.data);
+        }
+        )
+        axios.get(url+"/records").then(res => {
+            setRecordData(res.data);
+        }
+        )
+    }, [])
     return (
         <Box className={classes.box}>
-            <Card title="Result" path="/result" />
-            <Card title="Admit Card" path="/" />
-            <Card title="Latest Jobs" path="/" />
-            <Card title="Answer Key" path="/" />
-            <Card title="Syllabus" path="/" />
-            <Card title="Admission" path="/" />
+            {categoryData.map(item => {
+                const data = recordData.filter(record => record.categoryId === item._id);
+                return (
+                    <Card key={item._id} title={item.name} slug={item.slug} categoryId={item._id} recordData={data} />
+                )
+            })}
         </Box>
     )
 }

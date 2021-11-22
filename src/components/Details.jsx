@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import Flip from "react-reveal";
+import axios from 'axios';
+import { url } from '../config';
+import parse from 'html-react-parser';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -39,18 +42,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Details() {
     const query = new URLSearchParams(window.location.search)
-    const token = query.get('name')
+    const id = query.get('id')
     const classes = useStyles();
+
+    const [data, setData] = useState([]);
+    const [ready, setReady] = useState(false);
+
+    useEffect(() => {
+        axios.get(url + "/records?_id=" + id).then(res => {
+            setData(res.data[0]);
+            setReady(true);
+        }
+        )
+    }, [])
 
     return (
         <Flip right>
+            {ready ?
             <Box className={classes.box}>
                 <Box className={classes.row}>
                     <Box className={classes.title}>
                         Name of Post :
                     </Box>
                     <Box className={classes.desc}>
-                        <Typography style={{ fontSize: "25px", color: "#0F3063" }}> {token} </Typography>
+                        <Typography style={{ fontSize: "25px", color: "#0F3063" }}>{data.name}</Typography>
                     </Box>
                 </Box>
                 <Box className={classes.row}>
@@ -58,7 +73,8 @@ export default function Details() {
                         Post Update:
                     </Box>
                     <Box className={classes.desc}>
-                        12 November 2021 | 12:30 PM
+                        {/* 12 November 2021 | 12:30 PM */}
+                        {data.created_at}
                     </Box>
                 </Box>
                 <Box className={classes.row}>
@@ -66,10 +82,15 @@ export default function Details() {
                         Short Information:
                     </Box>
                     <Box className={classes.desc}>
-                        Uttar Pradesh Power Corporation Limited (UPPCL) has Recently Uploaded Result for the Post of Lekha Lipik (102 Post) Recruitment 2020. Those Candidates Who have Appeared in this Recruitment can Download Result.
+                        {data.short_information}
                     </Box>
                 </Box>
+                <Box className={classes.row} sx={{ alignItems: "center", justifyContent: "center" }}>
+                    {parse(data.more_data_html)}
+                </Box>
             </Box>
+            : <div>Loading...</div>}
+
         </Flip>
     )
 }
