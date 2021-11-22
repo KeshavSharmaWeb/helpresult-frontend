@@ -1,0 +1,1 @@
+exports.url = 'https://help-result-api.herokuapp.com/api';

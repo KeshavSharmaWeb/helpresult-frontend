@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Box, Button, makeStyles} from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
-import Data from "./data.json";
 import Bounce from "react-reveal";
 import {Link,NavLink} from "react-router-dom";
 
@@ -62,9 +61,8 @@ const useStyles = makeStyles((theme) => ({
 })
 );
 
-export default function Card({ title,path }) {
+export default function Card({ title,slug, categoryId, recordData }) {
     const classes = useStyles();
-
     return (
         <Box className={classes.box}>
             <Bounce left>
@@ -72,21 +70,22 @@ export default function Card({ title,path }) {
                     {title}
                 </Box>
                 <Box className={classes.mid}>
-                    {
-                        Data.map((val, id) => {
+
+                        {recordData.map((val) => {
                             return (
-                                <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/full", search: `?name=${val.data}`}} className={classes.navLink} >
+                                <li className={classes.li} key={val._id}> 
+                                    <NavLink to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.data}
+                                    {val.name}
                                     </NavLink>
                                 </li>
                                 )
                         })
-                    }
+                        }
+                    
                 </Box>
                 <Box style={{ textAlign: "end" }}>
-                    <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
+                    <Button variant="contained" className={classes.button}> <Link to={`/more/${slug}?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
                 </Box>
             </Bounce>
         </Box>
