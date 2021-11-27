@@ -1,7 +1,9 @@
 import React from 'react'
-import { Box, Typography,  makeStyles } from "@material-ui/core";
+import { Box, Typography, makeStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import Bounce from "react-reveal";
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -43,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Footer() {
     const classes = useStyles();
+    const location = useLocation();
+    const [currentLocation, setCurrentLocation] = useState('/');
+
+    useEffect(() => {
+        setCurrentLocation(location.pathname);
+    }
+        , [location.pathname]);
 
     const data = [
         "UP-scholorship",
@@ -65,47 +74,55 @@ export default function Footer() {
     ]
 
     return (
-        <Bounce left>
-            <Box className={classes.box}>
-                <Box >
+        <Box>
+            {currentLocation.startsWith('/admin') ? (
+                null)
+                :
+                (
                     <Bounce left>
-                        <Typography style={{ color: "white", fontSize: "25px" }} >  CONTACT  </Typography>
-                    </Bounce>
-                    <Box className={classes.contact}>
-                        <Bounce left>
-                            <Typography>
-                                Address: <br />
-                                KHASRA NO-4331/,FLAT <br />
-                                NO-14,SKHUNTLA APARTMENT, RANI <br />
-                                KHERA ROAD,MUNDKA,DELHI-110041 <br />
-                            </Typography>
-                        </Bounce>
-                        <Box style={{ margin: "20px 0px" }} >
-                            <Bounce left>
-                                <Typography>
-                                    Phone: +91-7210363680, 7210363681 <br />
-                                    Email: srinfotech9238@gmail.com
-                                </Typography>
-                            </Bounce>
-                        </Box>
-                    </Box>
-                </Box>
-                <Box >
-                    <Bounce left>
-                        <Typography style={{ color: "white", fontSize: "25px" }}> USEFUL lINKS </Typography>
-                        <Box className={classes.links} >
+                        <Box className={classes.box}>
+                            <Box >
+                                <Bounce left>
+                                    <Typography style={{ color: "white", fontSize: "25px" }} >  CONTACT  </Typography>
+                                </Bounce>
+                                <Box className={classes.contact}>
+                                    <Bounce left>
+                                        <Typography>
+                                            Address: <br />
+                                            KHASRA NO-4331/,FLAT <br />
+                                            NO-14,SKHUNTLA APARTMENT, RANI <br />
+                                            KHERA ROAD,MUNDKA,DELHI-110041 <br />
+                                        </Typography>
+                                    </Bounce>
+                                    <Box style={{ margin: "20px 0px" }} >
+                                        <Bounce left>
+                                            <Typography>
+                                                Phone: +91-7210363680, 7210363681 <br />
+                                                Email: srinfotech9238@gmail.com
+                                            </Typography>
+                                        </Bounce>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box >
+                                <Bounce left>
+                                    <Typography style={{ color: "white", fontSize: "25px" }}> USEFUL lINKS </Typography>
+                                    <Box className={classes.links} >
 
-                            {
-                                data.map((val, id) => {
-                                    return (
-                                        <Link key={id} className={classes.link} to="/" > {val} </Link>
-                                    )
-                                })
-                            }
+                                        {
+                                            data.map((val, id) => {
+                                                return (
+                                                    <Link key={id} className={classes.link} to="/" > {val} </Link>
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                </Bounce>
+                            </Box>
                         </Box>
                     </Bounce>
-                </Box>
-            </Box>
-        </Bounce>
+                )
+            }
+        </Box>
     )
 }
