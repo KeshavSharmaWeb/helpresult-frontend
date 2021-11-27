@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import { Box, Button, makeStyles} from "@material-ui/core";
+import React from 'react';
+import { Box, Button, makeStyles } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
 import Bounce from "react-reveal";
-import {Link,NavLink} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Loader from '../Loader';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         background: "#fff",
         padding: "10px",
-        "&:hover":{
+        "&:hover": {
             background: "#e3e8e5"
         }
     },
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         margin: "4px 0px",
         fontSize: "14px",
-        "&:hover":{
+        "&:hover": {
             fontWeight: "900",
             cursor: "pointer"
         }
@@ -54,35 +55,45 @@ const useStyles = makeStyles((theme) => ({
     navLink: {
         textDecoration: "none",
         color: "#727272",
-        "&:hover":{
+        "&:hover": {
             color: "black"
         }
     }
 })
 );
 
-export default function Card({ title,slug, categoryId, recordData }) {
+export default function Card({ title, slug, categoryId, recordData }) {
     const classes = useStyles();
+    const [ready, setReady] = React.useState(false);
+    const [data, setData] = React.useState([]);
+
+    React.useEffect(() => {
+        setData(recordData);
+        setReady(true);
+    })
     return (
         <Box className={classes.box}>
             <Bounce left>
                 <Box className={classes.top}>
                     {title}
                 </Box>
-                <Box className={classes.mid}>
 
-                        {recordData.map((val) => {
-                            return (
-                                <li className={classes.li} key={val._id}> 
-                                    <NavLink to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} >
-                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
+                <Box className={classes.mid}>
+                    {ready ?
+
+                    data.map((val) => {
+                        return (
+                            <li className={classes.li} key={val._id}>
+                                <NavLink to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} >
+                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
                                     {val.name}
-                                    </NavLink>
-                                </li>
-                                )
-                        })
-                        }
+                                </NavLink>
+                            </li>
+                        )
+                    })
                     
+                    : <Loader />}
+
                 </Box>
                 <Box style={{ textAlign: "end" }}>
                     <Button variant="contained" className={classes.button}> <Link to={`/more/${slug}?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>

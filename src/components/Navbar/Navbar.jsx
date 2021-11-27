@@ -7,14 +7,21 @@ import {
   makeStyles,
   useTheme,
   useMediaQuery,
+  Box,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import DrawerComponent from "./Drawer";
 import Fade from "react-reveal";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { url } from "../../config";
+import Loader from "../Loader";
+import { useLocation } from "react-router-dom";
+import AdminNav from "../Admin/Navbar";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    background: "#f4e8f1",
+    background: "white",
   },
   navlinks: {
     display: "flex",
@@ -29,16 +36,16 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     color: "black",
-    fontSize: "12px",
-    padding: "5px 5px",
+    fontSize: "14px",
+    padding: "3px 3px",
     display: "flex",
     justifyContent: "center",
-    width: "50%",  
-    fontWeight: "500",
+    width: "50%",
+    fontWeight: "600",
     "&:hover": {
       color: "blue",
       border: "none",
-      padding: "4px 5px",
+      // padding: "4px 5px",
     },
   },
 }));
@@ -47,55 +54,64 @@ function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  
+
+  const location = useLocation();
+  const [categoryData, setCategoryData] = useState([]);
+  const [isReady, setIsReady] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState('/');
+
+  useEffect(() => {
+    setCurrentLocation(location.pathname);
+  }
+    , [location.pathname]);
+
+  useEffect(() => {
+    axios.get(url + "/categories").then(res => {
+      setCategoryData(res.data);
+      setIsReady(true);
+    }
+    )
+  }, [])
+
   return (
-    <Fade left >
-    <AppBar  id="top" position="sticky" className={classes.appbar} >
-      <CssBaseline />
-      <Toolbar >
-        <Typography variant="h4" className={classes.logo}>
-          <img src="/images/logo.png" alt="logo" style={{marginTop: "10px"}} />
-          
-        </Typography>
-        {isMobile ? (
-          <DrawerComponent />
-        ) : (
-          <div className={classes.navlinks}>
-            <Link to="/" className={classes.link}>
-              HOME
-            </Link>
-            <Link to="/result" className={classes.link}>
-              RESULT
-            </Link>
-            <Link to="/" className={classes.link}>
-              ADMIT CARD
-            </Link>
-            <Link to="/" className={classes.link}>
-              LATEST JOBS
-            </Link>
-            <Link to="/" className={classes.link}>
-              ADMISSION
-            </Link>
-            <Link to="/" className={classes.link}>
-              SYLLABUS
-            </Link>
-            <Link to="/" className={classes.link}>
-              ANSWER KEY
-            </Link>
-            <Link to="/" className={classes.link}>
-              JOB ALERT
-            </Link>
-            <Link to="/" className={classes.link}>
-              MORE
-            </Link>
-            <Link to="/" className={classes.link}>
-              CONTACT
-            </Link>
-          </div>
-        )}
-      </Toolbar>
-    </AppBar>
-    </Fade>
+    <Box>
+      {currentLocation.startsWith('/admin') ? (
+        <AdminNav /> )
+        :
+        (
+      <Fade left >
+        <AppBar id="top" position="sticky" className={classes.appbar} >
+          <CssBaseline />
+          {isReady ? (
+            <Toolbar >
+              <Typography variant="h4" className={classes.logo}>
+                <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
+
+              </Typography>
+              {isMobile ? (
+                <DrawerComponent />
+              ) : (
+                <div className={classes.navlinks}>
+                  <Link to="/" className={classes.link}>
+                    HOME
+                  </Link>
+                  {categoryData.map((data, index) => (
+                    <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
+                      {data.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </Toolbar>
+          )
+            :
+            <Loader />}
+        </AppBar>
+      </Fade>
+      )
+}
+    </Box>
+
   );
 }
 export default Navbar;

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom';
 import {Box,makeStyles} from "@material-ui/core";
 import {Twitter,Facebook,LinkedIn, ArrowUpward } from "@material-ui/icons";
 import LightSpeed from "react-reveal"
@@ -67,7 +68,18 @@ const useStyles = makeStyles( (theme) =>  ({
 )
 export default function SocialIcons() {
     const classes = useStyles();
+    const location = useLocation();
+    const [currentLocation, setCurrentLocation] = useState('/');
+    useEffect(() => {
+        setCurrentLocation(location.pathname);
+    }, [location.pathname])
+
     return (
+        <Box>
+            {currentLocation.startsWith('/admin') ? (
+                null)
+                :
+                (
         <LightSpeed right>
         <Box className={classes.box}>
             <Box className={classes.copyright}>
@@ -92,5 +104,8 @@ export default function SocialIcons() {
             </Box>
         </Box>
         </LightSpeed>
+                )
+            }
+        </Box>
     )
 }
