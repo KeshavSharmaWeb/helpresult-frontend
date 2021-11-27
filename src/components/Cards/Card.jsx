@@ -70,7 +70,7 @@ export default function Card({ title, slug, categoryId, recordData }) {
     React.useEffect(() => {
         setData(recordData);
         setReady(true);
-    })
+    }, [recordData]);
     return (
         <Box className={classes.box}>
             <Bounce left>

@@ -8,6 +8,7 @@ import SocialIcons from './components/footer/SocialIcons';
 import Admin from "./components/Admin";
 import Categories from "./components/Admin/Categories";
 import Records from "./components/Admin/Records";
+import EditRecord from "./components/Admin/EditRecord";
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
       <Route path="/admin/dashboard" exact component={Admin} />
       <Route path="/admin/categories" exact component={Categories} />
       <Route path="/admin/records" exact component={Records} />
+      <Route path="/admin/records/edit" exact component={EditRecord} />
 
       <Footer/>
       <SocialIcons/>

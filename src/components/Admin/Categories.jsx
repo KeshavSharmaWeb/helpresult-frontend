@@ -85,7 +85,6 @@ const Categories = () => {
     }
     return (
         <Container>
-            {/* <Button style={{ width: "80%", marginTop: 20, display: "block", marginLeft: "auto", marginRight: "auto" }} variant="outline-dark">Add new Category</Button> */}
             <AddNewCategory />
             <hr />
             <Table striped bordered hover style={{ marginTop: 30, textAlign: "center" }}>
