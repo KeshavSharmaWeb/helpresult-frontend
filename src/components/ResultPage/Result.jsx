@@ -2,7 +2,6 @@ import { Box } from '@material-ui/core';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { url } from '../../config';
-import Loader from '../Loader';
 import TableBox from '../TableBox';
 
 export default function Result() {
@@ -22,7 +21,7 @@ export default function Result() {
 
     return (
         <Box>
-            {ready ? <TableBox title={data.name} data={data} /> : <Loader />}
+            {ready ? <TableBox title={data.name} data={data} /> : ''}
         </Box>
     )
 }

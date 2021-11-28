@@ -3,7 +3,6 @@ import { Box, makeStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import Boxex from './Boxex';
 import Zoom from "react-reveal";
-import $ from 'jquery';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -30,28 +29,29 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: "none",
         fontSize: "medium",
         fontWeight: 700,
+        "&:hover" : {
+            color: "red",
+        }
     },
     lineTwo: {
         color: "#0759ad",
         textDecoration: "none",
         fontSize: "medium",
         fontWeight: 700,
+        "&:hover" : {
+            color: "#0759ad",
+        }
     },
     lineThree: {
         color: "#f27a05",
         textDecoration: "none",
         fontSize: "medium",
         fontWeight: 700,
+        "&:hover" : {
+            color: "#f27a05",
+        }
     }
 }))
-
-$(function() {
-    $('marquee').mouseover(function() {
-        $(this).attr('scrollamount',0);
-    }).mouseout(function() {
-         $(this).attr('scrollamount',5);
-    });
-});
 
 export default function Midsec() {
     const classes = useStyles();
@@ -59,22 +59,25 @@ export default function Midsec() {
         <Box className={classes.box}>
             <Zoom right>
                 <Box className={classes.upperBox}>
-                    <marquee behavior="alternate" direction="ltr" align="center" >
-                        <Box >
+                    {/* eslint-disable-next-line */}
+                    <marquee behavior="alternate" direction="ltr" align="center" id="marquee-1">
+                        <Box onMouseOver={() => document.getElementById('marquee-1').stop()} onMouseOut={() => document.getElementById('marquee-1').start()}>
                             <Link to="/" className={classes.lineOne}> UP NTSE Online 2020 </Link> ||
                             <Link to="/" className={classes.lineOne}> UP NTSE Online 2020 </Link> ||
                             <Link to="/" className={classes.lineOne}> UP NTSE Online 2020 </Link>
                         </Box>
                     </marquee>
-                    <marquee behavior="alternate" direction="ltr" align="center">
-                        <Box >
+                    {/* eslint-disable-next-line */}
+                    <marquee behavior="alternate" direction="ltr" align="center" id="marquee-2">
+                    <Box onMouseOver={() => document.getElementById('marquee-2').stop()} onMouseOut={() => document.getElementById('marquee-2').start()}>
                             <Link to="/" className={classes.lineTwo}> UP NTSE Online 2020 </Link> ||
                             <Link to="/" className={classes.lineTwo}> Allahabad University Online Counseling 2020 </Link> ||
                             <Link to="/" className={classes.lineTwo}> UP NTSE Online 2020 </Link>
                         </Box>
                     </marquee>
-                    <marquee behavior="alternate" direction="ltr" align="center">
-                        <Box >
+                    {/* eslint-disable-next-line */}
+                    <marquee behavior="alternate" direction="ltr" align="center" id="marquee-3">
+                        <Box onMouseOver={() => document.getElementById('marquee-3').stop()} onMouseOut={() => document.getElementById('marquee-3').start()}>
                             <Link to="/" className={classes.lineThree}> Allahabad University Online Counseling 2020 </Link> ||
                             <Link to="/" className={classes.lineThree}> Allahabad University Online Counseling 2020 </Link> ||
                             <Link to="/" className={classes.lineThree}> UP NTSE Online 2020 </Link>

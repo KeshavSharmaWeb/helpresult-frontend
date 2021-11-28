@@ -3,7 +3,6 @@ import { Box, Button, makeStyles } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
 import Bounce from "react-reveal";
 import { Link, NavLink } from "react-router-dom";
-import Loader from '../Loader';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -92,7 +91,7 @@ export default function Card({ title, slug, categoryId, recordData }) {
                         )
                     })
                     
-                    : <Loader />}
+                    : ''}
 
                 </Box>
                 <Box style={{ textAlign: "end" }}>
