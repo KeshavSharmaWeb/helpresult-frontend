@@ -12,13 +12,13 @@ const Records = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`${url}/records`)
-            .then(res => {
-                setRecords(res.data)
-            })
         axios.get(`${url}/categories`)
             .then(res => {
                 setCategories(res.data)
+            })
+        axios.get(`${url}/records`)
+            .then(res => {
+                setRecords(res.data)
             })
         setLoading(false)
     }, [])
@@ -54,9 +54,6 @@ const Records = () => {
         }
         )
     }
-
-
-
 
     const AddNewRecord = () => {
         return (
@@ -124,9 +121,15 @@ const Records = () => {
                                             <td>{record.short_information.slice(0, 50)}...</td>
                                             <td>{formattedDate(record.last_date)}</td>
                                             <td>{record.more_data_html.slice(0, 50)}...</td>
+                                            {
+                                                // eslint-disable-next-line
+                                                categories.map(category => {
+                                                    if (category._id === record.categoryId) {
+                                                        return <td key={category._id}>{category.name}</td>
+                                                    }
+                                                })
 
-                                            <td>{((categories.filter(category => category._id === record.categoryId))[0]).name}</td>
-
+                                            }
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(record._id)} style={{ cursor: "pointer" }} />
                                             </td>

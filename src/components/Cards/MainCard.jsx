@@ -45,8 +45,11 @@ export default function MainCard() {
         <Box className={classes.box}>
             {categoryData.map(item => {
                 const data = recordData.filter(record => record.categoryId === item._id);
+                
                 return (
-                    <Card key={item._id} title={item.name} slug={item.slug} categoryId={item._id} recordData={data} />
+                    <Box>
+                    {data.length > 0 ? <Card key={item._id} title={item.name} slug={item.slug} categoryId={item._id} recordData={data} />:null}
+                    </Box>
                 )
             })}
         </Box>

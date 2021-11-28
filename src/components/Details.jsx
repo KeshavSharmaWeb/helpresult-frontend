@@ -4,7 +4,6 @@ import Flip from "react-reveal";
 import axios from 'axios';
 import { url } from '../config';
 import parse from 'html-react-parser';
-import Loader from './Loader';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -90,7 +89,7 @@ export default function Details() {
                     {parse(data.more_data_html)}
                 </Box>
             </Box>
-            : <Loader />}
+            : ''}
 
         </Flip>
     )

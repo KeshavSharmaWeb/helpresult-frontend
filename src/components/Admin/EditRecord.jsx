@@ -20,7 +20,7 @@ const EditRecord = () => {
             setRecord(res.data[0])
         }
         )
-    }, [])
+    }, [recordId])
 
     const handleSubmit = (e) => {
         e.preventDefault()

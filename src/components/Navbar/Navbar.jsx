@@ -15,7 +15,6 @@ import Fade from "react-reveal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "../../config";
-import Loader from "../Loader";
 import { useLocation } from "react-router-dom";
 import AdminNav from "../Admin/Navbar";
 
@@ -96,16 +95,16 @@ function Navbar() {
                     HOME
                   </Link>
                   {categoryData.map((data, index) => (
-                    <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
+                      <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
                       {data.name}
-                    </Link>
+                      </Link>
                   ))}
                 </div>
               )}
             </Toolbar>
           )
             :
-            <Loader />}
+            null}
         </AppBar>
       </Fade>
       )
