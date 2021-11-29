@@ -4,6 +4,7 @@ import Flip from "react-reveal";
 import axios from 'axios';
 import { url } from '../config';
 import parse from 'html-react-parser';
+import "../App.css"
 
 const useStyles = makeStyles((theme) => ({
     box: {
