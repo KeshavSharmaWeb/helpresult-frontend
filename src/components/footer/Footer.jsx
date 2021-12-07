@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
         background: "url('/images/footer-bg.jpg')",
         padding: "8%",
         display: "flex",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+        },
         [theme.breakpoints.down("xs")]: {
             flexDirection: "column"
         }
@@ -38,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             color: "white",
             fontWeight: "700"
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "110px"
         }
     }
 })
