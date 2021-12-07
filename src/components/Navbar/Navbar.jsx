@@ -18,38 +18,38 @@ import { url } from "../../config";
 import { useLocation } from "react-router-dom";
 import AdminNav from "../Admin/Navbar";
 
-const useStyles = makeStyles((theme) => ({
-  appbar: {
-    background: "white",
-  },
-  navlinks: {
-    display: "flex",
-    width: "80%",
-    justifycontent: "space-evenly",
-    margin: "0px 10px",
-  },
-  logo: {
-    flexGrow: "1",
-    cursor: "pointer",
-  },
-  link: {
-    textDecoration: "none",
-    color: "black",
-    fontSize: "14px",
-    padding: "3px 3px",
-    display: "flex",
-    justifyContent: "center",
-    width: "50%",
-    fontWeight: "600",
-    "&:hover": {
-      color: "blue",
-      border: "none",
-      // padding: "4px 5px",
-    },
-  },
-}));
 
 function Navbar() {
+  const useStyles = makeStyles((theme) => ({
+    appbar: {
+      background: "white",
+    },
+    navlinks: {
+      display: "flex",
+      width: "80%",
+      justifycontent: "space-evenly",
+      margin: "0px 10px",
+    },
+    logo: {
+      flexGrow: "1",
+      cursor: "pointer",
+    },
+    link: {
+      textDecoration: "none",
+      color: "black",
+      fontSize: "14px",
+      padding: "3px 3px",
+      display: "flex",
+      justifyContent: "center",
+      width: "50%",
+      fontWeight: "600",
+      "&:hover": {
+        color: "blue",
+        border: "none",
+        // padding: "4px 5px",
+      },
+    },
+  }));
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

@@ -5,45 +5,45 @@ import Bounce from "react-reveal";
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-    box: {
-        background: "url('/images/footer-bg.jpg')",
-        padding: "8%",
-        display: "flex",
-        [theme.breakpoints.down("xs")]: {
-            flexDirection: "column"
-        }
-    },
-    contact: {
-        display: "flex",
-        flexDirection: "column",
-        color: "grey"
-    },
-    links: {
-        display: "grid",
-        gridTemplateColumns: "auto auto auto",
-        padding: "0px 10px",
-        [theme.breakpoints.down("xs")]: {
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column"
-        }
-    },
-    link: {
-        width: "220px",
-        borderBottom: "1px solid white",
-        textDecoration: "none",
-        margin: "5px 5px",
-        color: "grey",
-        "&:hover": {
-            color: "white",
-            fontWeight: "700"
-        }
-    }
-})
-)
 
 export default function Footer() {
+    const useStyles = makeStyles((theme) => ({
+        box: {
+            background: "url('/images/footer-bg.jpg')",
+            padding: "8%",
+            display: "flex",
+            [theme.breakpoints.down("xs")]: {
+                flexDirection: "column"
+            }
+        },
+        contact: {
+            display: "flex",
+            flexDirection: "column",
+            color: "grey"
+        },
+        links: {
+            display: "grid",
+            gridTemplateColumns: "auto auto auto",
+            padding: "0px 10px",
+            [theme.breakpoints.down("xs")]: {
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column"
+            }
+        },
+        link: {
+            width: "220px",
+            borderBottom: "1px solid white",
+            textDecoration: "none",
+            margin: "5px 5px",
+            color: "grey",
+            "&:hover": {
+                color: "white",
+                fontWeight: "700"
+            }
+        }
+    })
+    )
     const classes = useStyles();
     const location = useLocation();
     const [currentLocation, setCurrentLocation] = useState('/');

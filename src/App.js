@@ -1,4 +1,4 @@
-import {BrowserRouter as Router,Route  } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Details from "./components/Details";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar/Navbar";
@@ -9,23 +9,44 @@ import Admin from "./components/Admin";
 import Categories from "./components/Admin/Categories";
 import Records from "./components/Admin/Records";
 import EditRecord from "./components/Admin/EditRecord";
+import AddRecord from "./components/Admin/AddRecord";
+import Login from "./components/Login";
+import AddUser from "./components/Admin/AddUser";
+import EditUser from "./components/Admin/EditUser";
+import Users from "./components/Admin/Users";
 
 function App() {
-  
+
+  const changeComponentToLogin = (Component) => {
+    if (localStorage.getItem('user')) {
+      return <Component />;
+    } else {
+      return <Login />;
+    }
+  }
+
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <Route path="/" exact component={Home} />
       <Route path="/details/:name" exact component={Details} />
       <Route path="/more/:name" exact component={Result} />
       {/* ADMIN ROUTES */}
-      <Route path="/admin/dashboard" exact component={Admin} />
-      <Route path="/admin/categories" exact component={Categories} />
-      <Route path="/admin/records" exact component={Records} />
-      <Route path="/admin/records/edit" exact component={EditRecord} />
 
-      <Footer/>
-      <SocialIcons/>
+      <Route path="/admin/dashboard" exact render={() => changeComponentToLogin(Admin)} />
+      <Route path="/admin/categories" exact render={() => changeComponentToLogin(Categories)} />
+
+      <Route path="/admin/records" exact render={() => changeComponentToLogin(Records)} />
+      <Route path="/admin/records/add" exact render={() => changeComponentToLogin(AddRecord)} />
+      <Route path="/admin/records/edit" exact render={() => changeComponentToLogin(EditRecord)} />
+
+      <Route path="/admin/users" exact render={() => changeComponentToLogin(Users)} />
+      <Route path="/admin/users/add" exact render={() => changeComponentToLogin(AddUser)} />
+      <Route path="/admin/users/edit" exact render={() => changeComponentToLogin(EditUser)} />
+
+      <Route path="/admin/login" exact render={(props) => <Login {...props} />} />
+      <Footer />
+      <SocialIcons />
     </Router>
   );
 }

@@ -4,56 +4,56 @@ import { Link } from 'react-router-dom';
 import Boxex from './Boxex';
 import Zoom from "react-reveal";
 
-const useStyles = makeStyles((theme) => ({
-    box: {
-        marginTop: "2%",
-    },
-    upperBox: {
-        margin: "10px 80px",
-        [theme.breakpoints.down("sm")]: {
-            margin: "2px 10px"
-        }
-    },
-    lowerBox: {
-        display: "grid",
-        gridTemplateColumns: "auto auto auto auto",
-        margin: "20px 70px",
-        columnGap: "8px",
-        rowGap: "8px",
-        [theme.breakpoints.down('sm')]: {
-            margin: "2px 10px",
-        },
-    },
-    lineOne: {
-        color: "red",
-        textDecoration: "none",
-        fontSize: "medium",
-        fontWeight: 700,
-        "&:hover" : {
-            color: "red",
-        }
-    },
-    lineTwo: {
-        color: "#0759ad",
-        textDecoration: "none",
-        fontSize: "medium",
-        fontWeight: 700,
-        "&:hover" : {
-            color: "#0759ad",
-        }
-    },
-    lineThree: {
-        color: "#f27a05",
-        textDecoration: "none",
-        fontSize: "medium",
-        fontWeight: 700,
-        "&:hover" : {
-            color: "#f27a05",
-        }
-    }
-}))
 
 export default function Midsec() {
+    const useStyles = makeStyles((theme) => ({
+        box: {
+            marginTop: "2%",
+        },
+        upperBox: {
+            margin: "10px 80px",
+            [theme.breakpoints.down("sm")]: {
+                margin: "2px 10px"
+            }
+        },
+        lowerBox: {
+            display: "grid",
+            gridTemplateColumns: "auto auto auto auto",
+            margin: "20px 70px",
+            columnGap: "8px",
+            rowGap: "8px",
+            [theme.breakpoints.down('sm')]: {
+                margin: "2px 10px",
+            },
+        },
+        lineOne: {
+            color: "red",
+            textDecoration: "none",
+            fontSize: "medium",
+            fontWeight: 700,
+            "&:hover" : {
+                color: "red",
+            }
+        },
+        lineTwo: {
+            color: "#0759ad",
+            textDecoration: "none",
+            fontSize: "medium",
+            fontWeight: 700,
+            "&:hover" : {
+                color: "#0759ad",
+            }
+        },
+        lineThree: {
+            color: "#f27a05",
+            textDecoration: "none",
+            fontSize: "medium",
+            fontWeight: 700,
+            "&:hover" : {
+                color: "#f27a05",
+            }
+        }
+    }))
     const classes = useStyles();
     return (
         <Box className={classes.box}>
