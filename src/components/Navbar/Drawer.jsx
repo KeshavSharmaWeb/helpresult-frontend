@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   IconButton,
@@ -10,23 +10,23 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: "none",
-    color: "blue",
-    fontSize: "14px",
-    "&:hover": {
-      color: "Red",
-      border: "none",
-      borderBottom: "1px solid black",
-    }
-  },
-  icon: {
-    color: "white"
-  }
-}));
 
 function DrawerComponent() {
+  const useStyles = makeStyles(() => ({
+    link: {
+      textDecoration: "none",
+      color: "blue",
+      fontSize: "14px",
+      "&:hover": {
+        color: "Red",
+        border: "none",
+        borderBottom: "1px solid black",
+      }
+    },
+    icon: {
+      color: "white"
+    }
+  }));
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   return (

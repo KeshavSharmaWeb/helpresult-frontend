@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Table, Form } from 'react-bootstrap'
+import { Container, Button, Table } from 'react-bootstrap'
 import axios from 'axios'
 import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
-import { formattedDate } from '../../helperFns'
+import { formattedDate, userExists } from '../../helperFns'
+
 
 const Records = () => {
     const [records, setRecords] = useState([])
@@ -23,81 +24,39 @@ const Records = () => {
         setLoading(false)
     }, [])
 
-    const handleCancel = (id) => {
-        axios.post(url + "/delete-record", { id: id }).then(res => {
-            if (res.status === 200) {
+    const handleCancel = async (id) => {
+        const isUserExists = await userExists(localStorage.getItem('userId'))
+        if (!isUserExists) {
+            localStorage.removeItem('user')
+            window.location.reload()
+            alert('You have been logged out')
+        }
+
+        axios.post(url + "/delete-record", { id: id, userId: localStorage.getItem('userId') }).then(res => {
+            if (res.data.status === 401) {
+                alert('You are not authorized to delete this record')
+            }
+             else if (res.status === 200) {
                 setRecords(records.filter(record => record._id !== id))
-            } else {
-                alert("Something went wrong")
+            }  else {
+                alert('Something went wrong')
             }
-        }
-        )
+        })
     }
 
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target)
-        const data = {
-            name: formData.get('name'),
-            categoryId: formData.get('category'),
-            shortInfo: formData.get('shortInfo'),
-            more_data_html: formData.get('more_data_html'),
-            last_date: formData.get('last_date'),
-        }
-        axios.post(url + "/add-record", data).then(res => {
-            if (res.status === 200) {
-                setRecords([...records, res.data])
-            } else {
-                alert("Something went wrong")
-            }
-        }
-        )
-    }
-
-    const AddNewRecord = () => {
-        return (
-            <Container style={{ width: "50%", marginTop: 30, marginBottom: 30 }}>
-                <h3 style={{ textAlign: "center" }}>Add new Record</h3>
-                <Form onSubmit={handleFormSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Record Name</Form.Label>
-                        <Form.Control type="text" name="name" placeholder="Enter record name" required />
-                        <Form.Label>Short Information</Form.Label>
-                        <Form.Control type="text" name="shortInfo" as="textarea" placeholder="Enter short information" required />
-                        <Form.Label>Last Date to apply</Form.Label>
-                        <Form.Control type="date" name="last_date" placeholder="Pick date" required />
-                        <Form.Label>Table HTML</Form.Label>
-                        <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" required />
-                        <Form.Label>Category</Form.Label> <br />
-                        <Form.Control as="select" name="category" id="category" required>
-                            <Form.Control as="option" value="" disabled selected>Select Category</Form.Control>
-                            {categories.map(category => {
-                                return <Form.Control as="option" key={category._id} value={category._id}>{category.name}</Form.Control>
-                            }
-                            )}
-                        </Form.Control>
-                    </Form.Group>
-                    <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
-                        Submit
-                    </Button>
-                </Form>
-            </Container>
-        )
-    }
     return (
         <Container>
-            <AddNewRecord />
-            <hr />
+            <h3 style={{ textAlign: "center", marginTop: 40 }}>Records</h3>
             <Table striped bordered hover style={{ marginTop: 30, textAlign: "center" }}>
                 {
                     records.length > 0 ? (
                         <>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Url</th>
+                                    <th>Post Display</th>
                                     <th>Date Added</th>
                                     <th>Date Updated</th>
                                     <th>Short Information</th>
@@ -113,9 +72,9 @@ const Records = () => {
                                     records.map((record, index) => (
 
                                         <tr>
-                                            <td>{index + 1}</td>
+                                            <td>{record._id}</td>
                                             <td>{record.name}</td>
-                                            <td>{record.slug}</td>
+                                            <td>{record.post_display_name}</td>
                                             <td>{record.created_at}</td>
                                             <td>{record.updated_at}</td>
                                             <td>{record.short_information.slice(0, 50)}...</td>

@@ -3,7 +3,10 @@ import React from 'react'
 const Admin = () => {
     return (
         <div>
-            Admin
+            {
+                localStorage.getItem('user') ?
+                Admin : "You are not admin"
+            }
         </div>
     )
 }
