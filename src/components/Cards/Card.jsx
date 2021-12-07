@@ -12,8 +12,17 @@ export default function Card({ title, minHeight, slug, categoryId, recordData })
             flexDirection: "column",
             background: "#fff",
             padding: "10px",
+            height: "700px",
+            width: "400px",
             "&:hover": {
-                background: "#e3e8e5"
+                background: "#e3e8e5",            
+            },
+            [theme.breakpoints.down("sm")]: {
+                width: "250px",
+                margin: "5px 15px"
+            },
+            [theme.breakpoints.down("xs")]: {
+                width: "250px",
             }
         },
         top: {
