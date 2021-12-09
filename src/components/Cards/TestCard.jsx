@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Button, makeStyles } from "@material-ui/core";
+import { Box, Button, makeStyles} from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
+import Data from "./data.json";
 import Bounce from "react-reveal";
-import { Link, NavLink } from "react-router-dom";
+import {Link,NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         margin: "4px 0px",
         fontSize: "14px",
-        "&:hover": {
+        "&:hover":{
             fontWeight: "900",
             cursor: "pointer"
         }
@@ -63,48 +64,38 @@ const useStyles = makeStyles((theme) => ({
     navLink: {
         textDecoration: "none",
         color: "#727272",
-        "&:hover": {
+        "&:hover":{
             color: "black"
         }
     }
 })
 );
 
-export default function Card({ title, slug, categoryId, recordData }) {
+export default function Card({ title,path }) {
     const classes = useStyles();
-    const [ready, setReady] = React.useState(false);
-    const [data, setData] = React.useState([]);
 
-    React.useEffect(() => {
-        setData(recordData);
-        setReady(true);
-    }, [recordData]);
     return (
         <Box className={classes.box}>
             <Bounce left>
                 <Box className={classes.top}>
                     {title}
                 </Box>
-
                 <Box className={classes.mid}>
-                    {ready ?
-
-                    data.map((val) => {
-                        return (
-                            <li className={classes.li} key={val._id}>
-                                <NavLink to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    {val.name}
-                                </NavLink>
-                            </li>
-                        )
-                    })
-                    
-                    : ''}
-
+                    {
+                        Data.map((val, id) => {
+                            return (
+                                <li key={id} className={classes.li}> 
+                                    <NavLink to={{pathname: "/full", search: `?name=${val.data}`}} className={classes.navLink} >
+                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
+                                    {val.data}
+                                    </NavLink>
+                                </li>
+                                )
+                        })
+                    }
                 </Box>
                 <Box style={{ textAlign: "end" }}>
-                    <Button variant="contained" className={classes.button}> <Link to={`/more/${slug}?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
+                    <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
                 </Box>
             </Bounce>
         </Box>
