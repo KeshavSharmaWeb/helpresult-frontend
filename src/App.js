@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import AddUser from "./components/Admin/AddUser";
 import EditUser from "./components/Admin/EditUser";
 import Users from "./components/Admin/Users";
+import NewsRecord from "./components/Admin/NewsRecord";
 
 function App() {
 
@@ -43,6 +44,8 @@ function App() {
       <Route path="/admin/users" exact render={() => changeComponentToLogin(Users)} />
       <Route path="/admin/users/add" exact render={() => changeComponentToLogin(AddUser)} />
       <Route path="/admin/users/edit" exact render={() => changeComponentToLogin(EditUser)} />
+
+      <Route path="/admin/news-records" exact render={() => changeComponentToLogin(NewsRecord)} />
 
       <Route path="/admin/login" exact render={(props) => <Login {...props} />} />
       <Footer />

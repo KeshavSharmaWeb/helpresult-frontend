@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Container, Nav, NavDropdown } from 'react-bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -8,7 +8,7 @@ const AdminNav = () => {
     useEffect(() => {
         document.title = "Admin"
     }, [])
-    
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
@@ -36,6 +36,9 @@ const AdminNav = () => {
                         </NavDropdown>
                         <LinkContainer to="/admin/categories">
                             <Nav.Link>Categories</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/news-records">
+                            <Nav.Link>News Records</Nav.Link>
                         </LinkContainer>
                     </Nav>
                     <Navbar.Collapse className="justify-content-end">
