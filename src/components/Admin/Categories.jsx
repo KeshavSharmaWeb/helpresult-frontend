@@ -39,8 +39,6 @@ const Categories = () => {
         axios.post(url + "/delete-category", { id: id, userId: localStorage.getItem('userId') }).then(res => {
             if (res.status === 200) {
                 setCategories(categories.filter(category => category._id !== id))
-            } else if (res.data.status === 401) {
-                alert('You are not authorized to delete this category')
             } else {
                 alert("Something went wrong")
             }
@@ -48,7 +46,7 @@ const Categories = () => {
         )
     }
 
-    const handleUpdate = async (id, name, minHeight) => {
+    const handleUpdate = async (id, name) => {
         const isUserExists = await userExists(localStorage.getItem('userId'))
         if (!isUserExists) {
             localStorage.removeItem('user')
@@ -56,11 +54,9 @@ const Categories = () => {
             alert('You have been logged out')
         }
 
-        axios.post(url + "/update-category", { id: id, userId: localStorage.getItem('userId'), name: name, minHeight: minHeight }).then(res => {
+        axios.post(url + "/update-category", { id: id, userId: localStorage.getItem('userId'), name: name }).then(res => {
             if (res.status === 200) {
-                setCategories(categories.map(category => category._id === id ? { ...category, name: name, slug: convertToSlug(name), minHeight: minHeight } : category))
-            } else if (res.data.status === 401) {
-                alert('You are not authorized to update this category')
+                setCategories(categories.map(category => category._id === id ? { ...category, name: name, slug: convertToSlug(name) } : category))
             } else {
                 alert("Something went wrong")
             }
@@ -69,12 +65,6 @@ const Categories = () => {
     }
 
     const handleFormSubmit = async (e) => {
-        const isUserExists = await userExists(localStorage.getItem('userId'))
-        if (!isUserExists) {
-            localStorage.removeItem('user')
-            window.location.reload()
-            alert('You have been logged out')
-        }
         e.preventDefault()
         const formData = new FormData(e.target)
         const data = {
@@ -86,8 +76,6 @@ const Categories = () => {
         axios.post(url + "/add-category", data).then(res => {
             if (res.status === 200) {
                 setCategories([...categories, res.data])
-            } else if (res.data.status === 401) {
-                alert('You are not authorized to add a category')
             } else {
                 alert("Something went wrong")
             }
@@ -105,9 +93,7 @@ const Categories = () => {
                         <Form.Control type="text" name="name" placeholder="Enter category name" required />
                         <Form.Text className="text-muted">
                             URL will be generated automatically.
-                        </Form.Text> <br />
-                        <Form.Label>Minimum Height</Form.Label>
-                        <Form.Control type="number" name="min_height" placeholder="Enter minimum height" required />
+                        </Form.Text>
                     </Form.Group>
                     <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
                         Submit
@@ -128,7 +114,6 @@ const Categories = () => {
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Minimum Height</th>
                                     <th>Date Added</th>
                                     <th></th>
                                     <th></th>
@@ -142,7 +127,6 @@ const Categories = () => {
                                         <tr>
                                             <td>{index + 1}</td>
                                             <td><input id={`name-${category._id}`} type="text" placeholder={category.name} style={{ textAlign: "center" }} /></td>
-                                            <td><input id={`minHeight-${category._id}`} type="number" placeholder={category.minHeight} style={{ textAlign: "center" }} /></td>
                                             <td>{category.date}</td>
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(category._id)} style={{ cursor: "pointer" }} />
@@ -150,10 +134,9 @@ const Categories = () => {
                                             <td>
                                                 <Button variant="outline-dark" size="sm" onClick={() => { handleUpdate(
                                                     category._id, 
-                                                    document.getElementById(`name-${category._id}`).value === "" ? category.name : document.getElementById(`name-${category._id}`).value,
-                                                    document.getElementById(`minHeight-${category._id}`).value === "" ? category.minHeight : document.getElementById(`minHeight-${category._id}`).value
+                                                    document.getElementById(`name-${category._id}`).value === "" ? category.name : document.getElementById(`name-${category._id}`).value
                                                     )
-                                                    ;document.getElementById(`name-${category._id}`).value = ""; document.getElementById(`minHeight-${category._id}`).value="" }}>
+                                                    ;document.getElementById(`name-${category._id}`).value = "";}}>
                                                     Update
                                                 </Button>
                                             </td>
