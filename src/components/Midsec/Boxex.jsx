@@ -1,8 +1,9 @@
 import React from 'react'
 import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Link } from 'react-router-dom';
 
 
-export default function Boxex({ title, backcolor }) {
+export default function Boxex({ record, backcolor }) {
     const useStyles = makeStyles((theme) => ({
         box: {
             display: "flex",
@@ -24,8 +25,10 @@ export default function Boxex({ title, backcolor }) {
     )
     const classes = useStyles()
     return (
+        <Link to={`/details/${record.name}?id=${record.recordId}`} style={{ textDecoration: "none" }}>
         <Box className={classes.box} style={{ background: backcolor }} >
-            <Typography className={classes.typo}> {title} </Typography>
+            <Typography className={classes.typo}> {record.name} </Typography>
         </Box>
+        </Link>
     )
 }

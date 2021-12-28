@@ -6,7 +6,6 @@ import { Cancel } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import { formattedDate, userExists } from '../../helperFns'
 
-
 const Records = () => {
     const [records, setRecords] = useState([])
     const [categories, setCategories] = useState([])

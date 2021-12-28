@@ -4,22 +4,25 @@ import axios from 'axios'
 import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
 import { userExists } from '../../helperFns'
+import { HexColorPicker } from "react-colorful";
+import { Box } from '@material-ui/core'
+
 
 const NewsRecord = () => {
     const [newsRecords, setNewsRecords] = useState([])
+    const [color, setColor] = useState("#aabbcc");
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axios.get(`${url}/news-records`)
             .then(res => {
-                console.log(res.data);
                 setNewsRecords(res.data)
                 setLoading(false)
             })
     }, [])
 
     const handleCancel = async (id) => {
-        axios.post(url + "/news-records/delete", { id: id }).then(res => {
+        axios.post(url + "/delete-news-records", { id: id }).then(res => {
             if (res.status === 200) {
                 setNewsRecords(newsRecords.filter(newsRecord => newsRecord._id !== id))
             } else {
@@ -46,10 +49,12 @@ const NewsRecord = () => {
         const data = {
             name: formData.get('name'),
             recordId: formData.get('recordId'),
+            fillColor: color,
         }
 
-        axios.post(url + "/news-records/add", data).then(res => {
+        axios.post(`${url}/add-news-records`, data).then(res => {
             if (res.status === 200) {
+                console.log(res.data);
                 setNewsRecords([...newsRecords, res.data])
             } else {
                 alert("Something went wrong")
@@ -70,6 +75,12 @@ const NewsRecord = () => {
                         <Form.Label>Record Id</Form.Label>
                         <Form.Control type="text" name="recordId" placeholder="Enter record id" required />
                     </Form.Group>
+                    <Form.Label>Fill Color</Form.Label>
+                    <Box style={{ display: "flex", alignItems: "flex-end", margin: "20px 0", marginTop: "5px" }}>
+
+                    <HexColorPicker color={color} onChange={setColor} style={{ marginRight: "30px" }} />
+                    <Box style={{ backgroundColor: color, width: "7vw", height: "7vw" }}></Box>
+                    </Box>
                     <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
                         Submit
                     </Button>
@@ -90,6 +101,7 @@ const NewsRecord = () => {
                                     <th>#</th>
                                     <th>News Name</th>
                                     <th>Record Id</th>
+                                    <th>Fill Color</th>
                                     <th>Date Added</th>
                                     <th></th>
                                     <th></th>
@@ -104,6 +116,7 @@ const NewsRecord = () => {
                                             <td>{index + 1}</td>
                                             <td>{newsRecord.name}</td>
                                             <td>{newsRecord.recordId}</td>
+                                            <td>{newsRecord.fillColor}</td>
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(newsRecord._id)} style={{ cursor: "pointer" }} />
                                             </td>

@@ -90,7 +90,7 @@ export default function ExtraCard({ alternate }) {
                 alternate ? <Box className={classes.box}>
 
                     <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Heading </Typography>
+                        <Typography className={classes.heading}> Answer Key </Typography>
                            {/* dummy data */}
                         <li className={classes.li} >
                                 <NavLink to="/" className={classes.navLink} >
@@ -101,7 +101,7 @@ export default function ExtraCard({ alternate }) {
                     </Box>
 
                     <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Heading </Typography>
+                        <Typography className={classes.heading}> Syllabus </Typography>
                         <li className={classes.li} >
                                 <NavLink to="/" className={classes.navLink} >
                                     <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
@@ -111,7 +111,7 @@ export default function ExtraCard({ alternate }) {
                     </Box>
 
                     <Box className={classes.extendedRight} >
-                        <Typography className={classes.heading}> Heading </Typography>
+                        <Typography className={classes.heading}> Admission </Typography>
                         <li className={classes.li} >
                                 <NavLink to="/" className={classes.navLink} >
                                     <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
@@ -121,7 +121,7 @@ export default function ExtraCard({ alternate }) {
                     </Box>
 
                     <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Heading </Typography>
+                        <Typography className={classes.heading}> Important </Typography>
                         <li className={classes.li} >
                                 <NavLink to="/" className={classes.navLink} >
                                     <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
@@ -131,7 +131,7 @@ export default function ExtraCard({ alternate }) {
                     </Box>
 
                     <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Heading </Typography>
+                        <Typography className={classes.heading}> Certificate Verification </Typography>
                         <li className={classes.li} >
                                 <NavLink to="/" className={classes.navLink} >
                                     <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />

@@ -1,11 +1,16 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Box, makeStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import Boxex from './Boxex';
 import Zoom from "react-reveal";
+import axios from 'axios';
+import { url } from '../../config';
 
 
 export default function Midsec() {
+    const [records, setRecords] = useState([])
+    const [isReady, setIsReady] = useState(false)
+
     const useStyles = makeStyles((theme) => ({
         box: {
             marginTop: "2%",
@@ -54,6 +59,14 @@ export default function Midsec() {
             }
         }
     }))
+
+    useEffect(() => {
+        axios.get(`${url}/news-records`).then(res => {
+            setRecords(res.data)
+            setIsReady(true)
+        }
+        )
+    }, [])
     const classes = useStyles();
     return (
         <Box className={classes.box}>
@@ -85,14 +98,12 @@ export default function Midsec() {
                     </marquee>
                 </Box>
                 <Box className={classes.lowerBox}>
-                    <Boxex title="SSC CHSL 10+2 Apply Online" backcolor="#868a08" />
-                    <Boxex title="UPSC CDS 1 Apply Online" backcolor="#0404b4" />
-                    <Boxex title="UP Sachivalaya Admit Card" backcolor="#fb5e03" />
-                    <Boxex title="UPSESSB UP PGT Apply Online" backcolor="#8c0101" />
-                    <Boxex title="UP Regional Inspector Apply Online" backcolor="#fb0303" />
-                    <Boxex title="UPSESSB UP TGT Apply Online" backcolor="#0b610b" />
-                    <Boxex title="UP Scholarship Apply Online" backcolor="#0080ff" />
-                    <Boxex title="Bihar Constable 2020 Apply Online" backcolor="#868a08" />
+                    {isReady && records.map((record, index) => {
+                            return (
+                                <Boxex record={record} key={index} backcolor={record.fillColor} />
+                                )
+                    })}
+                    {/* <Boxex title="SSC CHSL 10+2 Apply Online" backcolor="#868a08" /> */}
                 </Box>
             </Zoom>
         </Box>

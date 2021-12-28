@@ -4,6 +4,8 @@ import { CheckBox } from "@material-ui/icons";
 import Data from "./data.json";
 import Bounce from "react-reveal";
 import {Link,NavLink} from "react-router-dom";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -71,9 +73,8 @@ const useStyles = makeStyles((theme) => ({
 })
 );
 
-export default function Card({ title,path }) {
+export default function Card({ title,path,records }) {
     const classes = useStyles();
-
     return (
         <Box className={classes.box}>
             <Bounce left>
@@ -82,12 +83,12 @@ export default function Card({ title,path }) {
                 </Box>
                 <Box className={classes.mid}>
                     {
-                        Data.map((val, id) => {
+                        records.map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/full", search: `?name=${val.data}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.data}
+                                    {val.name}
                                     </NavLink>
                                 </li>
                                 )
