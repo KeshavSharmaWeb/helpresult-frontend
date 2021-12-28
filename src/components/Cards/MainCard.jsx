@@ -39,11 +39,14 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     cardBox: {
-        display: "flex",
         width: "100%",
-        justifyContent: "space-between",
+        display: "grid",
+        gridTemplateColumns: "auto auto auto",
+        gridTemplateRows: "auto auto",
+        gridColumnGap: "15px",
         [theme.breakpoints.down("xs")]:{
-            flexDirection: "column"
+            display: "flex",
+            flexDirection: "column",
         }
     }
 })
@@ -81,13 +84,14 @@ export default function MainCard() {
             })} */}
 
             {/* dummy  */}
-                <TestCard title="Result"  records={recordData.filter(record => record.categoryId == "61c7fcc58b071fa93f007477")} />
-                <TestCard title="Admit Card" records={recordData.filter(record => record.categoryId == "61c7fcc88b071fa93f007479")} />
-                <TestCard title="Latest Jobs" records={recordData.filter(record => record.categoryId == "61c7fccb8b071fa93f00747b")} />
+                <TestCard extend={false} title="Result"  records={recordData.filter(record => record.categoryId == "61c7fcc58b071fa93f007477")} />
+                <TestCard extend={false} title="Admit Card" records={recordData.filter(record => record.categoryId == "61c7fcc88b071fa93f007479")} />
+                <TestCard extend={true} title="Latest Jobs" records={recordData.filter(record => record.categoryId == "61c7fccb8b071fa93f00747b")} />
+                <ExtraCard/>
             </Box>
-            <Box className={classes.extraBox}>
+            {/* <Box className={classes.extraBox}>
                 <ExtraCard alternate={true} />
-            </Box>
+            </Box> */}
         </Box>
     )
 }

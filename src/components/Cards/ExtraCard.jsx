@@ -1,23 +1,45 @@
 import React from 'react'
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import {NavLink} from "react-router-dom";
-import {CheckBox} from "@material-ui/icons"
+import { NavLink } from "react-router-dom";
+import { CheckBox } from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
+    mainbox: {
+        gridColumnStart: "1",
+        gridColumnEnd: "3",
+        marginright: "1%",
+        [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            flexDirection: "column"
+        },
+        [theme.breakpoints.down("xs")]: {
+            display: "flex",
+            flexDirection: "column",
+        }
+    },
     box: {
-        margin: "2% 0%",
+        margin: "2% 2% 0% 0%",
         display: "grid",
-        gridTemplateColumns: "auto auto auto",
+        gridTemplateColumns: "auto auto ",
         gridColumnGap: "40px",
-        gridRowGap: "15px",        
+        gridRowGap: "15px",
+        "&>*":{
+            width: "370px"
+        },
         [theme.breakpoints.down('sm')]: {
             display: "flex",
             flexDirection: "column",
-            margin: "5px 15px"
+            margin: "5px 15px",
+            "&>*":{
+                width: "250px"
+            },
         },
         [theme.breakpoints.down('xs')]: {
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            "&>*":{
+                width: "250px"
+            },
         }
     },
     childBox: {
@@ -25,33 +47,7 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px",
         background: "white",
         "&:hover": {
-            background: "#e3e8e5",            
-        },
-    },
-    extendedRight: {
-        gridRowStart: "1",
-        gridRowEnd: "3",
-        gridColumnStart: "3",
-        padding: "10px",
-        background: "white",
-        [theme.breakpoints.down('sm')]: {
-            height: "300px"
-        },
-        "&:hover": {
-            background: "#e3e8e5",            
-        },
-    },
-    extendedLeft: {
-        gridRowStart: "1",
-        gridRowEnd: "3",
-        gridColumnStart: "1",
-        padding: "10px",
-        background: "white",
-        [theme.breakpoints.down('sm')]: {
-            height: "300px"
-        },
-        "&:hover": {
-            background: "#e3e8e5",            
+            background: "#e3e8e5",
         },
     },
     li: {
@@ -82,119 +78,51 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export default function ExtraCard({ alternate }) {
+export default function ExtraCard() {
     const classes = useStyles();
     return (
-        <Box>
-            {
-                alternate ? <Box className={classes.box}>
-
-                    <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Answer Key </Typography>
-                           {/* dummy data */}
-                        <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                    </Box>
-
-                    <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Syllabus </Typography>
-                        <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                    </Box>
-
-                    <Box className={classes.extendedRight} >
-                        <Typography className={classes.heading}> Admission </Typography>
-                        <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                Link Here
-                                </NavLink>
-                            </li>
-                    </Box>
-
-                    <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Important </Typography>
-                        <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                    </Box>
-
-                    <Box className={classes.childBox}>
-                        <Typography className={classes.heading}> Certificate Verification </Typography>
-                        <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                    </Box>
+        <Box className={classes.mainbox}>
+            <Box className={classes.box}>
+                <Box className={classes.childBox}>
+                    <Typography className={classes.heading}> Answer Key </Typography>
+                    {/* dummy data */}
+                    <li className={classes.li} >
+                        <NavLink to="/" className={classes.navLink} >
+                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                            Link Here
+                        </NavLink>
+                    </li>
                 </Box>
-                    :
-                    <Box className={classes.box}>
 
-                        <Box className={classes.extendedLeft}>
-                            <Typography className={classes.heading}> Heading </Typography>
-                            <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                        </Box>
+                <Box className={classes.childBox}>
+                    <Typography className={classes.heading}> Syllabus </Typography>
+                    <li className={classes.li} >
+                        <NavLink to="/" className={classes.navLink} >
+                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                            Link Here
+                        </NavLink>
+                    </li>
+                </Box>
+                <Box className={classes.childBox}>
+                    <Typography className={classes.heading}> Important </Typography>
+                    <li className={classes.li} >
+                        <NavLink to="/" className={classes.navLink} >
+                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                            Link Here
+                        </NavLink>
+                    </li>
+                </Box>
 
-                        <Box className={classes.childBox}>
-                            <Typography className={classes.heading}> Heading </Typography>
-                            <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                        </Box>
-
-                        <Box className={classes.childBox} >
-                            <Typography className={classes.heading}> Heading </Typography>
-                            <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                        </Box>
-
-                        <Box className={classes.childBox}>
-                            <Typography className={classes.heading} > Heading </Typography>
-                            <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                        </Box>
-
-                        <Box className={classes.childBox}>
-                            <Typography className={classes.heading}> Heading </Typography>
-                            <li className={classes.li} >
-                                <NavLink to="/" className={classes.navLink} >
-                                    <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                    Link Here
-                                </NavLink>
-                            </li>
-                        </Box>
-                    </Box>
-            }
+                <Box className={classes.childBox}>
+                    <Typography className={classes.heading}> Certificate Verification </Typography>
+                    <li className={classes.li} >
+                        <NavLink to="/" className={classes.navLink} >
+                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                            Link Here
+                        </NavLink>
+                    </li>
+                </Box>
+            </Box>
         </Box>
-
     )
 }

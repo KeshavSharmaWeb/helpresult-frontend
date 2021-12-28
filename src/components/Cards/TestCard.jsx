@@ -69,14 +69,33 @@ const useStyles = makeStyles((theme) => ({
         "&:hover":{
             color: "black"
         }
+    },
+    extendCol:{
+        gridRowStart: "1",
+        gridRowEnd: "4",
+        gridColumnStart: "3",
+        gridColumnEnd: "4",
+        "&>*":{
+            height: "100%"
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "250px",
+            height: "700px"
+        },
+        [theme.breakpoints.down("xs")]: {
+            width: "250px",
+            height: "700px",
+            marginBottom: "10px"
+        }
     }
 })
 );
 
-export default function Card({ title,path,records }) {
+export default function Card({ title,path,records ,extend }) {
     const classes = useStyles();
     return (
-        <Box className={classes.box}>
+        <Box className={extend ? classes.extendCol : ""}>
+            <Box className={classes.box}>
             <Bounce left>
                 <Box className={classes.top}>
                     {title}
@@ -99,6 +118,7 @@ export default function Card({ title,path,records }) {
                     <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
                 </Box>
             </Bounce>
+        </Box>
         </Box>
     )
 }
