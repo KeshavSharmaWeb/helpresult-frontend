@@ -66,7 +66,9 @@ function Navbar() {
 
   useEffect(() => {
     axios.get(url + "/categories").then(res => {
-      setCategoryData(res.data);
+
+      // get first 7 elements of the array
+      setCategoryData(res.data.slice(0, 6));
       setIsReady(true);
     }
     )

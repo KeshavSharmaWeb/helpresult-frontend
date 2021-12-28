@@ -78,49 +78,72 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export default function ExtraCard() {
+export default function ExtraCard({ records }) {
     const classes = useStyles();
     return (
         <Box className={classes.mainbox}>
             <Box className={classes.box}>
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Answer Key </Typography>
-                    {/* dummy data */}
-                    <li className={classes.li} >
-                        <NavLink to="/" className={classes.navLink} >
-                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                            Link Here
-                        </NavLink>
-                    </li>
+                    {
+                        records.filter(record => record.categoryId == "61c7fcd58b071fa93f00747d").map((val, id) => {
+                            return (
+                                <li key={id} className={classes.li}> 
+                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
+                                    {val.name}
+                                    </NavLink>
+                                </li>
+                                )
+                        })
+                    }
                 </Box>
 
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Syllabus </Typography>
-                    <li className={classes.li} >
-                        <NavLink to="/" className={classes.navLink} >
-                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                            Link Here
-                        </NavLink>
-                    </li>
+                    {
+                        records.filter(record => record.categoryId == "61c7fcdd8b071fa93f00747f").map((val, id) => {
+                            return (
+                                <li key={id} className={classes.li}> 
+                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
+                                    {val.name}
+                                    </NavLink>
+                                </li>
+                                )
+                        })
+                    }
                 </Box>
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Important </Typography>
-                    <li className={classes.li} >
-                        <NavLink to="/" className={classes.navLink} >
-                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                            Link Here
-                        </NavLink>
-                    </li>
+                    {
+                        records.filter(record => record.categoryId == "61c7fce38b071fa93f007481").map((val, id) => {
+                            return (
+                                <li key={id} className={classes.li}> 
+                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
+                                    {val.name}
+                                    </NavLink>
+                                </li>
+                                )
+                        })
+                    }
                 </Box>
 
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Certificate Verification </Typography>
-                    <li className={classes.li} >
-                        <NavLink to="/" className={classes.navLink} >
-                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                            Link Here
-                        </NavLink>
-                    </li>
+                    {
+                        records.filter(record => record.categoryId == "61c7fce58b071fa93f007483").map((val, id) => {
+                            return (
+                                <li key={id} className={classes.li}> 
+                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
+                                    {val.name}
+                                    </NavLink>
+                                </li>
+                                )
+                        })
+                    }
                 </Box>
             </Box>
         </Box>
