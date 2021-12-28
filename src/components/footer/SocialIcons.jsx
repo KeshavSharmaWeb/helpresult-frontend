@@ -83,7 +83,7 @@ export default function SocialIcons() {
         <LightSpeed right>
         <Box className={classes.box}>
             <Box className={classes.copyright}>
-                Copyright 2020 [Website name]
+                Copyright 2021. All Rights Reserved.
             </Box>
             <Box className={classes.icons}>
                 <Box className={classes.icon}>

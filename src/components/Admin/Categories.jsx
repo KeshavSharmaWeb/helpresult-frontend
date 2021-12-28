@@ -125,7 +125,7 @@ const Categories = () => {
                                     !loading &&
                                     categories.map((category, index) => (
                                         <tr>
-                                            <td>{index + 1}</td>
+                                            <td>{category._id}</td>
                                             <td><input id={`name-${category._id}`} type="text" placeholder={category.name} style={{ textAlign: "center" }} /></td>
                                             <td>{category.date}</td>
                                             <td>

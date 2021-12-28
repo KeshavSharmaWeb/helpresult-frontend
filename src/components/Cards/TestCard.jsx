@@ -4,6 +4,8 @@ import { CheckBox } from "@material-ui/icons";
 import Data from "./data.json";
 import Bounce from "react-reveal";
 import {Link,NavLink} from "react-router-dom";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -67,27 +69,45 @@ const useStyles = makeStyles((theme) => ({
         "&:hover":{
             color: "black"
         }
+    },
+    extendCol:{
+        gridRowStart: "1",
+        gridRowEnd: "4",
+        gridColumnStart: "3",
+        gridColumnEnd: "4",
+        "&>*":{
+            height: "100%"
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "250px",
+            height: "700px"
+        },
+        [theme.breakpoints.down("xs")]: {
+            width: "250px",
+            height: "700px",
+            marginBottom: "10px"
+        }
     }
 })
 );
 
-export default function Card({ title,path }) {
+export default function Card({ title,path,records ,extend }) {
     const classes = useStyles();
-
     return (
-        <Box className={classes.box}>
+        <Box className={extend ? classes.extendCol : ""}>
+            <Box className={classes.box}>
             <Bounce left>
                 <Box className={classes.top}>
                     {title}
                 </Box>
                 <Box className={classes.mid}>
                     {
-                        Data.map((val, id) => {
+                        records.map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/full", search: `?name=${val.data}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.data}
+                                    {val.name}
                                     </NavLink>
                                 </li>
                                 )
@@ -98,6 +118,7 @@ export default function Card({ title,path }) {
                     <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
                 </Box>
             </Bounce>
+        </Box>
         </Box>
     )
 }
