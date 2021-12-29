@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
         [theme.breakpoints.down("xs")]:{
             flexDirection: "column",
-            margin: "2% 20%"
+            margin: "2% 5%"
         }
     },
     box1:{
