@@ -13,21 +13,20 @@ export default function Details() {
         box: {
             display: "flex",
             flexDirection: "column",
-            margin: "5% 10%",
+            margin: "5% 16% 5% 9%",
             [theme.breakpoints.down("sm")]: {
                 margin: "5% 6%"
             }
         },
         row: {
             display: "flex",
-            margin: "10px 0px"
+            margin: "10px 0px",
+            flexDirection: "column"
         },
         title: {
             color: "#ff0033",
             width: "20%",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             fontWeight: "bold",
             [theme.breakpoints.down("sm")]: {
                 marginRight: "5%"
