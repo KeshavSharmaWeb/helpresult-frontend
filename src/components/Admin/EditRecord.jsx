@@ -14,6 +14,32 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+    container:{
+        display: "flex",
+        margin: "2% 8%",
+        width: "100%",
+        justifyContent: "space-between",
+        [theme.breakpoints.down("xs")]:{
+            flexDirection: "column",
+            margin: "2% 5%"
+        }
+    },
+    box1:{
+        width: "37%",
+        [theme.breakpoints.down("xs")]:{
+            width: "80%"
+        }
+    },
+    box2: {
+        width: "100%",
+        marginTop: "0px",
+        width: "60%",
+    }
+}))
+
 const EditRecord = () => {
     const query = new URLSearchParams(window.location.search)
     const recordId = query.get('id')
@@ -66,7 +92,7 @@ const EditRecord = () => {
     }, [recordId])
 
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         let last_date;
 
@@ -107,63 +133,69 @@ const EditRecord = () => {
 
     const date = formattedDate(record.last_date)
 
+    const classes = useStyles()
+
     return (
-        <Container style={{ width: "50%", marginTop: 30, marginBottom: 30 }}>
+        // <Container style={{ width: "50%", marginTop: 30, marginBottom: 30 }}>
+        <Container className={classes.container} >
+            <Box className={classes.box1}>
+                <h3 style={{ textAlign: "center" }}>Edit Post</h3>
 
-            <h3 style={{ textAlign: "center" }}>Edit Post</h3>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Post Name</Form.Label>
+                        <Form.Control type="text" name="name" placeholder="Enter record name" defaultValue={record.name} onChange={(e) => document.getElementById("record_display_name").value = e.target.value} required />
+                        <Form.Label>Post display name</Form.Label>
+                        <Form.Control type="text" name="record_display_name" placeholder="Enter record display name" id="record_display_name" defaultValue={record.name} required />
 
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Post Name</Form.Label>
-                    <Form.Control type="text" name="name" placeholder="Enter record name" defaultValue={record.name} onChange={(e) => document.getElementById("record_display_name").value = e.target.value} required />
-                    <Form.Label>Post display name</Form.Label>
-                    <Form.Control type="text" name="record_display_name" placeholder="Enter record display name" id="record_display_name" defaultValue={record.name} required />
+                        <FormControl sx={{ marginY: 1, width: 300 }}>
+                            <InputLabel>Categories</InputLabel>
+                            <Select
+                                multiple
+                                value={selectedCategories}
+                                onChange={handleChange}
+                                input={<OutlinedInput label="Tag" />}
+                                renderValue={(selected) => categories.filter(category => selected.indexOf(category._id) > -1).map(category => category.name).join(', ')}
+                                MenuProps={MenuProps}
+                                name="role"
+                                required
+                            >
+                                {isReady && categories.map((category) => (
+                                    <MenuItem key={category._id} value={category._id}>
+                                        <ListItemText primary={category.name} />
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl><br />
 
-                    <FormControl sx={{ marginY: 1, width: 300 }}>
-                        <InputLabel>Categories</InputLabel>
-                        <Select
-                            multiple
-                            value={selectedCategories}
-                            onChange={handleChange}
-                            input={<OutlinedInput label="Tag" />}
-                            renderValue={(selected) => categories.filter(category => selected.indexOf(category._id) > -1).map(category => category.name).join(', ')}
-                            MenuProps={MenuProps}
-                            name="role"
-                            required
-                        >
-                            {isReady && categories.map((category) => (
-                                <MenuItem key={category._id} value={category._id}>
-                                    <ListItemText primary={category.name} />
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl><br />
+                        <Form.Label>Short Information</Form.Label>
+                        <Form.Control type="text" name="shortInfo" as="textarea" placeholder="Enter Short Information" defaultValue={record.short_information} required />
+                        <div style={{ margin: "10px 0" }}>
 
-                    <Form.Label>Short Information</Form.Label>
-                    <Form.Control type="text" name="shortInfo" as="textarea" placeholder="Enter Short Information" defaultValue={record.short_information} required />
-                    <div style={{ margin: "10px 0" }}>
-
-                        <input type="checkbox" id="show_last_date" onChange={handleCheckBox} />{"    "}
-                        <label htmlFor="show_last_date">
-                            Edit last date
-                        </label> <br />
-                    </div>
-                    <div style={{ display: isChecked ? 'block' : 'none' }}>
-                        <Form.Label>Last Date to apply -  Current Date: {date}</Form.Label>
-                        <Form.Control type="date" name="last_date" placeholder="Pick date" />
-                    </div>
-                    <Form.Label>Table HTML</Form.Label>
-                    <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" defaultValue={record.more_data_html} onChange={(e) => setTableHTML(e.target.value)} required />
-                </Form.Group>
-                <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
-                    Update
-                </Button>
-            </Form>
+                            <input type="checkbox" id="show_last_date" onChange={handleCheckBox} />{"    "}
+                            <label htmlFor="show_last_date">
+                                Edit last date
+                            </label> <br />
+                        </div>
+                        <div style={{ display: isChecked ? 'block' : 'none' }}>
+                            <Form.Label>Last Date to apply -  Current Date: {date}</Form.Label>
+                            <Form.Control type="date" name="last_date" placeholder="Pick date" />
+                        </div>
+                        <Form.Label>Table HTML</Form.Label>
+                        <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" defaultValue={record.more_data_html} onChange={(e) => setTableHTML(e.target.value)} required />
+                    </Form.Group>
+                    <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
+                        Update
+                    </Button>
+                </Form>
+            </Box>
 
 
-            <h3 style={{ textAlign: "center", marginTop: "50px" }}>HTML Display</h3>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "25px" }}>
-                {parse(tableHTML)}
+            <Box className={classes.box2}>
+                <h3 style={{ textAlign: "center", marginTop: "50px" }}>HTML Display</h3>
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "25px" }}>
+                    {parse(tableHTML)}
+                </Box>
             </Box>
 
         </Container>
