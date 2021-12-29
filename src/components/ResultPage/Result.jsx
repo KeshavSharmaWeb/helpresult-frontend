@@ -27,7 +27,6 @@ export default function Result() {
     return (
         <Box>
             {ready ? <TableBox title={categoryName} data={data} /> : ''}
-
         </Box>
     )
 }

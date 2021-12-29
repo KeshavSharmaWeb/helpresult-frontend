@@ -1,11 +1,12 @@
 import React from 'react';
 import { Box, Button, makeStyles} from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
-import Data from "./data.json";
+
 import Bounce from "react-reveal";
 import {Link,NavLink} from "react-router-dom";
-import { useState } from 'react';
-import { useEffect } from 'react';
+
+import {formattedDate} from "../../helperFns";
+
 
 const useStyles = makeStyles((theme) => ({
     box: {

@@ -84,9 +84,9 @@ export default function MainCard() {
             })} */}
 
             {/* dummy  */}
-                <TestCard extend={false} title="Result"  records={recordData.filter(record => record.categoryId == "61c7fcc58b071fa93f007477")} />
-                <TestCard extend={false} title="Admit Card" records={recordData.filter(record => record.categoryId == "61c7fcc88b071fa93f007479")} />
-                <TestCard extend={true} title="Latest Jobs" records={recordData.filter(record => record.categoryId == "61c7fccb8b071fa93f00747b")} />
+                <TestCard extend={false} title="Result"  records={recordData.filter(record => record.categoryIds.includes("61c7fcc58b071fa93f007477"))} />
+                <TestCard extend={false} title="Admit Card" records={recordData.filter(record => record.categoryIds.includes("61c7fcc88b071fa93f007479"))} />
+                <TestCard extend={true} title="Latest Jobs" records={recordData.filter(record => record.categoryIds.includes("61c7fccb8b071fa93f00747b"))} />
                 <ExtraCard records={recordData}/>
             </Box>
             {/* <Box className={classes.extraBox}>
