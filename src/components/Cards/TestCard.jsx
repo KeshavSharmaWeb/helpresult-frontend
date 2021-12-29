@@ -106,7 +106,7 @@ export default function Card({ title,path,records ,extend }) {
                         records.map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
                                     {val.name}
                                     </NavLink>
