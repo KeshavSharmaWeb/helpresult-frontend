@@ -33,7 +33,7 @@ function App() {
       <Route path="/details/:name" exact component={Details} />
       <Route path="/more/:name" exact component={Result} />
       {/* ADMIN ROUTES */}
-
+      <Route path="/admin" exact render={() => changeComponentToLogin(Admin)} />
       <Route path="/admin/dashboard" exact render={() => changeComponentToLogin(Admin)} />
       <Route path="/admin/categories" exact render={() => changeComponentToLogin(Categories)} />
 

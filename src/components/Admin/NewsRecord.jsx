@@ -103,8 +103,7 @@ const NewsRecord = () => {
                                     <th>Record Id</th>
                                     <th>Fill Color</th>
                                     <th>Date Added</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -117,13 +116,9 @@ const NewsRecord = () => {
                                             <td>{newsRecord.name}</td>
                                             <td>{newsRecord.recordId}</td>
                                             <td>{newsRecord.fillColor}</td>
+                                            <td>{newsRecord.datetime}</td>
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(newsRecord._id)} style={{ cursor: "pointer" }} />
-                                            </td>
-                                            <td>
-                                                <Button variant="outline-dark" size="sm" >
-                                                    Update
-                                                </Button>
                                             </td>
                                         </tr>
                                     )

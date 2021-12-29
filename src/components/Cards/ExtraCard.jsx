@@ -86,7 +86,7 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Answer Key </Typography>
                     {
-                        records.filter(record => record.categoryId == "61c7fcd58b071fa93f00747d").map((val, id) => {
+                        records.filter(record => record.categoryIds.includes("61c7fcd58b071fa93f00747d")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
@@ -102,7 +102,7 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Syllabus </Typography>
                     {
-                        records.filter(record => record.categoryId == "61c7fcdd8b071fa93f00747f").map((val, id) => {
+                        records.filter(record => record.categoryIds.includes("61c7fcdd8b071fa93f00747f")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
@@ -117,7 +117,7 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Important </Typography>
                     {
-                        records.filter(record => record.categoryId == "61c7fce38b071fa93f007481").map((val, id) => {
+                        records.filter(record => record.categoryIds.includes("61c7fce38b071fa93f007481")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
@@ -133,7 +133,7 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Certificate Verification </Typography>
                     {
-                        records.filter(record => record.categoryId == "61c7fce58b071fa93f007483").map((val, id) => {
+                        records.filter(record => record.categoryIds.includes("61c7fce58b071fa93f007483")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >

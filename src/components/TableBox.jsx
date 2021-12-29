@@ -4,6 +4,8 @@ import { CheckBox } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import Rotate from "react-reveal";
 
+import {formattedDate} from "../helperFns";
+
 
 
 export default function TableBox({ title, data }) {
@@ -70,7 +72,10 @@ export default function TableBox({ title, data }) {
                         <Box className={classes.desc}>
                             {
                                 data.map((val) => {
-                                    return <li key={val._id} className={classes.li}> <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "16px" }} /> <Link to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} > {val.name} </Link> </li>
+                                    return <><li key={val._id} className={classes.li}> <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "16px" }} /> <Link to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} > {val.name} </Link>
+                                    <span style={{ color: "black", fontWeight: 900 }}>{ val.last_date ? `  Last Date : ${formattedDate(val.last_date)}` : null}</span>
+                                    </li>
+                                    </>
                                 })
                             }
                         </Box> :
