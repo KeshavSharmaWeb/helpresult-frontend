@@ -44,6 +44,8 @@ export default function Details() {
     )
     const query = new URLSearchParams(window.location.search)
     const id = query.get('id')
+
+    console.log(id, '**************')
     const classes = useStyles();
 
     const [data, setData] = useState([]);

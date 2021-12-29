@@ -89,7 +89,7 @@ export default function ExtraCard({ records }) {
                         records.filter(record => record.categoryIds.includes("61c7fcd58b071fa93f00747d")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
                                     {val.name}
                                     </NavLink>
@@ -105,7 +105,7 @@ export default function ExtraCard({ records }) {
                         records.filter(record => record.categoryIds.includes("61c7fcdd8b071fa93f00747f")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
                                     {val.name}
                                     </NavLink>
@@ -120,7 +120,7 @@ export default function ExtraCard({ records }) {
                         records.filter(record => record.categoryIds.includes("61c7fce38b071fa93f007481")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
                                     {val.name}
                                     </NavLink>
@@ -136,7 +136,7 @@ export default function ExtraCard({ records }) {
                         records.filter(record => record.categoryIds.includes("61c7fce58b071fa93f007483")).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.name, search: `?id=${val._id}`}} className={classes.navLink} >
+                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
                                     {val.name}
                                     </NavLink>
