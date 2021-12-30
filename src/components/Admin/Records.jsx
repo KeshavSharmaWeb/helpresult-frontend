@@ -5,6 +5,7 @@ import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import { formattedDate, userExists } from '../../helperFns'
+import ReactPaginate from "react-paginate";
 
 const Records = () => {
 
@@ -14,6 +15,24 @@ const Records = () => {
 
     const [loading, setLoading] = useState(true)
 
+    // pagination
+    const [rows, setRows] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
+
+    const rowsPerPage = 10; // no of records per row 
+
+    const pagesVisited = pageNumber * rowsPerPage;
+
+    const displayRows = rows.slice(pagesVisited, pagesVisited + rowsPerPage)
+
+    const pageCount = Math.ceil(rows.length / rowsPerPage);
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
+    // pagination end
+
+
     useEffect(() => {
         axios.get(`${url}/categories`)
             .then(res => {
@@ -22,13 +41,18 @@ const Records = () => {
         axios.get(`${url}/records`)
             .then(res => {
                 setRecords(res.data)
+                setLoading(false)
+                console.log(res.data, " fetched");
+                setRows(res.data)
             })
         axios.get(`${url}/sub-categories`)
             .then(res => {
                 setSubCategories(res.data)
-                setLoading(false)
             })
+        setLoading(false)
     }, [])
+
+    console.log(rows, "rows");
 
     const handleCancel = async (id) => {
         const isUserExists = await userExists(localStorage.getItem('userId'))
@@ -76,7 +100,7 @@ const Records = () => {
 
                                 {
                                     !loading &&
-                                    records.map((record, index) => (
+                                    displayRows.map((record, index) => (
 
                                         <tr>
                                             <td>{index + 1}</td>
@@ -88,7 +112,7 @@ const Records = () => {
                                             <td>{record.short_information.slice(0, 50)}...</td>
                                             <td>{formattedDate(record.last_date)}</td>
                                             <td>{categories.filter(category => record.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
-                                            <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td>
+                                            {/* <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td> */}
 
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(record._id)} style={{ cursor: "pointer" }} />
@@ -101,12 +125,24 @@ const Records = () => {
                                     )
                                     )
                                 }
-
                             </tbody>
                         </>
                     ) : <h3 style={{ textAlign: "center" }}>Nothing to display</h3>
                 }
             </Table>
+            {
+                (records.length > 0 && loading === false) ?  <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                /> : ""
+            }
         </Container>
 
     )
