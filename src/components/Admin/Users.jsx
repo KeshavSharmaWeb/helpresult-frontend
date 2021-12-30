@@ -4,17 +4,34 @@ import axios from 'axios'
 import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
-
+import ReactPaginate from "react-paginate";
 
 const Users = () => {
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
+
+    // pagination
+    const [userRows, setUserRows] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
+
+    const rowsPerPage = 10;
+    const pagesVisited = pageNumber * rowsPerPage;
+
+    const displayRows = userRows.slice(pagesVisited, pagesVisited + rowsPerPage)
+
+    const pageCount = Math.ceil(userRows.length / rowsPerPage);
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
+    // pagination end
 
     useEffect(() => {
         axios.get(`${url}/users`)
             .then(res => {
                 setUsers(res.data)
                 setLoading(false)
+                setUserRows(res.data)
             })
     }, [])
 
@@ -50,7 +67,7 @@ const Users = () => {
                             <tbody>
                                 {
                                     !loading &&
-                                    users.map(user => (
+                                    displayRows.map(user => (
                                         <tr>
                                             <td>{user._id}</td>
                                             <td>{user.name}</td>
@@ -73,6 +90,21 @@ const Users = () => {
                     ) : <h3 style={{ textAlign: "center" }}>Nothing to display</h3>
                 }
             </Table>
+            {
+                (users.length > 0 && loading === false) ? <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"pagination justify-content-end"}
+                    previousLinkClassName={"page-link page-item disabled"}
+                    nextLinkClassName={"page-link page-item disabled"}
+                    disabledClassName={"page-item disabled"}
+                    activeClassName={"page-item active"}
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
+                /> : ""
+            }
         </Container>
     )
 }
