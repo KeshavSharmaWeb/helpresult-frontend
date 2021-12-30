@@ -96,11 +96,13 @@ const Users = () => {
                     nextLabel={"Next"}
                     pageCount={pageCount}
                     onPageChange={changePage}
-                    containerClassName={"paginationBttns"}
-                    previousLinkClassName={"previousBttn"}
-                    nextLinkClassName={"nextBttn"}
-                    disabledClassName={"paginationDisabled"}
-                    activeClassName={"paginationActive"}
+                    containerClassName={"pagination justify-content-end"}
+                    previousLinkClassName={"page-link page-item disabled"}
+                    nextLinkClassName={"page-link page-item disabled"}
+                    disabledClassName={"page-item disabled"}
+                    activeClassName={"page-item active"}
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
                 /> : ""
             }
         </Container>
