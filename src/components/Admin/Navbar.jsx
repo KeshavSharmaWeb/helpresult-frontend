@@ -18,12 +18,12 @@ const AdminNav = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavDropdown title="Records" id="basic-nav-dropdown">
+                        <NavDropdown title="Posts" id="basic-nav-dropdown">
                             <LinkContainer to="/admin/records">
-                                <NavDropdown.Item>My Records</NavDropdown.Item>
+                                <NavDropdown.Item>View</NavDropdown.Item>
                             </LinkContainer>
                             <LinkContainer to="/admin/records/add" >
-                                <NavDropdown.Item>Add New Records</NavDropdown.Item>
+                                <NavDropdown.Item>Add</NavDropdown.Item>
                             </LinkContainer>
                         </NavDropdown>
                         <NavDropdown title="Users" id="basic-nav-dropdown">
@@ -36,6 +36,9 @@ const AdminNav = () => {
                         </NavDropdown>
                         <LinkContainer to="/admin/categories">
                             <Nav.Link>Categories</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/sub-categories">
+                            <Nav.Link>Sub categories</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/admin/news-records">
                             <Nav.Link>News Records</Nav.Link>

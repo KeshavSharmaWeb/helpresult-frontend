@@ -7,6 +7,7 @@ import Footer from './components/footer/Footer';
 import SocialIcons from './components/footer/SocialIcons';
 import Admin from "./components/Admin";
 import Categories from "./components/Admin/Categories";
+import SubCategories from "./components/Admin/SubCategories";
 import Records from "./components/Admin/Records";
 import EditRecord from "./components/Admin/EditRecord";
 import AddRecord from "./components/Admin/AddRecord";
@@ -36,6 +37,8 @@ function App() {
       <Route path="/admin" exact render={() => changeComponentToLogin(Admin)} />
       <Route path="/admin/dashboard" exact render={() => changeComponentToLogin(Admin)} />
       <Route path="/admin/categories" exact render={() => changeComponentToLogin(Categories)} />
+
+      <Route path="/admin/sub-categories" exact render={() => changeComponentToLogin(SubCategories)} />
 
       <Route path="/admin/records" exact render={() => changeComponentToLogin(Records)} />
       <Route path="/admin/records/add" exact render={() => changeComponentToLogin(AddRecord)} />

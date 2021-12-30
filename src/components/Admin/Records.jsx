@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom'
 import { formattedDate, userExists } from '../../helperFns'
 
 const Records = () => {
+
     const [records, setRecords] = useState([])
     const [categories, setCategories] = useState([])
+    const [subCategories, setSubCategories] = useState([])
+
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -20,7 +23,11 @@ const Records = () => {
             .then(res => {
                 setRecords(res.data)
             })
-        setLoading(false)
+        axios.get(`${url}/sub-categories`)
+            .then(res => {
+                setSubCategories(res.data)
+                setLoading(false)
+            })
     }, [])
 
     const handleCancel = async (id) => {
@@ -35,9 +42,9 @@ const Records = () => {
             if (res.data.status === 401) {
                 alert('You are not authorized to delete this record')
             }
-             else if (res.status === 200) {
+            else if (res.status === 200) {
                 setRecords(records.filter(record => record._id !== id))
-            }  else {
+            } else {
                 alert('Something went wrong')
             }
         })
@@ -46,13 +53,14 @@ const Records = () => {
 
     return (
         <Container>
-            <h3 style={{ textAlign: "center", marginTop: 40 }}>Records</h3>
+            <h3 style={{ textAlign: "center", marginTop: 40 }}>Posts</h3>
             <Table striped bordered hover style={{ marginTop: 30, textAlign: "center" }}>
                 {
                     records.length > 0 ? (
                         <>
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Post Display</th>
@@ -60,8 +68,8 @@ const Records = () => {
                                     <th>Date Updated</th>
                                     <th>Short Information</th>
                                     <th>Last date</th>
-                                    <th>Table HTML</th>
                                     <th>Category</th>
+                                    <th>Sub category</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,6 +79,7 @@ const Records = () => {
                                     records.map((record, index) => (
 
                                         <tr>
+                                            <td>{index + 1}</td>
                                             <td>{record._id}</td>
                                             <td>{record.name}</td>
                                             <td>{record.post_display_name}</td>
@@ -78,9 +87,9 @@ const Records = () => {
                                             <td>{record.updated_at}</td>
                                             <td>{record.short_information.slice(0, 50)}...</td>
                                             <td>{formattedDate(record.last_date)}</td>
-                                            <td>{record.more_data_html.slice(0, 50)}...</td>
                                             <td>{categories.filter(category => record.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
-                                            
+                                            <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td>
+
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(record._id)} style={{ cursor: "pointer" }} />
                                             </td>
@@ -99,6 +108,7 @@ const Records = () => {
                 }
             </Table>
         </Container>
+
     )
 }
 

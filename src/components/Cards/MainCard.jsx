@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Box, makeStyles } from "@material-ui/core";
 import TestCard from './TestCard';
-import Card from './Card';
 import axios from 'axios';
 import { url } from '../../config';
 import ExtraCard from './ExtraCard';
@@ -55,14 +54,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainCard() {
     const classes = useStyles();
-    const [categoryData, setCategoryData] = useState([]);
     const [recordData, setRecordData] = useState([]);
 
     useEffect(() => {
-        axios.get(url+"/categories").then(res => {
-            setCategoryData(res.data);
-        }
-        )
         axios.get(url+"/records").then(res => {
             setRecordData(res.data);
         }
