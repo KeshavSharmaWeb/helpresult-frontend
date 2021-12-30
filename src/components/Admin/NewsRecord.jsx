@@ -3,7 +3,6 @@ import { Container, Button, Table, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
-import { userExists } from '../../helperFns'
 import { HexColorPicker } from "react-colorful";
 import { Box } from '@material-ui/core'
 
@@ -31,17 +30,6 @@ const NewsRecord = () => {
         }
         )
     }
-
-    // const handleUpdate = async (id, name, minHeight) => {
-    //     axios.post(url + "/update-category", { id: id, userId: localStorage.getItem('userId'), name: name, minHeight: minHeight }).then(res => {
-    //         if (res.status === 200) {
-    //             setNewsRecords(categories.map(category => category._id === id ? { ...category, name: name, slug: convertToSlug(name), minHeight: minHeight } : category))
-    //         } else {
-    //             alert("Something went wrong")
-    //         }
-    //     }
-    //     )
-    // }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()

@@ -13,37 +13,39 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 
-import {makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    container:{
+    container: {
         display: "flex",
         margin: "2% 8%",
         width: "100%",
         justifyContent: "space-between",
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             flexDirection: "column",
             margin: "2% 5%"
         }
     },
-    box1:{
+    box1: {
         width: "37%",
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             width: "80%"
         }
     },
     box2: {
-        width: "100%",
-        marginTop: "0px",
         width: "60%",
+        marginTop: "0px",
     }
 }))
 
 const AddRecord = () => {
     const [categories, setCategories] = useState([])
+    const [subCategories, setSubCategories] = useState([])
+
     const [isChecked, setIsChecked] = useState(false)
     const [isReady, setIsReady] = useState(false)
     const [tableHTML, setTableHTML] = useState('')
+
 
     const [selectedCategories, setSelectedCategories] = useState([])
     const handleChange = (event) => {
@@ -71,8 +73,13 @@ const AddRecord = () => {
         axios.get(`${url}/categories`)
             .then(res => {
                 setCategories(res.data)
-                setIsReady(true)
             })
+        axios.get(`${url}/sub-categories`)
+            .then(res => {
+                setSubCategories(res.data)
+                setIsReady(true)
+            }
+            )
     }, [])
 
     const handleCheckBox = (e) => {
@@ -99,6 +106,7 @@ const AddRecord = () => {
             name: formData.get('name'),
             userId: localStorage.getItem('userId'),
             categoryIds: selectedCategories,
+            subCategoryId: formData.get('sub-category'),
             shortInfo: formData.get('shortInfo'),
             more_data_html: formData.get('more_data_html'),
             last_date: last_date,
@@ -133,8 +141,7 @@ const AddRecord = () => {
                         <Form.Label>Post display name</Form.Label>
                         <Form.Control type="text" name="record_display_name" placeholder="Enter post display name" id="record_display_name" required />
 
-
-                        <FormControl sx={{ marginY: 1, width: 300 }}>
+                        <FormControl sx={{ marginY: 2, width: 300 }}>
                             <InputLabel>Categories</InputLabel>
                             <Select
                                 multiple
@@ -153,6 +160,15 @@ const AddRecord = () => {
                                 ))}
                             </Select>
                         </FormControl><br />
+
+                        <Form.Label>Sub Category</Form.Label> <br />
+                        <Form.Control as="select" name="sub-category" id="sub-category" required>
+                            <Form.Control as="option" value="" disabled selected>Select Category</Form.Control>
+                            {subCategories.map(category => {
+                                return <Form.Control as="option" key={category._id} value={category._id}>{category.name}</Form.Control>
+                            }
+                            )}
+                        </Form.Control> <br />
 
                         <Form.Label>Short Information</Form.Label>
                         <Form.Control type="text" name="shortInfo" as="textarea" placeholder="Enter short information" required />

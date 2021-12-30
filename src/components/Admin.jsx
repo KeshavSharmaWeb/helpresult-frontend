@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Table } from 'react-bootstrap'
+import { Container, Table } from 'react-bootstrap'
 import axios from 'axios'
 import { url } from '../config'
-import { Cancel } from '@material-ui/icons'
-import { Link } from 'react-router-dom'
-import { formattedDate } from '../helperFns'
 
 const Dashboard = () => {
     const [logs, setLogs] = useState([])

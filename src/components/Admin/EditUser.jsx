@@ -36,7 +36,7 @@ const EditUser = () => {
             setRoleName(res.data[0].roles)
             setIsReady(true)
         })
-    }, [])
+    })
 
     const handleFormSubmit = (e) => {
         e.preventDefault()

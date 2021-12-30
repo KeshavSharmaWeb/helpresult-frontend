@@ -5,9 +5,6 @@ import { CheckBox } from "@material-ui/icons";
 import Bounce from "react-reveal";
 import {Link,NavLink} from "react-router-dom";
 
-import {formattedDate} from "../../helperFns";
-
-
 const useStyles = makeStyles((theme) => ({
     box: {
         display: "flex",
