@@ -19,7 +19,7 @@ const Records = () => {
     const [rows, setRows] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
 
-    const rowsPerPage = 10; // no of records per row 
+    const rowsPerPage = 3; // no of records per row 
 
     const pagesVisited = pageNumber * rowsPerPage;
 
@@ -41,18 +41,14 @@ const Records = () => {
         axios.get(`${url}/records`)
             .then(res => {
                 setRecords(res.data)
-                setLoading(false)
-                console.log(res.data, " fetched");
                 setRows(res.data)
             })
-        axios.get(`${url}/sub-categories`)
+            axios.get(`${url}/sub-categories`)
             .then(res => {
                 setSubCategories(res.data)
+                setLoading(false)
             })
-        setLoading(false)
     }, [])
-
-    console.log(rows, "rows");
 
     const handleCancel = async (id) => {
         const isUserExists = await userExists(localStorage.getItem('userId'))
@@ -112,7 +108,7 @@ const Records = () => {
                                             <td>{record.short_information.slice(0, 50)}...</td>
                                             <td>{formattedDate(record.last_date)}</td>
                                             <td>{categories.filter(category => record.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
-                                            {/* <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td> */}
+                                            <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td>
 
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(record._id)} style={{ cursor: "pointer" }} />
@@ -143,6 +139,19 @@ const Records = () => {
                     activeClassName={"paginationActive"}
                 /> : ""
             }
+            <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li class="page-item disabled">
+      <a class="page-link">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
         </Container>
 
     )
