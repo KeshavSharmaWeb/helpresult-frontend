@@ -13,11 +13,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-evenly",
         background: "#f2edf4",
         flexDirection: "column",
+        border: "2px sold red",
         [theme.breakpoints.down("sm")]: {
             padding: "2%",
             display: "flex",
             justifyContent: "space-evenly",
-            margin: "30px 10px",
+            flexDirection: "column",
+            margin: "30px 5px",
         },
         [theme.breakpoints.down("xs")]: {
             display: "flex",

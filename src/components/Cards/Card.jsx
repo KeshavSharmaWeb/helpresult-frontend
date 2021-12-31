@@ -12,15 +12,16 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px",
         height: "700px",
         width: "370px",
+        border: "2px solid red",
         "&:hover": {
             background: "#e3e8e5",            
         },
         [theme.breakpoints.down("sm")]: {
-            width: "250px",
-            margin: "5px 15px"
+            width: "90%",
+            margin: "5px 10px",
         },
         [theme.breakpoints.down("xs")]: {
-            width: "250px",
+            width: "90%",
         }
     },
     top: {

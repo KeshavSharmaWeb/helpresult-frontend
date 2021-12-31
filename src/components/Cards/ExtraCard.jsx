@@ -9,13 +9,17 @@ const useStyles = makeStyles((theme) => ({
         gridColumnEnd: "3",
         marginright: "1%",
         [theme.breakpoints.down("sm")]: {
-            display: "flex",
-            flexDirection: "column"
+            display: "grid",
+            width: "150%",
+            border: "2px solid green",
+            gridTemplateColumns: "auto auto"
         },
         [theme.breakpoints.down("xs")]: {
             display: "flex",
             flexDirection: "column",
-        }
+            width: "100%",
+        },
+
     },
     box: {
         margin: "2% 2% 0% 0%",
@@ -31,21 +35,22 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: "column",
             margin: "5px 15px",
             "&>*":{
-                width: "250px"
+                width: "100%"
             },
         },
         [theme.breakpoints.down('xs')]: {
             display: "flex",
             flexDirection: "column",
             "&>*":{
-                width: "250px"
+                width: "98%"
             },
         }
     },
     childBox: {
-        height: "300px",
+        height: "100%",
         padding: "10px",
         background: "white",
+        width: "100%",
         "&:hover": {
             background: "#e3e8e5",
         },
