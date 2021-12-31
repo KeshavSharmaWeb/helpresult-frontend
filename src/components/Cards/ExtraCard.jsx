@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
         padding: "10px",
         background: "white",
-        width: "370px",
+        width: "100%",
         // minWidth: "370px",
         "&:hover": {
             background: "#e3e8e5",

@@ -32,13 +32,15 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         display: "grid",
         gridTemplateColumns: "auto auto auto",
-        gridTemplateRows: "auto auto",
+        gridTemplateRows: "auto auto auto" ,
         gridColumnGap: "15px",
+        gridRowGap: "15px",
         [theme.breakpoints.down("sm")]:{
             width: "90%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center"
+            gridTemplateColumns: "auto auto",
+            gridTemplateRows: "auto auto auto" ,
+            gridColumnGap: "15px",
+            gridRowGap: "15px",
         },
         [theme.breakpoints.down("xs")]:{
             display: "flex",
@@ -83,7 +85,12 @@ export default function MainCard() {
                 <TestCard extend={false} title="Result"  records={recordData['61c7fcc58b071fa93f007477']} />
                 <TestCard extend={false} title="Admit Card" records={recordData['61c7fcc88b071fa93f007479']} />
                 <TestCard extend={true} title="Latest Jobs" records={recordData['61c7fccb8b071fa93f00747b']} />
-                <ExtraCard records={recordData}/>
+                {/* <ExtraCard records={recordData}/> */}
+                <TestCard extend={false} side={true} title="Answer Key" records={recordData['61c7fcd58b071fa93f00747d']} />
+                <TestCard extend={false} side={true} title="Syllabus" records={recordData['61c7fcdd8b071fa93f00747f']} />
+                <TestCard extend={false} side={true} title="Important" records={recordData['61c7fce38b071fa93f007481']} />
+                <TestCard extend={false} side={true} title="Certificate Verification" records={recordData['61c7fce58b071fa93f007483']} />
+
                 </>
             : null
             }
