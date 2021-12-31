@@ -3,7 +3,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import TestCard from './TestCard';
 import axios from 'axios';
 import { url } from '../../config';
-import ExtraCard from './ExtraCard';
+// import ExtraCard from './ExtraCard';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,14 +82,14 @@ export default function MainCard() {
             {/* dummy  */}
             {isReady ?
                 <>
-                <TestCard extend={false} title="Result"  records={recordData['61c7fcc58b071fa93f007477']} />
-                <TestCard extend={false} title="Admit Card" records={recordData['61c7fcc88b071fa93f007479']} />
-                <TestCard extend={true} title="Latest Jobs" records={recordData['61c7fccb8b071fa93f00747b']} />
+                <TestCard extend={false} title="Result"  records={recordData['61c7fcc58b071fa93f007477']} categoryId="61c7fcc58b071fa93f007477" />
+                <TestCard extend={false} title="Admit Card" records={recordData['61c7fcc88b071fa93f007479']} categoryId="61c7fcc88b071fa93f007479" />
+                <TestCard extend={true} title="Latest Jobs" records={recordData['61c7fccb8b071fa93f00747b']} categoryId="61c7fccb8b071fa93f00747b"/>
                 {/* <ExtraCard records={recordData}/> */}
-                <TestCard extend={false} side={true} title="Answer Key" records={recordData['61c7fcd58b071fa93f00747d']} />
-                <TestCard extend={false} side={true} title="Syllabus" records={recordData['61c7fcdd8b071fa93f00747f']} />
-                <TestCard extend={false} side={true} title="Important" records={recordData['61c7fce38b071fa93f007481']} />
-                <TestCard extend={false} side={true} title="Certificate Verification" records={recordData['61c7fce58b071fa93f007483']} />
+                <TestCard extend={false} side={true} title="Answer Key" records={recordData['61c7fcd58b071fa93f00747d']} categoryId="61c7fcd58b071fa93f00747d"/>
+                <TestCard extend={false} side={true} title="Syllabus" records={recordData['61c7fcdd8b071fa93f00747f']} categoryId="61c7fcdd8b071fa93f00747f"/>
+                <TestCard extend={false} side={true} title="Important" records={recordData['61c7fce38b071fa93f007481']} categoryId="61c7fce38b071fa93f007481"/>
+                <TestCard extend={false} side={true} title="Certificate Verification" records={recordData['61c7fce58b071fa93f007483']} categoryId="61c7fce58b071fa93f007483"/>
 
                 </>
             : null
