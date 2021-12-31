@@ -2,12 +2,13 @@ import React from 'react'
 import { Box, makeStyles, Typography, Button } from "@material-ui/core";
 import { NavLink, Link } from "react-router-dom";
 import { CheckBox } from "@material-ui/icons"
+import Bounce from "react-reveal";
 
 const useStyles = makeStyles((theme) => ({
     mainbox: {
         gridColumnStart: "1",
-        gridColumnEnd: "3",
-        marginright: "1%",  
+        gridColumnEnd: "3",  
+        display: "flex",
         [theme.breakpoints.down("sm")]: {
             display: "grid",
             gridTemplateColumns: "auto auto",
@@ -19,17 +20,13 @@ const useStyles = makeStyles((theme) => ({
             width: "100%",
             margin: "10px 20px"
         },
-
     },
     box: {
         margin: "2% 2% 0% 0%",
         display: "grid",
-        gridTemplateColumns: "auto auto ",
-        gridColumnGap: "40px",
+        gridTemplateColumns: "auto auto",
+        gridColumnGap: "35px",
         gridRowGap: "15px",
-        "&>*": {
-            width: "370px"
-        },
         [theme.breakpoints.down('sm')]: {
             display: "grid",
             gridTemplateColumns: "auto auto",
@@ -43,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
         padding: "10px",
         background: "white",
-        width: "100%",
+        width: "370px",
+        // minWidth: "370px",
         "&:hover": {
             background: "#e3e8e5",
         },
@@ -100,6 +98,7 @@ export default function ExtraCard({ records }) {
     const classes = useStyles();
     return (
         <Box className={classes.mainbox}>
+        <Bounce left>
             <Box className={classes.box}>
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Answer Key </Typography>
@@ -176,6 +175,7 @@ export default function ExtraCard({ records }) {
                     </Box>
                 </Box>
             </Box>
+        </Bounce>
         </Box>
     )
 }

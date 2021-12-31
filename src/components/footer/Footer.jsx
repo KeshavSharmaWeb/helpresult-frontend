@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: "column"
         },
         [theme.breakpoints.down("xs")]: {
-            flexDirection: "column"
+            flexDirection: "column",
         }
     },
     contact: {
@@ -25,10 +25,9 @@ const useStyles = makeStyles((theme) => ({
     links: {
         display: "grid",
         gridTemplateColumns: "auto auto auto",
-        // padding: "0px 10px",
         [theme.breakpoints.down("xs")]: {
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             flexDirection: "column"
         }
     },
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
             fontWeight: "700"
         },
         [theme.breakpoints.down("sm")]: {
-            width: "110px"
+            width: "100%"
         }
     }
 })
@@ -148,7 +147,7 @@ export default function Footer() {
                                     </Box>
                                 </Box>
                             </Box>
-                            <Box style={{ marginLeft: "40px" }}>
+                            <Box style={{ marginLeft: "10px" }}>
                                 <Bounce left>
                                     <Typography style={{ color: "white", fontSize: "25px" }}> USEFUL lINKS </Typography>
                                     <Box className={classes.links} >
