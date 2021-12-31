@@ -5,7 +5,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  makeStyles
+  makeStyles,
+  Box
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
@@ -25,15 +26,17 @@ function DrawerComponent() {
     },
     icon: {
       color: "white"
-    }
+    },
+
   }));
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
-    <>
+    <Box style={{marginTop: "20px"}}>
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
+        style={{marginTop: "20px"}}
       >
         <List>
           <ListItem onClick={() => setOpenDrawer(false)}>
@@ -91,7 +94,7 @@ function DrawerComponent() {
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
         <MenuIcon />
       </IconButton>
-    </>
+    </Box>
   );
 }
 export default DrawerComponent;
