@@ -11,17 +11,18 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         background: "#fff",
         padding: "10px",
-        height: "700px",
+        height: "100%",
         width: "370px",
         "&:hover": {
             background: "#e3e8e5",            
         },
         [theme.breakpoints.down("sm")]: {
-            width: "250px",
-            margin: "5px 15px"
+            width: "100%",
+            margin: "5px 30px"
         },
         [theme.breakpoints.down("xs")]: {
-            width: "250px",
+            width: "90%",
+            margin: "5px 15px"
         }
     },
     top: {
@@ -77,11 +78,12 @@ const useStyles = makeStyles((theme) => ({
             height: "100%"
         },
         [theme.breakpoints.down("sm")]: {
-            width: "250px",
-            height: "700px"
+            width: "100%",
+            height: "700px",
+            margin: "10px 2px",
         },
         [theme.breakpoints.down("xs")]: {
-            width: "250px",
+            width: "100%",
             height: "700px",
             marginBottom: "10px"
         }
