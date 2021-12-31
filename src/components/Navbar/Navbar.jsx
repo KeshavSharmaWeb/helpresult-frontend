@@ -33,6 +33,12 @@ function Navbar() {
     logo: {
       flexGrow: "1",
       cursor: "pointer",
+      [theme.breakpoints.down("xs")]:{
+        fontSize: "50px",
+        height: "60px",
+        width: "250px",
+        marginLeft: "30px"
+      }
     },
     link: {
       textDecoration: "none",
@@ -83,11 +89,29 @@ function Navbar() {
       <Fade left >
         <AppBar id="top" position="sticky" className={classes.appbar} >
           <CssBaseline />
-          {isReady ? (
+          {
+            isReady ? ( 
+              isMobile ? <Toolbar >
+                <DrawerComponent /> 
+              {isMobile ? (
+                <Typography variant="h4" className={classes.logo}>
+                  <img src="/images/logo.png" alt="logo" className={classes.logo} />
+              </Typography>
+                ) : (
+                <div className={classes.navlinks}>
+                  <Link to="/" className={classes.link}>
+                    HOME
+                  </Link>
+                  {categoryData.map((data, index) => (
+                      <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
+                      {data.name}
+                      </Link>
+                  ))}
+                </div>
+              )}
+            </Toolbar>
+            : 
             <Toolbar >
-            {
-              isMobile ? "" : ""
-            }
               <Typography variant="h4" className={classes.logo}>
                 <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
 
