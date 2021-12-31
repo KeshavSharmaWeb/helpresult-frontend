@@ -75,7 +75,7 @@ function Navbar() {
   }, [])
 
   return (
-    <Box>
+    <Box >
       {currentLocation.startsWith('/admin') ? (
         <AdminNav /> )
         :
@@ -85,6 +85,9 @@ function Navbar() {
           <CssBaseline />
           {isReady ? (
             <Toolbar >
+            {
+              isMobile ? "" : ""
+            }
               <Typography variant="h4" className={classes.logo}>
                 <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
 

@@ -1,23 +1,23 @@
 import React from 'react'
-import { Box, makeStyles, Typography } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { Box, makeStyles, Typography, Button } from "@material-ui/core";
+import { NavLink, Link } from "react-router-dom";
 import { CheckBox } from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
     mainbox: {
         gridColumnStart: "1",
         gridColumnEnd: "3",
-        marginright: "1%",
+        marginright: "1%",  
         [theme.breakpoints.down("sm")]: {
             display: "grid",
-            width: "150%",
-            border: "2px solid green",
-            gridTemplateColumns: "auto auto"
+            gridTemplateColumns: "auto auto",
+            marginBottom: "30px"
         },
         [theme.breakpoints.down("xs")]: {
             display: "flex",
             flexDirection: "column",
             width: "100%",
+            margin: "10px 20px"
         },
 
     },
@@ -27,23 +27,16 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateColumns: "auto auto ",
         gridColumnGap: "40px",
         gridRowGap: "15px",
-        "&>*":{
+        "&>*": {
             width: "370px"
         },
         [theme.breakpoints.down('sm')]: {
-            display: "flex",
-            flexDirection: "column",
-            margin: "5px 15px",
-            "&>*":{
-                width: "100%"
-            },
+            display: "grid",
+            gridTemplateColumns: "auto auto",
         },
         [theme.breakpoints.down('xs')]: {
             display: "flex",
             flexDirection: "column",
-            "&>*":{
-                width: "98%"
-            },
         }
     },
     childBox: {
@@ -54,6 +47,14 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             background: "#e3e8e5",
         },
+        [theme.breakpoints.down('sm')]: {
+            width: "100%", 
+            margin: "0px 45px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: "90%", 
+            margin: "0px 15px"
+        }
     },
     li: {
         listStyle: "none",
@@ -65,6 +66,18 @@ const useStyles = makeStyles((theme) => ({
             fontWeight: "900",
             cursor: "pointer"
         }
+    },
+    button: {
+        background: "#e87e04",
+        fontSize: "13px",
+        margin: "20px 20px",
+        "&:hover": {
+            background: "#e87e04",
+        }
+    },
+    links: {
+        color: "white",
+        textDecoration: "none",
     },
     navLink: {
         textDecoration: "none",
@@ -93,15 +106,18 @@ export default function ExtraCard({ records }) {
                     {
                         (records['61c7fcd58b071fa93f00747d']).map((val, id) => {
                             return (
-                                <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
-                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.post_display_name}
+                                <li key={id} className={classes.li}>
+                                    <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                        <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                        {val.post_display_name}
                                     </NavLink>
                                 </li>
-                                )
+                            )
                         })
                     }
+                    <Box style={{ textAlign: "end" }}>
+                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                    </Box>
                 </Box>
 
                 <Box className={classes.childBox}>
@@ -109,30 +125,36 @@ export default function ExtraCard({ records }) {
                     {
                         (records['61c7fcdd8b071fa93f00747f']).map((val, id) => {
                             return (
-                                <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
-                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.post_display_name}
+                                <li key={id} className={classes.li}>
+                                    <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                        <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                        {val.post_display_name}
                                     </NavLink>
                                 </li>
-                                )
+                            )
                         })
                     }
+                    <Box style={{ textAlign: "end" }}>
+                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                    </Box>
                 </Box>
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Important </Typography>
                     {
                         (records['61c7fce38b071fa93f007481']).map((val, id) => {
                             return (
-                                <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
-                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.post_display_name}
+                                <li key={id} className={classes.li}>
+                                    <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                        <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                        {val.post_display_name}
                                     </NavLink>
                                 </li>
-                                )
+                            )
                         })
                     }
+                    <Box style={{ textAlign: "end" }}>
+                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                    </Box>
                 </Box>
 
                 <Box className={classes.childBox}>
@@ -140,15 +162,18 @@ export default function ExtraCard({ records }) {
                     {
                         (records['61c7fce58b071fa93f007483']).map((val, id) => {
                             return (
-                                <li key={id} className={classes.li}> 
-                                    <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
-                                    <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.post_display_name}
+                                <li key={id} className={classes.li}>
+                                    <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                        <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                        {val.post_display_name}
                                     </NavLink>
                                 </li>
-                                )
+                            )
                         })
                     }
+                    <Box style={{ textAlign: "end" }}>
+                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                    </Box>
                 </Box>
             </Box>
         </Box>

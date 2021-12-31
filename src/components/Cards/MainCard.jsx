@@ -13,31 +13,20 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-evenly",
         background: "#f2edf4",
         flexDirection: "column",
-        border: "2px sold red",
         [theme.breakpoints.down("sm")]: {
-            padding: "2%",
+            // padding: "2%",
             display: "flex",
             justifyContent: "space-evenly",
             flexDirection: "column",
             margin: "30px 5px",
+            padding: "0",
         },
         [theme.breakpoints.down("xs")]: {
             display: "flex",
             flexDirection: "column",
-            margin: "30px 10px"
-        }
-    },
-    extraBox: {
-        [theme.breakpoints.down("sm")]: {
-            display: "grid",
-            gridTemplateColumns: "auto auto",
-            margin: "30px 10px"
+            margin: "30px 10px",
+            justifyContent: "center",
         },
-        [theme.breakpoints.down("xs")]: {
-            display: "flex",
-            flexDirection: "column",
-            margin: "30px 10px"
-        }
     },
     cardBox: {
         width: "100%",
@@ -45,9 +34,16 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateColumns: "auto auto auto",
         gridTemplateRows: "auto auto",
         gridColumnGap: "15px",
+        [theme.breakpoints.down("sm")]:{
+            width: "90%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
+        },
         [theme.breakpoints.down("xs")]:{
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center"
         }
     }
 })
