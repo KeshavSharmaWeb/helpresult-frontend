@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down("sm")]: {
             width: "100%",
-            height: "1100px",
+            height: "98%",
             margin: "2% 2px",
             marginBottom: "5%",
             "&>*": {
@@ -93,14 +93,22 @@ const useStyles = makeStyles((theme) => ({
             height: "100%",
             marginBottom: "10px",
         }
+    },
+    side:{
+        width: "100%",
+        "&>*":{
+            minHeight: "400px"
+        }
     }
 })
 );
 
-export default function Card({ title, path, records, extend }) {
+export default function Card({ title, path, records, extend ,side }) {
     const classes = useStyles();
     return (
         <Box className={extend ? classes.extendCol : ""}>
+        {
+            side ? <Box className={classes.side}>
             <Box className={classes.box}>
                 <Bounce left>
                     <Box className={classes.top}>
@@ -125,6 +133,55 @@ export default function Card({ title, path, records, extend }) {
                     </Box>
                 </Bounce>
             </Box>
+            </Box> : <Box className={classes.box}>
+                <Bounce left>
+                    <Box className={classes.top}>
+                        {title}
+                    </Box>
+                    <Box className={classes.mid}>
+                        {
+                            records.map((val, id) => {
+                                return (
+                                    <li key={id} className={classes.li}>
+                                        <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                            {val.post_display_name}
+                                        </NavLink>
+                                    </li>
+                                )
+                            })
+                        }
+                    </Box>
+                    <Box style={{ textAlign: "end" }}>
+                        <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
+                    </Box>
+                </Bounce>
+            </Box>
+        }
+            {/* <Box className={classes.box}>
+                <Bounce left>
+                    <Box className={classes.top}>
+                        {title}
+                    </Box>
+                    <Box className={classes.mid}>
+                        {
+                            records.map((val, id) => {
+                                return (
+                                    <li key={id} className={classes.li}>
+                                        <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                            {val.post_display_name}
+                                        </NavLink>
+                                    </li>
+                                )
+                            })
+                        }
+                    </Box>
+                    <Box style={{ textAlign: "end" }}>
+                        <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
+                    </Box>
+                </Bounce>
+            </Box> */}
         </Box>
     )
 }
