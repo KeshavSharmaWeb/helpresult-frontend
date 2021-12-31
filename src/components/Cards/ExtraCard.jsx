@@ -9,13 +9,17 @@ const useStyles = makeStyles((theme) => ({
         gridColumnEnd: "3",
         marginright: "1%",
         [theme.breakpoints.down("sm")]: {
-            display: "flex",
-            flexDirection: "column"
+            display: "grid",
+            width: "150%",
+            border: "2px solid green",
+            gridTemplateColumns: "auto auto"
         },
         [theme.breakpoints.down("xs")]: {
             display: "flex",
             flexDirection: "column",
-        }
+            width: "100%",
+        },
+
     },
     box: {
         margin: "2% 2% 0% 0%",
@@ -31,21 +35,22 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: "column",
             margin: "5px 15px",
             "&>*":{
-                width: "250px"
+                width: "100%"
             },
         },
         [theme.breakpoints.down('xs')]: {
             display: "flex",
             flexDirection: "column",
             "&>*":{
-                width: "250px"
+                width: "98%"
             },
         }
     },
     childBox: {
-        height: "300px",
+        height: "100%",
         padding: "10px",
         background: "white",
+        width: "100%",
         "&:hover": {
             background: "#e3e8e5",
         },
@@ -86,12 +91,12 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Answer Key </Typography>
                     {
-                        records.filter(record => record.categoryIds.includes("61c7fcd58b071fa93f00747d")).map((val, id) => {
+                        (records['61c7fcd58b071fa93f00747d']).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.name}
+                                    {val.post_display_name}
                                     </NavLink>
                                 </li>
                                 )
@@ -102,12 +107,12 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Syllabus </Typography>
                     {
-                        records.filter(record => record.categoryIds.includes("61c7fcdd8b071fa93f00747f")).map((val, id) => {
+                        (records['61c7fcdd8b071fa93f00747f']).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.name}
+                                    {val.post_display_name}
                                     </NavLink>
                                 </li>
                                 )
@@ -117,12 +122,12 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Important </Typography>
                     {
-                        records.filter(record => record.categoryIds.includes("61c7fce38b071fa93f007481")).map((val, id) => {
+                        (records['61c7fce38b071fa93f007481']).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.name}
+                                    {val.post_display_name}
                                     </NavLink>
                                 </li>
                                 )
@@ -133,12 +138,12 @@ export default function ExtraCard({ records }) {
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Certificate Verification </Typography>
                     {
-                        records.filter(record => record.categoryIds.includes("61c7fce58b071fa93f007483")).map((val, id) => {
+                        (records['61c7fce58b071fa93f007483']).map((val, id) => {
                             return (
                                 <li key={id} className={classes.li}> 
                                     <NavLink to={{pathname: "/details/"+val.slug, search: `?id=${val._id}`}} className={classes.navLink} >
                                     <CheckBox  style={{ background: "#0868fe", color: "white",fontSize: "15px", marginRight: "5px" }} />
-                                    {val.name}
+                                    {val.post_display_name}
                                     </NavLink>
                                 </li>
                                 )

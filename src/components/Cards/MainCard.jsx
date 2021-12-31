@@ -13,11 +13,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-evenly",
         background: "#f2edf4",
         flexDirection: "column",
+        border: "2px sold red",
         [theme.breakpoints.down("sm")]: {
             padding: "2%",
             display: "flex",
             justifyContent: "space-evenly",
-            margin: "30px 10px",
+            flexDirection: "column",
+            margin: "30px 5px",
         },
         [theme.breakpoints.down("xs")]: {
             display: "flex",
@@ -54,11 +56,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainCard() {
     const classes = useStyles();
-    const [recordData, setRecordData] = useState([]);
+    const [recordData, setRecordData] = useState({});
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        axios.get(url+"/records").then(res => {
+        axios.get(url+"/home-records").then(res => {
             setRecordData(res.data);
+            setIsReady(true);
         }
         )
     }, [])
@@ -78,10 +82,15 @@ export default function MainCard() {
             })} */}
 
             {/* dummy  */}
-                <TestCard extend={false} title="Result"  records={recordData.filter(record => record.categoryIds.includes("61c7fcc58b071fa93f007477"))} />
-                <TestCard extend={false} title="Admit Card" records={recordData.filter(record => record.categoryIds.includes("61c7fcc88b071fa93f007479"))} />
-                <TestCard extend={true} title="Latest Jobs" records={recordData.filter(record => record.categoryIds.includes("61c7fccb8b071fa93f00747b"))} />
+            {isReady ?
+                <>
+                <TestCard extend={false} title="Result"  records={recordData['61c7fcc58b071fa93f007477']} />
+                <TestCard extend={false} title="Admit Card" records={recordData['61c7fcc88b071fa93f007479']} />
+                <TestCard extend={true} title="Latest Jobs" records={recordData['61c7fccb8b071fa93f00747b']} />
                 <ExtraCard records={recordData}/>
+                </>
+            : null
+            }
             </Box>
             {/* <Box className={classes.extraBox}>
                 <ExtraCard alternate={true} />

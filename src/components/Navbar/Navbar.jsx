@@ -90,8 +90,8 @@ function Navbar() {
 
               </Typography>
               {isMobile ? (
-                <DrawerComponent />
-              ) : (
+                <DrawerComponent /> 
+                ) : (
                 <div className={classes.navlinks}>
                   <Link to="/" className={classes.link}>
                     HOME
