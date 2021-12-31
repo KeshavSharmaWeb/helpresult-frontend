@@ -37,7 +37,7 @@ export default function SocialIcons() {
             width: "30px",
             height: "30px",
             borderRadius: "50%",
-            background: "grey",
+            background: "white",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

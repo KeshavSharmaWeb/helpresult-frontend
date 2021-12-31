@@ -5,3 +5,11 @@ body {
   font-family: 'Open Sans', sans-serif !important;
   font-size: 14px !important;
 }
+
+/* .MuiTypography-body1 {
+  font-family: Arial, Helvetica, sans-serif !important;
+} */
+
+.makeStyles-heading-85 {
+  font-family: inherit !important;
+}

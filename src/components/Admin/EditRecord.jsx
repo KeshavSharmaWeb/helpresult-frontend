@@ -13,22 +13,22 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 
-import {makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    container:{
+    container: {
         display: "flex",
         margin: "2% 8%",
         width: "100%",
         justifyContent: "space-between",
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             flexDirection: "column",
             margin: "2% 5%"
         }
     },
-    box1:{
+    box1: {
         width: "37%",
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             width: "80%"
         }
     },
@@ -45,7 +45,9 @@ const EditRecord = () => {
     const [categories, setCategories] = useState([])
     const [subCategories, setSubCategories] = useState([])
 
-    const [isChecked, setIsChecked] = useState(false)
+    const [isLastDateChecked, setIsLastDateChecked] = useState(false)
+    const [isUpdateDateChecked, setIsUpdateDateChecked] = useState(false)
+
     const [record, setRecord] = useState([])
     const [isReady, setIsReady] = useState(false)
 
@@ -72,8 +74,12 @@ const EditRecord = () => {
         },
     };
 
-    const handleCheckBox = (e) => {
-        setIsChecked(e.target.checked)
+    const handleCheckBoxLastDate = (e) => {
+        setIsLastDateChecked(e.target.checked)
+    }
+
+    const handleCheckBoxUpdateDate = (e) => {
+        setIsUpdateDateChecked(e.target.checked)
     }
 
     useEffect(() => {
@@ -99,7 +105,7 @@ const EditRecord = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let last_date;
+        let last_date;let update_date;
 
         const isUserExists = await userExists(localStorage.getItem('userId'))
         if (!isUserExists) {
@@ -113,6 +119,11 @@ const EditRecord = () => {
         } else {
             last_date = formData.get('last_date')
         }
+        if (!formData.get('update_date')) {
+            update_date = new Date().toLocaleString()
+        } else {
+            update_date = formData.get('update_date')
+        }
         const data = {
             id: record._id,
             userId: localStorage.getItem('userId'),
@@ -122,6 +133,7 @@ const EditRecord = () => {
             shortInfo: formData.get('shortInfo'),
             more_data_html: formData.get('more_data_html'),
             last_date: last_date,
+            update_date: update_date,
             post_display_name: formData.get('record_display_name'),
         }
         axios.post(`${url}/update-record`, data).then(res => {
@@ -147,8 +159,11 @@ const EditRecord = () => {
             <Box className={classes.box1}>
                 <h3 style={{ textAlign: "center" }}>Edit Post</h3>
 
+                <h6 style={{ textAlign: "center" }}>Id -- <b>{record._id}</b></h6>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Table HTML</Form.Label>
+                        <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" defaultValue={record.more_data_html} onChange={(e) => setTableHTML(e.target.value)} required />
                         <Form.Label>Post Name</Form.Label>
                         <Form.Control type="text" name="name" placeholder="Enter record name" defaultValue={record.name} onChange={(e) => document.getElementById("record_display_name").value = e.target.value} required />
                         <Form.Label>Post display name</Form.Label>
@@ -186,18 +201,25 @@ const EditRecord = () => {
                         <Form.Label>Short Information</Form.Label>
                         <Form.Control type="text" name="shortInfo" as="textarea" placeholder="Enter Short Information" defaultValue={record.short_information} required />
                         <div style={{ margin: "10px 0" }}>
-
-                            <input type="checkbox" id="show_last_date" onChange={handleCheckBox} />{"    "}
+                            <input type="checkbox" id="show_last_date" onChange={handleCheckBoxLastDate} />{"    "}
                             <label htmlFor="show_last_date">
                                 Edit last date
                             </label> <br />
                         </div>
-                        <div style={{ display: isChecked ? 'block' : 'none' }}>
-                            <Form.Label>Last Date to apply -  Current Date: {date}</Form.Label>
-                            <Form.Control type="date" name="last_date" placeholder="Pick date" />
+                        <div style={{ margin: "10px 0" }}>
+                            <input type="checkbox" id="show_update_date" onChange={handleCheckBoxUpdateDate} />{"    "}
+                            <label htmlFor="show_update_date">
+                                Edit update date
+                            </label> <br />
                         </div>
-                        <Form.Label>Table HTML</Form.Label>
-                        <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" defaultValue={record.more_data_html} onChange={(e) => setTableHTML(e.target.value)} required />
+                        <div style={{ display: isLastDateChecked ? 'block' : 'none' }}>
+                            <Form.Label htmlFor='last_date'>Last Date to apply -  Current Date: {date}</Form.Label>
+                            <Form.Control type="date" name="last_date" id="last_date" placeholder="Pick date" />
+                        </div>
+                        <div style={{ display: isUpdateDateChecked ? 'block' : 'none' }}>
+                            <Form.Label htmlFor='update_date'>Date updated (Default : Current Datetime)</Form.Label>
+                            <Form.Control type="datetime-local" name="update_date" id="update_date" placeholder="Pick date" />
+                        </div>
                     </Form.Group>
                     <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
                         Update
@@ -207,7 +229,7 @@ const EditRecord = () => {
 
 
             <Box className={classes.box2}>
-                <h3 style={{ textAlign: "center"}}>HTML Display</h3>
+                <h3 style={{ textAlign: "center" }}>HTML Display</h3>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "25px" }}>
                     {parse(tableHTML)}
                 </Box>
