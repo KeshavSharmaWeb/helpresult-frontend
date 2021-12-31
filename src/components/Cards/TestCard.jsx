@@ -3,7 +3,7 @@ import { Box, Button, makeStyles } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
 
 import Bounce from "react-reveal";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px",
         height: "100%",
         minHeight: "700px",
-        width: "370px",
+        width: "100%",
         "&:hover": {
             background: "#e3e8e5",
         },
@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
 })
 );
 
-export default function Card({ title, path, records, extend ,side }) {
+export default function Card({ title, path, records, extend ,side, categoryId }) {
     const classes = useStyles();
     return (
         <Box className={extend ? classes.extendCol : ""}>
@@ -119,17 +119,17 @@ export default function Card({ title, path, records, extend ,side }) {
                             records.map((val, id) => {
                                 return (
                                     <li key={id} className={classes.li}>
-                                        <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                        <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
                                             <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
                                             {val.post_display_name}
-                                        </NavLink>
+                                        </a>
                                     </li>
                                 )
                             })
                         }
                     </Box>
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
+                        <Button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
                     </Box>
                 </Bounce>
             </Box>
@@ -143,17 +143,17 @@ export default function Card({ title, path, records, extend ,side }) {
                             records.map((val, id) => {
                                 return (
                                     <li key={id} className={classes.li}>
-                                        <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
+                                        <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
                                             <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
                                             {val.post_display_name}
-                                        </NavLink>
+                                        </a>
                                     </li>
                                 )
                             })
                         }
                     </Box>
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
+                        <Button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
                     </Box>
                 </Bounce>
             </Box>

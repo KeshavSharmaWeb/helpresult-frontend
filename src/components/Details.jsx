@@ -9,6 +9,14 @@ import "../App.css"
 
 
 export default function Details() {
+    // eslint-disable-next-line
+    String.prototype.replaceAll = function(strReplace, strWith) {
+        // eslint-disable-next-line
+        var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        var reg = new RegExp(esc, 'ig');
+        return this.replace(reg, strWith);
+    };
+
     const useStyles = makeStyles((theme) => ({
         box: {
             display: "flex",
@@ -46,6 +54,7 @@ export default function Details() {
     const id = query.get('id')
 
     const classes = useStyles();
+    const [more_data_html, setMoreDataHtml] = useState('<h3 style="text-align: center">Loading...</h3>');
 
     const [data, setData] = useState([]);
     const [ready, setReady] = useState(false);
@@ -55,6 +64,7 @@ export default function Details() {
             setData(res.data[0]);
             setReady(true);
             document.title = res.data[0].name;
+            setMoreDataHtml((res.data[0].more_data_html).replaceAll("WWW.SARKARIRESULT.COM", '').replaceAll('sarkariresult.com', 'HelpResult.com').replaceAll('sarkari result', '').replaceAll('https://t.me/sarkari', '').replaceAll('sarkari-result', 'help-result.com').replaceAll('https://itunes.apple.com/us/app/sarkari-result/id1051363935?ls=1&mt=8', '').replaceAll('https://itunes.apple.com/us', '').replaceAll('id1051363935', '').replaceAll('https://play.google.com/store/apps/details?id=com.app.app14f269771c01', '').replaceAll('com.app.app14f269771c01', '').replaceAll('android apps', '').replaceAll('apple ios apps', '').replaceAll('window apps', '').replaceAll('9nblggh6cm69', ''));
         }
         )
     }, [id])
@@ -84,12 +94,12 @@ export default function Details() {
                     <Box className={classes.title}>
                         Short Information:
                     </Box>
-                    <Box className={classes.desc}>
+                    <Box className={classes.desc} sx={{ textAlign: "justify !important" }}>
                         {data.short_information}
                     </Box>
                 </Box>
                 <Box className={classes.row} >
-                    {parse(data.more_data_html)}
+                    {parse(more_data_html)}
                 </Box>
             </Box>
             : ''}
