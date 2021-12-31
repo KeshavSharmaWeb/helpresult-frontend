@@ -19,11 +19,13 @@ const Records = () => {
     const [rows, setRows] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
 
-    const rowsPerPage = 3; // no of records per row 
+    const rowsPerPage = 1; // no of records per row 
 
     const pagesVisited = pageNumber * rowsPerPage;
 
     const displayRows = rows.slice(pagesVisited, pagesVisited + rowsPerPage)
+
+    let rowindex = rows.indexOf(displayRows[0]) + 1
 
     const pageCount = Math.ceil(rows.length / rowsPerPage);
 
@@ -158,7 +160,7 @@ const Records = () => {
                                             displayRows.map((record, index) => (
 
                                                 <tr>
-                                                    <td>{index + 1}</td>
+                                                    <td>{rowindex + index}</td>
                                                     <td>{record._id}</td>
                                                     <td>{record.name}</td>
                                                     <td>{record.post_display_name}</td>
