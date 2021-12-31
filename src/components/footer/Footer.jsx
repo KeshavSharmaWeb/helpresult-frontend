@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     links: {
         display: "grid",
         gridTemplateColumns: "auto auto auto",
-        padding: "0px 10px",
+        // padding: "0px 10px",
         [theme.breakpoints.down("xs")]: {
             display: "flex",
             justifyContent: "center",
@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: "1px solid white",
         textDecoration: "none",
         margin: "5px 5px",
-        color: "grey",
+        color: "#f1ecec",
+        transition: "all 0.3s ease-in-out 0s",
         "&:hover": {
             color: "white",
             fontWeight: "700"
@@ -130,14 +131,14 @@ export default function Footer() {
                                 </Bounce>
                                 <Box className={classes.contact}>
                                     <Bounce left>
-                                        <Typography>
+                                        <Typography style={{ color: "#f1ecec" }}>
                                             Address: <br />
                                             KHASRA NO-4331/,FLAT <br />
                                             NO-14,SKHUNTLA APARTMENT, RANI <br />
                                             KHERA ROAD,MUNDKA,DELHI-110041 <br />
                                         </Typography>
                                     </Bounce>
-                                    <Box style={{ margin: "20px 0px" }} >
+                                    <Box style={{ margin: "20px 0px", color: "#f1ecec" }} >
                                         <Bounce left>
                                             <Typography>
                                                 Phone: +91-7210363680, 7210363681 <br />
@@ -147,7 +148,7 @@ export default function Footer() {
                                     </Box>
                                 </Box>
                             </Box>
-                            <Box >
+                            <Box style={{ marginLeft: "40px" }}>
                                 <Bounce left>
                                     <Typography style={{ color: "white", fontSize: "25px" }}> USEFUL lINKS </Typography>
                                     <Box className={classes.links} >

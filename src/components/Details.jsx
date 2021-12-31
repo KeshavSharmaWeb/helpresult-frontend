@@ -13,7 +13,8 @@ export default function Details() {
         box: {
             display: "flex",
             flexDirection: "column",
-            margin: "5% 16% 5% 9%",
+            color: "black !important",
+            margin: "1% 32% 5% 9%",
             [theme.breakpoints.down("sm")]: {
                 margin: "5% 6%"
             }
@@ -25,7 +26,7 @@ export default function Details() {
         },
         title: {
             color: "#ff0033",
-            width: "20%",
+            // width: "20%",
             display: "flex",
             fontWeight: "bold",
             [theme.breakpoints.down("sm")]: {
@@ -70,17 +71,15 @@ export default function Details() {
                         <Typography style={{ fontSize: "medium" }}>{data.name}</Typography>
                     </Box>
                 </Box>
-                {
-                    data.updated_at ? 
                     <Box className={classes.row}>
                     <Box className={classes.title}>
                         Post Update:
                     </Box>
                     <Box className={classes.desc}>
-                        {data.updated_at}
+                    {data.updated_at ?( (new Date(data.updated_at).toLocaleString()).toLowerCase() === "invalid date" ? data.updated_at : new Date(data.updated_at).toLocaleString()) : data.created_at}
+
                     </Box>
                 </Box>
-                : ''}
                 <Box className={classes.row}>
                     <Box className={classes.title}>
                         Short Information:

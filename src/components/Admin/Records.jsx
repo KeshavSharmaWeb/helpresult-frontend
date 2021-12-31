@@ -73,11 +73,12 @@ const Records = () => {
     const [searchText, setSearchText] = useState([])
 
     const searchForString = (e) => {
+        let searchText = e.target.value.toLowerCase()
+        console.log(searchText)
         if (e.target.value !== "") {
             let test = records.length > 0 ? records.filter((val) => {
-                return val.name.includes(e.target.value)
+                return val.name.toLowerCase().includes(searchText)
             }) : ""
-            console.log(test);
             setSearchText(test)
             setRows(test)
         }else{
@@ -89,19 +90,17 @@ const Records = () => {
     return (
         <Container>
             <h3 style={{ textAlign: "center", marginTop: 40 }}>Posts</h3>
-            <input type="text" name="" placeholder='Search Here...' onChange={(e) => searchForString(e)} id="" />
+            <input class="form-control me-2" type="search" placeholder="Search Here..." name="" id="" onChange={(e) => searchForString(e)} aria-label="Search" style={{ margin: "20px 0", width: "30%"}}/>
             <Table striped bordered hover style={{ marginTop: 30, textAlign: "center" }}>
                 {
                     searchText.length > 0 ? <>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Id</th>
                                 <th>Name</th>
                                 <th>Post Display</th>
                                 <th>Date Added</th>
                                 <th>Date Updated</th>
-                                <th>Short Information</th>
                                 <th>Last date</th>
                                 <th>Category</th>
                                 <th>Sub category</th>
@@ -109,15 +108,14 @@ const Records = () => {
                         </thead>
                         <tbody>
                             {
-                                searchText.map((text, id) => {
+                                searchText.reverse().map((text, id) => {
                                     return <tr key={id}>
                                         <td>{id + 1}</td>
-                                        <td>{text._id}</td>
                                         <td>{text.name}</td>
                                         <td>{text.post_display_name}</td>
                                         <td>{text.created_at}</td>
-                                        <td>{text.updated_at}</td>
-                                        <td>{text.short_information.slice(0, 50)}...</td>
+                                        <td>{text.updated_at ?( (new Date(text.updated_at).toLocaleString()).toLowerCase() === "invalid date" ? text.updated_at : new Date(text.updated_at).toLocaleString()) : "N/A"}</td>
+
                                         <td>{formattedDate(text.last_date)}</td>
                                         <td>{categories.filter(category => text.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
                                         <td>{subCategories.filter(category => text.subCategory === category._id)[0].name}</td>
@@ -140,12 +138,10 @@ const Records = () => {
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Id</th>
                                             <th>Name</th>
                                             <th>Post Display</th>
                                             <th>Date Added</th>
                                             <th>Date Updated</th>
-                                            <th>Short Information</th>
                                             <th>Last date</th>
                                             <th>Category</th>
                                             <th>Sub category</th>
@@ -155,17 +151,15 @@ const Records = () => {
 
                                         {
                                             !loading &&
-                                            displayRows.map((record, index) => (
+                                            displayRows.reverse().map((record, index) => (
 
                                                 <tr>
                                                     <td>{index + 1}</td>
-                                                    <td>{record._id}</td>
                                                     <td>{record.name}</td>
                                                     <td>{record.post_display_name}</td>
                                                     <td>{record.created_at}</td>
-                                                    <td>{record.updated_at}</td>
-                                                    <td>{record.short_information.slice(0, 50)}...</td>
-                                                    <td>{formattedDate(record.last_date)}</td>
+                                                    <td>{record.updated_at ?( (new Date(record.updated_at).toLocaleString()).toLowerCase() === "invalid date" ? record.updated_at : new Date(record.updated_at).toLocaleString()) : "N/A"}</td>
+                                                    <td>{record.last_date ? formattedDate(record.last_date) : "N/A"}</td>
                                                     <td>{categories.filter(category => record.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
                                                     <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td>
 
