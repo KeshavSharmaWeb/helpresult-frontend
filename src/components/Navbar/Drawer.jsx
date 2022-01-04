@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   IconButton,
@@ -10,9 +10,14 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { url } from "../../config";
 
 
 function DrawerComponent() {
+  const [categoryData, setCategoryData] = useState([]);
+  const [isReady, setIsReady] = useState(false);
+
   const useStyles = makeStyles(() => ({
     link: {
       textDecoration: "none",
@@ -29,10 +34,21 @@ function DrawerComponent() {
     },
 
   }));
+
+  useEffect(() => {
+    axios.get(url + "/categories").then(res => {
+
+      // get first 7 elements of the array
+      setCategoryData(res.data.slice(0, 6));
+      setIsReady(true);
+    }
+    )
+  }, [])
+
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
-    <Box style={{marginTop: "20px"}}>
+    <Box >
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
@@ -44,46 +60,14 @@ function DrawerComponent() {
               <Link to="/" className={classes.link}>Home</Link>
             </ListItemText>
           </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
+          {categoryData.map((data, index) => (
+          <ListItem key={index} onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link to="/result" className={classes.link}>RESULT</Link>
+              <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>{data.name}</Link>
             </ListItemText>
           </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>ADMIT CARD</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>LATEST JOBS</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>ADMISSION</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>SYLLABUS</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>ANSWER KEY</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>JOB ALERTS</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>CONTACT</Link>
-            </ListItemText>
-          </ListItem>
+          ))}
+
         </List>
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>

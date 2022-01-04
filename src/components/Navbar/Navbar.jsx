@@ -35,8 +35,9 @@ function Navbar() {
       cursor: "pointer",
       [theme.breakpoints.down("xs")]: {
         fontSize: "50px",
+        marginLeft: "3vw",
         height: "auto",
-        width: "65vw",
+        width: "55vw",
       }
     },
     link: {
