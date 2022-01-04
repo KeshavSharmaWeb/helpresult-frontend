@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, makeStyles, Typography, Button } from "@material-ui/core";
 import { NavLink, Link } from "react-router-dom";
 import { CheckBox } from "@material-ui/icons"
-import Bounce from "react-reveal";
 
 const useStyles = makeStyles((theme) => ({
     mainbox: {
@@ -98,7 +97,6 @@ export default function ExtraCard({ records }) {
     const classes = useStyles();
     return (
         <Box className={classes.mainbox}>
-        <Bounce left>
             <Box className={classes.box}>
                 <Box className={classes.childBox}>
                     <Typography className={classes.heading}> Answer Key </Typography>
@@ -175,7 +173,6 @@ export default function ExtraCard({ records }) {
                     </Box>
                 </Box>
             </Box>
-        </Bounce>
         </Box>
     )
 }

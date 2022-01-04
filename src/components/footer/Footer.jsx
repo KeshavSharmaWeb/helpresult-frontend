@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Typography, makeStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
-import Bounce from "react-reveal";
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -122,7 +121,6 @@ export default function Footer() {
                 null)
                 :
                 (
-                    <Bounce left>
                         <Box className={classes.box}>
                             <Box >
                                 <Bounce left>
@@ -163,7 +161,6 @@ export default function Footer() {
                                 </Bounce>
                             </Box>
                         </Box>
-                    </Bounce>
                 )
             }
         </Box>

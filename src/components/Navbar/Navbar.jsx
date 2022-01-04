@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import DrawerComponent from "./Drawer";
-import Fade from "react-reveal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "../../config";
@@ -100,7 +99,6 @@ function Navbar() {
         <AdminNav />)
         :
         (
-          <Fade left >
             <AppBar id="top" position="sticky" className={classes.appbar} >
               <CssBaseline />
               {
@@ -149,7 +147,6 @@ function Navbar() {
                   :
                   null}
             </AppBar>
-          </Fade>
         )
       }
     </Box>
