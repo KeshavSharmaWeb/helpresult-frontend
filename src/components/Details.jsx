@@ -45,7 +45,7 @@ export default function Details() {
             width: "100%",
             fontSize: "medium",
             [theme.breakpoints.down("sm")]: {
-                width: "80%"
+                width: "100%"
             }
         }
     })
