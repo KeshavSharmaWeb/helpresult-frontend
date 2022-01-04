@@ -123,30 +123,23 @@ export default function Footer() {
                 (
                         <Box className={classes.box}>
                             <Box >
-                                <Bounce left>
                                     <Typography style={{ color: "white", fontSize: "25px" }} >  CONTACT  </Typography>
-                                </Bounce>
                                 <Box className={classes.contact}>
-                                    <Bounce left>
                                         <Typography style={{ color: "#f1ecec" }}>
                                             Address: <br />
                                             KHASRA NO-4331/,FLAT <br />
                                             NO-14,SKHUNTLA APARTMENT, RANI <br />
                                             KHERA ROAD,MUNDKA,DELHI-110041 <br />
                                         </Typography>
-                                    </Bounce>
                                     <Box style={{ margin: "20px 0px", color: "#f1ecec" }} >
-                                        <Bounce left>
                                             <Typography>
                                                 Phone: +91-7210363680, 7210363681 <br />
                                                 Email: srinfotech9238@gmail.com
                                             </Typography>
-                                        </Bounce>
                                     </Box>
                                 </Box>
                             </Box>
                             <Box style={{ marginLeft: "10px" }}>
-                                <Bounce left>
                                     <Typography style={{ color: "white", fontSize: "25px" }}> USEFUL lINKS </Typography>
                                     <Box className={classes.links} >
 
@@ -158,7 +151,6 @@ export default function Footer() {
                                             })
                                         }
                                     </Box>
-                                </Bounce>
                             </Box>
                         </Box>
                 )

@@ -42,7 +42,6 @@ const NewsRecord = () => {
 
         axios.post(`${url}/add-news-records`, data).then(res => {
             if (res.status === 200) {
-                console.log(res.data);
                 setNewsRecords([...newsRecords, res.data])
             } else {
                 alert("Something went wrong")

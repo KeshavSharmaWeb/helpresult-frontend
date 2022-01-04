@@ -61,11 +61,14 @@ const Records = () => {
         }
 
         axios.post(url + "/delete-record", { id: id, userId: localStorage.getItem('userId') }).then(res => {
-            if (res.data.status === 401) {
-                alert('You are not authorized to delete this record')
-            }
-            else if (res.status === 200) {
+            if (res.status === 200) {
                 setRecords(records.filter(record => record._id !== id))
+                alert('Record deleted successfully')
+                window.location.reload()
+            
+        }
+            else if (res.data.status === 401) {
+                alert('You are not authorized to delete this record')
             } else {
                 alert('Something went wrong')
             }
@@ -76,7 +79,6 @@ const Records = () => {
 
     const searchForString = (e) => {
         let searchText = e.target.value.toLowerCase()
-        console.log(searchText)
         if (e.target.value !== "") {
             let test = records.length > 0 ? records.filter((val) => {
                 return val.name.toLowerCase().includes(searchText)
@@ -120,7 +122,7 @@ const Records = () => {
 
                                         <td>{formattedDate(text.last_date)}</td>
                                         <td>{categories.filter(category => text.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
-                                        <td>{subCategories.filter(category => text.subCategory === category._id)[0].name}</td>
+                                        <td>{subCategories.filter(category => text.subCategory === category._id)[0] ? subCategories.filter(category => text.subCategory === category._id)[0].name : "N/A"}</td>
 
                                         <td>
                                             <Cancel fontSize="small" onClick={() => handleCancel(text._id)} style={{ cursor: "pointer" }} />
@@ -163,7 +165,7 @@ const Records = () => {
                                                     <td>{record.updated_at ?( (new Date(record.updated_at).toLocaleString()).toLowerCase() === "invalid date" ? record.updated_at : new Date(record.updated_at).toLocaleString()) : "N/A"}</td>
                                                     <td>{record.last_date ? formattedDate(record.last_date) : "N/A"}</td>
                                                     <td>{categories.filter(category => record.categoryIds.indexOf(category._id) > -1).map(category => category.name).join(', ')}</td>
-                                                    <td>{subCategories.filter(category => record.subCategory === category._id)[0].name}</td>
+                                                    <td>{subCategories.filter(category => record.subCategory === category._id)[0] ? subCategories.filter(category => record.subCategory === category._id)[0].name : "N/A"}</td>
 
                                                     <td>
                                                         <Cancel fontSize="small" onClick={() => handleCancel(record._id)} style={{ cursor: "pointer" }} />
