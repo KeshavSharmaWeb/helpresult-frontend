@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, makeStyles } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import Rotate from "react-reveal";
 
 import {formattedDate} from "../helperFns";
 
@@ -61,7 +60,6 @@ export default function TableBox({ title, data }) {
     const classes = useStyles();
 
     return (
-        <Rotate right>
             <Box className={classes.box}>
                 <Box className={classes.title}>
                     {title}
@@ -82,6 +80,5 @@ export default function TableBox({ title, data }) {
                         <h3 style={{ textAlign: "center" }}>No data found</h3>
                 }
             </Box>
-        </Rotate>
     )
 }

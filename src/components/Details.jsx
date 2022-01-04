@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import Flip from "react-reveal";
 import axios from 'axios';
 import { url } from '../config';
 import parse from 'html-react-parser';
@@ -70,7 +69,7 @@ export default function Details() {
     }, [id])
 
     return (
-        <Flip right>
+        <>
             {ready ?
             <Box className={classes.box}>
                 <Box className={classes.row}>
@@ -104,6 +103,6 @@ export default function Details() {
             </Box>
             : ''}
 
-        </Flip>
+        </>
     )
 }

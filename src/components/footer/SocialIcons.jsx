@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import {Box,makeStyles} from "@material-ui/core";
 import {Twitter,Facebook,LinkedIn, ArrowUpward } from "@material-ui/icons";
-import LightSpeed from "react-reveal"
 
 export default function SocialIcons() {
     const useStyles = makeStyles( (theme) =>  ({
@@ -80,7 +79,6 @@ export default function SocialIcons() {
                 null)
                 :
                 (
-        <LightSpeed right>
         <Box className={classes.box}>
             <Box className={classes.copyright}>
                 Copyright 2021. All Rights Reserved.
@@ -103,7 +101,7 @@ export default function SocialIcons() {
                 </Box>        
             </Box>
         </Box>
-        </LightSpeed>
+
                 )
             }
         </Box>

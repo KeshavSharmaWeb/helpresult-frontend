@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
-import Bounce from "react-reveal";
 import { Link, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +81,6 @@ export default function Card({ title, slug, categoryId, recordData }) {
     }, [recordData]);
     return (
         <Box className={classes.box}>
-            <Bounce left>
                 <Box className={classes.top}>
                     {title}
                 </Box>
@@ -107,7 +105,6 @@ export default function Card({ title, slug, categoryId, recordData }) {
                 <Box style={{ textAlign: "end" }}>
                     <Button variant="contained" className={classes.button}> <Link to={`/more/${slug}?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
                 </Box>
-            </Bounce>
         </Box>
     )
 }

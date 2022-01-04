@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
 
-import Bounce from "react-reveal";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -103,14 +102,13 @@ const useStyles = makeStyles((theme) => ({
 })
 );
 
-export default function Card({ title, path, records, extend ,side, categoryId }) {
+export default function Card({ title, records, extend ,side, categoryId }) {
     const classes = useStyles();
     return (
         <Box className={extend ? classes.extendCol : ""}>
         {
             side ? <Box className={classes.side}>
             <Box className={classes.box}>
-                <Bounce left>
                     <Box className={classes.top}>
                         {title}
                     </Box>
@@ -131,10 +129,8 @@ export default function Card({ title, path, records, extend ,side, categoryId })
                     <Box style={{ textAlign: "end" }}>
                         <Button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
                     </Box>
-                </Bounce>
             </Box>
             </Box> : <Box className={classes.box}>
-                <Bounce left>
                     <Box className={classes.top}>
                         {title}
                     </Box>
@@ -155,33 +151,9 @@ export default function Card({ title, path, records, extend ,side, categoryId })
                     <Box style={{ textAlign: "end" }}>
                         <Button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
                     </Box>
-                </Bounce>
+
             </Box>
         }
-            {/* <Box className={classes.box}>
-                <Bounce left>
-                    <Box className={classes.top}>
-                        {title}
-                    </Box>
-                    <Box className={classes.mid}>
-                        {
-                            records.map((val, id) => {
-                                return (
-                                    <li key={id} className={classes.li}>
-                                        <NavLink to={{ pathname: "/details/" + val.slug, search: `?id=${val._id}` }} className={classes.navLink} >
-                                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                            {val.post_display_name}
-                                        </NavLink>
-                                    </li>
-                                )
-                            })
-                        }
-                    </Box>
-                    <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to={path} className={classes.links} > Read More </Link> </Button>
-                    </Box>
-                </Bounce>
-            </Box> */}
         </Box>
     )
 }

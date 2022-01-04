@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box,  Typography ,makeStyles} from "@material-ui/core";
 import Card from './Card';
-import Bounce from "react-reveal";
 
 
 export default function News() {
@@ -41,12 +40,10 @@ export default function News() {
     const classes = useStyles();
     return (
         <Box className={classes.box}>
-            <Bounce left>
             <Box className={classes.upperBox}>
                 <Typography style={{fontSize: "30px", fontWeight: "800"}} >  GOVERNMENT JOBS NEWS </Typography>
                 <Typography style={{color: "gray"}} > We have the experience and the knowledge to get your vision comes true </Typography>
             </Box>
-            </Bounce>
             <Box className={classes.lowerBox}>
                 <Card/>
             </Box>

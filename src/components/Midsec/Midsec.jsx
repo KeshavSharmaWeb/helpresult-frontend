@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { Box, makeStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import Boxex from './Boxex';
-import Zoom from "react-reveal";
 import axios from 'axios';
 import { url } from '../../config';
 
@@ -70,7 +69,6 @@ export default function Midsec() {
     const classes = useStyles();
     return (
         <Box className={classes.box}>
-            <Zoom right>
                 <Box className={classes.upperBox}>
                     {/* eslint-disable-next-line */}
                     <marquee behavior="alternate" direction="ltr" align="center" id="marquee-1">
@@ -105,7 +103,6 @@ export default function Midsec() {
                     })}
                     {/* <Boxex title="SSC CHSL 10+2 Apply Online" backcolor="#868a08" /> */}
                 </Box>
-            </Zoom>
         </Box>
     )
 }
