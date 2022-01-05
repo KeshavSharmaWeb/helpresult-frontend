@@ -10,8 +10,10 @@ const useStyles = makeStyles((theme) => ({
     box: {
         display: "flex",
         padding: "3% 6%",
+        // margin: "auto",
+        // maxWidth:"1200px",
         justifyContent: "space-evenly",
-        background: "#f2edf4",
+        background: "whitesmoke",
         flexDirection: "column",
         [theme.breakpoints.down("sm")]: {
             // padding: "2%",
@@ -29,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     cardBox: {
-        width: "100%",
+        // width: "100%",
+        maxWidth: "1200px",
+        margin: "auto",
         display: "grid",
         gridTemplateColumns: "auto auto auto",
         gridTemplateRows: "auto auto auto" ,

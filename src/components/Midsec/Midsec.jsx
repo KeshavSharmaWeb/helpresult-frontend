@@ -12,10 +12,12 @@ export default function Midsec() {
 
     const useStyles = makeStyles((theme) => ({
         box: {
+            maxWidth: "1200px",
+            margin: "auto",
             marginTop: "2%",
         },
         upperBox: {
-            margin: "10px 80px",
+            margin: "10px 0",
             [theme.breakpoints.down("sm")]: {
                 margin: "2px 10px"
             }
@@ -23,7 +25,7 @@ export default function Midsec() {
         lowerBox: {
             display: "grid",
             gridTemplateColumns: "auto auto auto auto",
-            margin: "20px 70px",
+            margin: "20px 0",
             columnGap: "8px",
             rowGap: "8px",
             [theme.breakpoints.down('sm')]: {
@@ -97,9 +99,7 @@ export default function Midsec() {
                 </Box>
                 <Box className={classes.lowerBox}>
                     {isReady && records.map((record, index) => {
-                            return (
-                                <Boxex record={record} key={index} backcolor={record.fillColor} />
-                                )
+                            return ( <Boxex record={record} key={index} backcolor={record.fillColor} /> )
                     })}
                     {/* <Boxex title="SSC CHSL 10+2 Apply Online" backcolor="#868a08" /> */}
                 </Box>
