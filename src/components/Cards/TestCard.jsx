@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, makeStyles } from "@material-ui/core";
-import { CheckBox } from "@material-ui/icons";
+import {FaCheckSquare} from "react-icons/fa"
 
 import { Link } from "react-router-dom";
 
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
             margin: "5px 30px"
         },
         [theme.breakpoints.down("xs")]: {
-            width: "90%",
-            margin: "5px 30px"
+            width: "100%",
+            margin: "0"
         }
     },
     top: {
@@ -41,11 +41,11 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         background: "#e87e04",
-        fontSize: "13px",
+        fontSize: "14px",
         margin: "20px 20px",
-        "&:hover": {
-            background: "#e87e04",
-        }
+        color: "#fff",
+        padding: "5px 10px",
+        border: "none"
     },
     li: {
         listStyle: "none",
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
         margin: "4px 0px",
         fontSize: "14px",
         "&:hover": {
-            fontWeight: "900",
+            fontWeight: "500",
             cursor: "pointer"
         }
     },
@@ -67,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
         color: "#727272",
         "&:hover": {
             color: "black"
+        },
+        "&:visited": {
+            color: "purple"
         }
     },
     extendCol: {
@@ -93,22 +96,44 @@ const useStyles = makeStyles((theme) => ({
             marginBottom: "10px",
         }
     },
-    side:{
+    side: {
         width: "100%",
-        "&>*":{
+        "&>*": {
             minHeight: "400px"
         }
     }
 })
 );
 
-export default function Card({ title, records, extend ,side, categoryId }) {
+export default function Card({ title, records, extend, side, categoryId }) {
     const classes = useStyles();
     return (
         <Box className={extend ? classes.extendCol : ""}>
-        {
-            side ? <Box className={classes.side}>
-            <Box className={classes.box}>
+            {
+                side ? <Box className={classes.side}>
+                    <Box className={classes.box}>
+                        <Box className={classes.top}>
+                            {title}
+                        </Box>
+                        <Box className={classes.mid}>
+                            {
+                                records.map((val, id) => {
+                                    return (
+                                        <li key={id} className={classes.li}>
+                                            <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
+                                                <FaCheckSquare style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                                {val.post_display_name}
+                                            </a>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </Box>
+                        <Box style={{ textAlign: "end" }}>
+                            <button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </button>
+                        </Box>
+                    </Box>
+                </Box> : <Box className={classes.box}>
                     <Box className={classes.top}>
                         {title}
                     </Box>
@@ -118,7 +143,7 @@ export default function Card({ title, records, extend ,side, categoryId }) {
                                 return (
                                     <li key={id} className={classes.li}>
                                         <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
-                                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
+                                            <FaCheckSquare style={{ background: "white",color: "blue", fontSize: "15px", marginRight: "5px" }} />
                                             {val.post_display_name}
                                         </a>
                                     </li>
@@ -127,33 +152,11 @@ export default function Card({ title, records, extend ,side, categoryId }) {
                         }
                     </Box>
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
-                    </Box>
-            </Box>
-            </Box> : <Box className={classes.box}>
-                    <Box className={classes.top}>
-                        {title}
-                    </Box>
-                    <Box className={classes.mid}>
-                        {
-                            records.map((val, id) => {
-                                return (
-                                    <li key={id} className={classes.li}>
-                                        <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
-                                            <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                            {val.post_display_name}
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        }
-                    </Box>
-                    <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </Button>
+                        <button className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </button>
                     </Box>
 
-            </Box>
-        }
+                </Box>
+            }
         </Box>
     )
 }

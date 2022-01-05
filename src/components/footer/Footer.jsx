@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
         background: "url('/images/footer-bg.jpg')",
         padding: "8%",
         display: "flex",
+        maxWidth: "1200px",
+        margin: "auto",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column"
         },

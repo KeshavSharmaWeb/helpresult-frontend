@@ -13,7 +13,7 @@ export default function Home() {
                 isMobile ? " " : <Midsec/>  
             }
             <MainCard/>
-            <News/>
+            {/* <News/> */}
         </>
     )
 }

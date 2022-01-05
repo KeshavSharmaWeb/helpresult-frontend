@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { url } from "../../config";
+import ExtraNav from "./ExtraNav";
 
 
 function DrawerComponent() {
@@ -52,9 +53,10 @@ function DrawerComponent() {
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
-        style={{marginTop: "20px"}}
+        style={{marginTop: "20px",width: "200%"}}
       >
-        <List>
+      <ExtraNav open={openDrawer} setdrop={setOpenDrawer} />
+        {/* <List>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link to="/" className={classes.link}>Home</Link>
@@ -68,7 +70,7 @@ function DrawerComponent() {
           </ListItem>
           ))}
 
-        </List>
+        </List> */}
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
         <MenuIcon />
