@@ -3,7 +3,6 @@ import Details from "./components/Details";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Result from "./components/ResultPage/Result";
-import Footer from './components/footer/Footer';
 import SocialIcons from './components/footer/SocialIcons';
 import Admin from "./components/Admin";
 import Categories from "./components/Admin/Categories";

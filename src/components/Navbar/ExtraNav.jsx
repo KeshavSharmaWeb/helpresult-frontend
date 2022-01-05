@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {Box , List,ListItem,ListItemText , makeStyles,IconButton,} from "@material-ui/core";
+import {Box , List,ListItem,ListItemText , makeStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import { url } from "../../config";
-import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles(() => ({
     link: {
@@ -31,17 +30,15 @@ const useStyles = makeStyles(() => ({
     }
   }));
 
-export default function ExtraNav({open,setOpen}) {
+export default function ExtraNav({open}) {
     const classes = useStyles();
     const [categoryData, setCategoryData] = useState([]);
-    const [isReady, setIsReady] = useState(false);
   
     useEffect(() => {
         axios.get(url + "/categories").then(res => {
     
           // get first 7 elements of the array
           setCategoryData(res.data.slice(0, 6));
-          setIsReady(true);
         }
         )
       }, []);

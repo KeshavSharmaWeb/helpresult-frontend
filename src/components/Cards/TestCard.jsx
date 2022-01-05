@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, makeStyles } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
 import {FaCheckSquare} from "react-icons/fa"
 
 import { Link } from "react-router-dom";
@@ -61,10 +61,15 @@ const useStyles = makeStyles((theme) => ({
     links: {
         color: "white",
         textDecoration: "none",
+        '&:hover': {
+            color: "white",
+            textDecoration: "none"
+        }
     },
     navLink: {
         textDecoration: "none",
         color: "#727272",
+        transition: "0.15s ease-in-out all",
         "&:hover": {
             color: "black"
         },

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Table, Form } from 'react-bootstrap'
+import { Container, Button, Table } from 'react-bootstrap'
 import axios from 'axios'
 import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
-import { userExists } from '../../helperFns'
 
 
 const NewsRecord = () => {
@@ -41,32 +40,6 @@ const NewsRecord = () => {
         )
     }
 
-
-    // const AddRecordToNews = () => {
-    //     return (
-    //         <Container style={{ width: "50%", marginTop: 30, marginBottom: 30 }}>
-    //             <h3 style={{ textAlign: "center" }}>Add a record to news</h3>
-    //             <Form onSubmit={handleFormSubmit}>
-    //                 <Form.Group className="mb-3" controlId="formBasicEmail">
-    //                     <Form.Label>News Name</Form.Label>
-    //                     <Form.Control type="text" name="name" placeholder="Enter news name" required />
-    //                 <br />
-    //                     <Form.Label>Record Id</Form.Label>
-    //                     <Form.Control type="text" name="recordId" placeholder="Enter record id" required />
-    //                 </Form.Group>
-    //                 <Form.Label>Fill Color</Form.Label>
-    //                 <Box style={{ display: "flex", alignItems: "flex-end", margin: "20px 0", marginTop: "5px" }}>
-
-    //                 <HexColorPicker color={color} onChange={setColor} style={{ marginRight: "30px" }} />
-    //                 <Box style={{ backgroundColor: color, width: "7vw", height: "7vw" }}></Box>
-    //                 </Box>
-    //                 <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
-    //                     Submit
-    //                 </Button>
-    //             </Form>
-    //         </Container>
-    //     )
-    // }
     return (
         <Container>
             {/* <AddRecordToNews /> */}

@@ -1,11 +1,7 @@
 import React from 'react'
 import { Box, makeStyles } from "@material-ui/core";
-import { CheckBox } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-
-import {formattedDate} from "../helperFns";
-
-
+import { formattedDate } from "../helperFns";
+import { FaCheckSquare } from 'react-icons/fa';
 
 export default function TableBox({ title, data }) {
     const useStyles = makeStyles((theme) => ({
@@ -43,16 +39,18 @@ export default function TableBox({ title, data }) {
             paddingBottom: "5px",
             color: "#727272",
             "&:hover": {
-                fontWeight: "900",
-                color: "black",
                 cursor: "pointer"
             },
         },
         navLink: {
             textDecoration: "none",
             color: "#727272",
+            transition: "0.15s ease-in-out all",
             "&:hover": {
                 color: "black"
+            },
+            "&:visited": {
+                color: "purple"
             }
         }
     })
@@ -60,25 +58,32 @@ export default function TableBox({ title, data }) {
     const classes = useStyles();
 
     return (
-            <Box className={classes.box}>
-                <Box className={classes.title}>
-                    {title}
-                </Box>
-                {
-
-                    data.length > 0 ?
-                        <Box className={classes.desc}>
-                            {
-                                data.map((val) => {
-                                    return <><li key={val._id} className={classes.li}> <CheckBox style={{ background: "#0868fe", color: "white", fontSize: "16px" }} /> <Link to={`/details/${val.slug}?id=${val._id}`} className={classes.navLink} > {val.name} </Link>
-                                    <span style={{ color: "black", fontWeight: 900 }}>{ val.last_date ? `  Last Date : ${formattedDate(val.last_date)}` : null}</span>
-                                    </li>
-                                    </>
-                                })
-                            }
-                        </Box> :
-                        <h3 style={{ textAlign: "center" }}>No data found</h3>
-                }
+        <Box className={classes.box}>
+            <Box className={classes.title}>
+                {title}
             </Box>
+            {
+
+                data.length > 0 ?
+                    <Box className={classes.desc}>
+                        {
+                            data.map((val) => {
+                                return <>
+                                <li key={val._id} className={classes.li}> 
+                                <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
+                                            <FaCheckSquare style={{ background: "white",color: "blue", fontSize: "15px", marginRight: "5px" }} />
+                                            {val.post_display_name}
+                                        </a>
+                                    <span style={{ color: "black", fontWeight: 900 }}>
+                                        {val.last_date ? `  Last Date : ${formattedDate(val.last_date)}` : null}
+                                        </span>
+                                </li>
+                                </>
+                            })
+                        }
+                    </Box> :
+                    <h3 style={{ textAlign: "center" }}>No data found</h3>
+            }
+        </Box>
     )
 }

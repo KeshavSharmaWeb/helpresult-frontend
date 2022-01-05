@@ -141,7 +141,7 @@ const EditRecord = () => {
                 alert("You are not authorized to edit this record")
             } else if (res.status === 200) {
                 alert("Record updated successfully")
-                window.location.href = '/admin/records'
+                window.location.reload()
             } else {
                 alert("Something went wrong")
             }

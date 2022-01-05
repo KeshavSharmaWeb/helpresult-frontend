@@ -16,7 +16,6 @@ import axios from "axios";
 import { url } from "../../config";
 import { useLocation } from "react-router-dom";
 import AdminNav from "../Admin/Navbar";
-import ExtraNav from "./ExtraNav";
 import MenuIcon from "@material-ui/icons/Menu";
 
 
