@@ -3,13 +3,11 @@ import { Container, Button, Table, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { url } from '../../config'
 import { Cancel } from '@material-ui/icons'
-import { HexColorPicker } from "react-colorful";
-import { Box } from '@material-ui/core'
+import { userExists } from '../../helperFns'
 
 
 const NewsRecord = () => {
     const [newsRecords, setNewsRecords] = useState([])
-    const [color, setColor] = useState("#aabbcc");
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -31,18 +29,11 @@ const NewsRecord = () => {
         )
     }
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target)
-        const data = {
-            name: formData.get('name'),
-            recordId: formData.get('recordId'),
-            fillColor: color,
-        }
-
-        axios.post(`${url}/add-news-records`, data).then(res => {
+    const updateNewsRecord = async (id, name, recordId, color) => {
+        axios.post(url + "/update-news-record", { id: id, fillColor: color, name: name, recordId: recordId }).then(res => {
             if (res.status === 200) {
-                setNewsRecords([...newsRecords, res.data])
+                setNewsRecords(newsRecords.map(newsRecord => newsRecord._id === id ? { ...newsRecord, name: name, recordId: recordId, fillColor: color } : newsRecord))
+                alert("Record Updated")
             } else {
                 alert("Something went wrong")
             }
@@ -50,35 +41,37 @@ const NewsRecord = () => {
         )
     }
 
-    const AddRecordToNews = () => {
-        return (
-            <Container style={{ width: "50%", marginTop: 30, marginBottom: 30 }}>
-                <h3 style={{ textAlign: "center" }}>Add a record to news</h3>
-                <Form onSubmit={handleFormSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>News Name</Form.Label>
-                        <Form.Control type="text" name="name" placeholder="Enter news name" required />
-                    <br />
-                        <Form.Label>Record Id</Form.Label>
-                        <Form.Control type="text" name="recordId" placeholder="Enter record id" required />
-                    </Form.Group>
-                    <Form.Label>Fill Color</Form.Label>
-                    <Box style={{ display: "flex", alignItems: "flex-end", margin: "20px 0", marginTop: "5px" }}>
 
-                    <HexColorPicker color={color} onChange={setColor} style={{ marginRight: "30px" }} />
-                    <Box style={{ backgroundColor: color, width: "7vw", height: "7vw" }}></Box>
-                    </Box>
-                    <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
-                        Submit
-                    </Button>
-                </Form>
-            </Container>
-        )
-    }
+    // const AddRecordToNews = () => {
+    //     return (
+    //         <Container style={{ width: "50%", marginTop: 30, marginBottom: 30 }}>
+    //             <h3 style={{ textAlign: "center" }}>Add a record to news</h3>
+    //             <Form onSubmit={handleFormSubmit}>
+    //                 <Form.Group className="mb-3" controlId="formBasicEmail">
+    //                     <Form.Label>News Name</Form.Label>
+    //                     <Form.Control type="text" name="name" placeholder="Enter news name" required />
+    //                 <br />
+    //                     <Form.Label>Record Id</Form.Label>
+    //                     <Form.Control type="text" name="recordId" placeholder="Enter record id" required />
+    //                 </Form.Group>
+    //                 <Form.Label>Fill Color</Form.Label>
+    //                 <Box style={{ display: "flex", alignItems: "flex-end", margin: "20px 0", marginTop: "5px" }}>
+
+    //                 <HexColorPicker color={color} onChange={setColor} style={{ marginRight: "30px" }} />
+    //                 <Box style={{ backgroundColor: color, width: "7vw", height: "7vw" }}></Box>
+    //                 </Box>
+    //                 <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
+    //                     Submit
+    //                 </Button>
+    //             </Form>
+    //         </Container>
+    //     )
+    // }
     return (
         <Container>
-            <AddRecordToNews />
-            <hr />
+            {/* <AddRecordToNews /> */}
+            {/* <hr /> */}
+            <h3 style={{ textAlign: "center", marginTop: 30 }}>News Posts</h3>
             <Table striped bordered hover style={{ marginTop: 30, textAlign: "center" }}>
                 {
                     newsRecords.length > 0 ? (
@@ -90,6 +83,8 @@ const NewsRecord = () => {
                                     <th>Record Id</th>
                                     <th>Fill Color</th>
                                     <th>Date Added</th>
+                                    <th>Type</th>
+                                    <th></th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -100,10 +95,19 @@ const NewsRecord = () => {
                                     newsRecords.map((newsRecord, index) => (
                                         <tr>
                                             <td>{index + 1}</td>
-                                            <td>{newsRecord.name}</td>
-                                            <td>{newsRecord.recordId}</td>
-                                            <td>{newsRecord.fillColor}</td>
+                                            <td><input type="text" defaultValue={newsRecord.name} id={`name-${newsRecord._id}`} style={{ textAlign: "center" }} /></td>
+                                            <td><input type="text" defaultValue={newsRecord.recordId} id={`record-${newsRecord._id}`} style={{ textAlign: "center" }} /> </td>
+                                            <td><input type="text" defaultValue={newsRecord.fillColor} id={`color-${newsRecord._id}`} style={{ textAlign: "center" }} /></td>
                                             <td>{newsRecord.datetime}</td>
+                                            <td>Box</td>
+                                            <td><Button variant="outline-dark" size="sm" onClick={() => updateNewsRecord(
+                                                newsRecord._id,
+                                                document.getElementById(`name-${newsRecord._id}`).value === "" ? newsRecord.name : document.getElementById(`name-${newsRecord._id}`).value,
+                                                document.getElementById(`record-${newsRecord._id}`).value === "" ? newsRecord.recordId : document.getElementById(`record-${newsRecord._id}`).value,
+                                                document.getElementById(`color-${newsRecord._id}`).value === "" ? newsRecord.fillColor : document.getElementById(`color-${newsRecord._id}`).value
+                                                )}>
+                                                Update
+                                            </Button></td>
                                             <td>
                                                 <Cancel fontSize="small" onClick={() => handleCancel(newsRecord._id)} style={{ cursor: "pointer" }} />
                                             </td>

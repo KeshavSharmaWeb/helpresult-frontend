@@ -26,7 +26,7 @@ export default function Boxex({ record, backcolor }) {
     const classes = useStyles()
     return (
         <Link to={`/details/${record.name}?id=${record.recordId}`} style={{ textDecoration: "none" }}>
-        <Box className={classes.box} style={{ background: backcolor }} >
+        <Box className={classes.box} style={{ background: backcolor, minHeight: "100%" }} >
             <Typography className={classes.typo} style={{ lineHeight: "1" }}> {record.name} </Typography>
         </Box>
         </Link>
