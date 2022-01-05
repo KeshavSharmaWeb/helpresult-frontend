@@ -14,7 +14,8 @@ export default function Midsec() {
         box: {
             maxWidth: "1200px",
             margin: "auto",
-            marginTop: "2%",
+            // marginTop: "2%",
+            background: "whitesmoke",
         },
         upperBox: {
             margin: "10px 0",

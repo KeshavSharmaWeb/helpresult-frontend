@@ -2,12 +2,12 @@ import React from "react";
 import {
   AppBar,
   Toolbar,
-  CssBaseline,
   Typography,
   makeStyles,
   useTheme,
   useMediaQuery,
   Box,
+  IconButton
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import DrawerComponent from "./Drawer";
@@ -16,12 +16,17 @@ import axios from "axios";
 import { url } from "../../config";
 import { useLocation } from "react-router-dom";
 import AdminNav from "../Admin/Navbar";
+import ExtraNav from "./ExtraNav";
+import MenuIcon from "@material-ui/icons/Menu";
 
 
-function Navbar() {
+function Navbar( {open,setOpen}) {
   const useStyles = makeStyles((theme) => ({
     appbar: {
       background: "white",
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
     },
     navlinks: {
       display: "flex",
@@ -67,6 +72,12 @@ function Navbar() {
         alignItems: "center",
         paddingLeft: "6%"
       }
+    },
+    innerBox:{
+      [theme.breakpoints.down("xs")]: {
+        minWidth: "0px",
+        maxWidth: "0px"
+      }
     }
   }));
   const classes = useStyles();
@@ -94,17 +105,21 @@ function Navbar() {
   }, [])
 
   return (
-    <Box >
+    <Box sx={{width: "100%"}} >
       {currentLocation.startsWith('/admin') ? (
         <AdminNav />)
         :
         (
-            <AppBar id="top" position="sticky" className={classes.appbar} >
-              <CssBaseline />
-              {
+            <AppBar id="top" position="sticky" className={classes.appbar} > 
+              <Box sx={{minWidth: "1200px",maxWidth: "1200px"}} className={classes.innerBox}>
+                    {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
+               {
                 isReady ? (
                   isMobile ? <Toolbar className={classes.toolbar} >
-                    <DrawerComponent />
+                    {/* <DrawerComponent/> */}
+                    <IconButton onClick={() => setOpen(!open)} >
+                        <MenuIcon />
+                      </IconButton>
                     {isMobile ? (
                       <Typography variant="h4" className={classes.logo}>
                         <img src="/images/logo.png" alt="logo" className={classes.logo} />
@@ -128,8 +143,9 @@ function Navbar() {
                         <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
 
                       </Typography>
+                        {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
                       {isMobile ? (
-                        <DrawerComponent />
+                        <DrawerComponent/>
                       ) : (
                         <div className={classes.navlinks}>
                           <Link to="/" className={classes.link}>
@@ -146,6 +162,7 @@ function Navbar() {
                 )
                   :
                   null}
+              </Box>
             </AppBar>
         )
       }

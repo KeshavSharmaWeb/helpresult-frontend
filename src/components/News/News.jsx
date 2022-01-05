@@ -7,7 +7,9 @@ export default function News() {
     const useStyles = makeStyles((theme) => ({
         box: {
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            maxWidth: "1200px",
+            margin: "auto"
         },
         upperBox: {
             textAlign: "center",

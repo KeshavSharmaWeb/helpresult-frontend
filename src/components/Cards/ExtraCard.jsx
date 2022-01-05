@@ -66,11 +66,11 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         background: "#e87e04",
-        fontSize: "13px",
+        fontSize: "14px",
         margin: "20px 20px",
-        "&:hover": {
-            background: "#e87e04",
-        }
+        color: "#fff",
+        padding: "5px 10px",
+        border: "none"
     },
     links: {
         color: "white",
@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
         color: "#727272",
         "&:hover": {
             color: "black"
+        },
+        "&:visited":{
+            color: "purple"
         }
     },
     heading: {
@@ -113,7 +116,7 @@ export default function ExtraCard({ records }) {
                         })
                     }
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                        <button className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </button>
                     </Box>
                 </Box>
 
@@ -132,7 +135,7 @@ export default function ExtraCard({ records }) {
                         })
                     }
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                        <button className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </button>
                     </Box>
                 </Box>
                 <Box className={classes.childBox}>
@@ -150,7 +153,7 @@ export default function ExtraCard({ records }) {
                         })
                     }
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                        <button className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </button>
                     </Box>
                 </Box>
 
@@ -169,7 +172,7 @@ export default function ExtraCard({ records }) {
                         })
                     }
                     <Box style={{ textAlign: "end" }}>
-                        <Button variant="contained" className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </Button>
+                        <button  className={classes.button}> <Link to="/" className={classes.links} > Read More </Link> </button>
                     </Box>
                 </Box>
             </Box>
