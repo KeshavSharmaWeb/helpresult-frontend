@@ -25,7 +25,7 @@ export default function Result() {
     }, [id])
 
     return (
-        <Box>
+        <Box marginTop={"75px"}>
             {ready ? <TableBox title={categoryName} data={data} /> : ''}
         </Box>
     )

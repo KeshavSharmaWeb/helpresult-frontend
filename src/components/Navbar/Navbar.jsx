@@ -26,6 +26,13 @@ function Navbar({ open, setOpen }) {
       width: "100%",
       display: "flex",
       alignItems: "center",
+      position: "fixed",
+      // [theme.breakpoints.down("xs")]: {
+      // background: "white",
+      // width: "unset",
+      // display: "block",
+      // alignItems: "center",
+      // }
     },
     navlinks: {
       display: "flex",
@@ -38,7 +45,7 @@ function Navbar({ open, setOpen }) {
       cursor: "pointer",
       [theme.breakpoints.down("xs")]: {
         fontSize: "50px",
-        marginLeft: "3vw",
+        // marginLeft: "3vw",
         height: "auto",
         width: "55vw",
       }
@@ -71,7 +78,8 @@ function Navbar({ open, setOpen }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingLeft: "6%"
+        paddingLeft: "0%",
+        paddingRight: "0%",
       }
     },
     innerBox: {
@@ -112,33 +120,22 @@ function Navbar({ open, setOpen }) {
         :
         (
           <AppBar id="top" position="sticky" className={classes.appbar} >
-            <Box sx={{ minWidth: "1200px", maxWidth: "1200px" }} className={classes.innerBox}>
-              {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
-              {
-                isReady ? (
-                  isMobile ? <Toolbar className={classes.toolbar} >
+            {
+              isMobile ?
+              <Toolbar className={classes.toolbar} >
                     {/* <DrawerComponent/> */}
                     <IconButton onClick={() => setOpen(!open)} >
                       <MenuIcon />
                     </IconButton>
-                    {isMobile ? (
-                      <Typography variant="h4" className={classes.logo}>
+                    <Box>
                         <img src="/images/logo.png" alt="logo" className={classes.logo} />
-                      </Typography>
-                    ) : (
-                      <div className={classes.navlinks}>
-                        <Link to="/" className={classes.link}>
-                          HOME
-                        </Link>
-                        {categoryData.map((data, index) => (
-                          <Link to={`/more/${data.slug}?id=${data._id}`} key={index} className={classes.link}>
-                            {data.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                    </Box>
                   </Toolbar>
-                    :
+                  : null
+            }
+            <Box sx={{ minWidth: "1200px", maxWidth: "1200px" }} className={classes.innerBox}>
+              {
+                isReady && !isMobile ? (
                     <Toolbar >
                       <Typography variant="h4" className={classes.logo}>
                         <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
@@ -153,7 +150,7 @@ function Navbar({ open, setOpen }) {
                             HOME
                           </Link>
                           {categoryData.map((data, index) => (
-                            <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
+                            <Link key={index} to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
                               {data.name}
                             </Link>
                           ))}

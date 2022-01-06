@@ -20,7 +20,7 @@ export default function SocialIcons() {
             }
         },
         copyright: {
-            marginLeft: "7%",
+            // marginLeft: "7%",
             color: "white",
             [theme.breakpoints.down("xs")]: {
                 textAlign: "center"

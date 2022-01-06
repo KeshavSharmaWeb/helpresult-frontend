@@ -69,7 +69,7 @@ export default function Details() {
     }, [id])
 
     return (
-        <>
+        <Box marginTop={"75px"}>
             {ready ?
             <Box className={classes.box}>
                 <Box className={classes.row}>
@@ -77,7 +77,7 @@ export default function Details() {
                         Name of Post :
                     </Box>
                     <Box className={classes.desc}>
-                        <Typography style={{ fontSize: "large" }}>{data.name}</Typography>
+                        <Typography style={{ fontSize: "large", fontWeight: 600 }}>{data.name}</Typography>
                     </Box>
                 </Box>
                     <Box className={classes.row}>
@@ -103,6 +103,6 @@ export default function Details() {
             </Box>
             : ''}
 
-        </>
+        </Box>
     )
 }

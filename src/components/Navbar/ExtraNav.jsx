@@ -43,7 +43,7 @@ export default function ExtraNav({open}) {
         )
       }, []);
     return (
-        <Box className={`${open ? classes.showBox : classes.hideBox}` }>
+        <Box className={`${open ? classes.showBox : classes.hideBox}`} marginTop={"55px"}>
             <List>
           <ListItem >
             <ListItemText>

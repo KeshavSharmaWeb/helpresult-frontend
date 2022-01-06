@@ -12,7 +12,7 @@ function DrawerComponent() {
 
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
-    <Box >
+    <Box>
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
