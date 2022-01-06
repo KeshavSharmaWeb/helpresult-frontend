@@ -74,7 +74,6 @@ export default function MainCard() {
     }, [])
     return (
         <Box className={classes.box}>
-
             <Box className={classes.cardBox}>
             {isReady ?
                 isMobile ? <>
@@ -99,10 +98,12 @@ export default function MainCard() {
                 <TestCard extend={false} side={true} title="Certificate Verification" records={recordData['61c7fce58b071fa93f007483']} categoryId="61c7fce58b071fa93f007483"/>
 
                 </>
-            : null
+            : <h3 style={{ textAlign: "center" }}>Loading...</h3>
             }
             </Box>
-
+            {/* <Box className={classes.extraBox}>
+                <ExtraCard alternate={true} />
+            </Box> */}
         </Box>
     )
 }
