@@ -19,7 +19,7 @@ import AdminNav from "../Admin/Navbar";
 import MenuIcon from "@material-ui/icons/Menu";
 
 
-function Navbar( {open,setOpen}) {
+function Navbar({ open, setOpen }) {
   const useStyles = makeStyles((theme) => ({
     appbar: {
       background: "white",
@@ -29,9 +29,9 @@ function Navbar( {open,setOpen}) {
     },
     navlinks: {
       display: "flex",
-      width: "80%",
-      justifycontent: "space-evenly",
-      margin: "0px 10px",
+      width: "60%",
+      justifyContent: "space-evenly",
+      margin: "0",
     },
     logo: {
       flexGrow: "1",
@@ -50,8 +50,10 @@ function Navbar( {open,setOpen}) {
       padding: "3px 3px",
       display: "flex",
       justifyContent: "center",
-      width: "50%",
+      // width: "50%",
       fontWeight: "600",
+      textTransform: "uppercase",
+      transition: "0.15s ease-in-out all",
       "&:hover": {
         color: "blue",
         border: "none",
@@ -72,7 +74,7 @@ function Navbar( {open,setOpen}) {
         paddingLeft: "6%"
       }
     },
-    innerBox:{
+    innerBox: {
       [theme.breakpoints.down("xs")]: {
         minWidth: "0px",
         maxWidth: "0px"
@@ -104,21 +106,21 @@ function Navbar( {open,setOpen}) {
   }, [])
 
   return (
-    <Box sx={{width: "100%"}} >
+    <Box sx={{ width: "100%" }} >
       {currentLocation.startsWith('/admin') ? (
         <AdminNav />)
         :
         (
-            <AppBar id="top" position="sticky" className={classes.appbar} > 
-              <Box sx={{minWidth: "1200px",maxWidth: "1200px"}} className={classes.innerBox}>
-                    {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
-               {
+          <AppBar id="top" position="sticky" className={classes.appbar} >
+            <Box sx={{ minWidth: "1200px", maxWidth: "1200px" }} className={classes.innerBox}>
+              {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
+              {
                 isReady ? (
                   isMobile ? <Toolbar className={classes.toolbar} >
                     {/* <DrawerComponent/> */}
                     <IconButton onClick={() => setOpen(!open)} >
-                        <MenuIcon />
-                      </IconButton>
+                      <MenuIcon />
+                    </IconButton>
                     {isMobile ? (
                       <Typography variant="h4" className={classes.logo}>
                         <img src="/images/logo.png" alt="logo" className={classes.logo} />
@@ -129,7 +131,7 @@ function Navbar( {open,setOpen}) {
                           HOME
                         </Link>
                         {categoryData.map((data, index) => (
-                          <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
+                          <Link to={`/more/${data.slug}?id=${data._id}`} key={index} className={classes.link}>
                             {data.name}
                           </Link>
                         ))}
@@ -142,9 +144,9 @@ function Navbar( {open,setOpen}) {
                         <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
 
                       </Typography>
-                        {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
+                      {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
                       {isMobile ? (
-                        <DrawerComponent/>
+                        <DrawerComponent />
                       ) : (
                         <div className={classes.navlinks}>
                           <Link to="/" className={classes.link}>
@@ -161,8 +163,8 @@ function Navbar( {open,setOpen}) {
                 )
                   :
                   null}
-              </Box>
-            </AppBar>
+            </Box>
+          </AppBar>
         )
       }
     </Box>

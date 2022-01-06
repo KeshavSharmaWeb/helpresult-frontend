@@ -114,31 +114,7 @@ export default function Card({ title, records, extend, side, categoryId }) {
     const classes = useStyles();
     return (
         <Box className={extend ? classes.extendCol : ""}>
-            {
-                side ? <Box className={classes.side}>
-                    <Box className={classes.box}>
-                        <Box className={classes.top}>
-                            {title}
-                        </Box>
-                        <Box className={classes.mid}>
-                            {
-                                records.map((val, id) => {
-                                    return (
-                                        <li key={id} className={classes.li}>
-                                            <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
-                                                <FaCheckSquare style={{ background: "#0868fe", color: "white", fontSize: "15px", marginRight: "5px" }} />
-                                                {val.post_display_name}
-                                            </a>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </Box>
-                        <Box style={{ textAlign: "end" }}>
-                            <button variant="contained" className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </button>
-                        </Box>
-                    </Box>
-                </Box> : <Box className={classes.box}>
+         <Box className={classes.box}>
                     <Box className={classes.top}>
                         {title}
                     </Box>
@@ -161,7 +137,7 @@ export default function Card({ title, records, extend, side, categoryId }) {
                     </Box>
 
                 </Box>
-            }
+            
         </Box>
     )
 }

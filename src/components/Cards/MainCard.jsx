@@ -75,19 +75,7 @@ export default function MainCard() {
     return (
         <Box className={classes.box}>
 
-            {/* place all the cards here  */}
             <Box className={classes.cardBox}>
-                {/* {categoryData.map(item => {
-                const data = recordData.filter(record => record.categoryId === item._id);
-                
-                return (
-                    <Box>
-                    {data.length > 0 ? <Card key={item._id} title={item.name} slug={item.slug} categoryId={item._id} recordData={data} />:null}
-                    </Box>
-                )
-            })} */}
-
-            {/* dummy  */}
             {isReady ?
                 isMobile ? <>
                 <TestCard extend={true} title="Latest Jobs" records={recordData['61c7fccb8b071fa93f00747b']} categoryId="61c7fccb8b071fa93f00747b"/>
@@ -114,9 +102,7 @@ export default function MainCard() {
             : null
             }
             </Box>
-            {/* <Box className={classes.extraBox}>
-                <ExtraCard alternate={true} />
-            </Box> */}
+
         </Box>
     )
 }
