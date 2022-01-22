@@ -74,7 +74,7 @@ export default function TableBox({ title, data }) {
                                             <FaCheckSquare style={{ background: "white",color: "blue", fontSize: "15px", marginRight: "5px" }} />
                                             {val.post_display_name}
                                         </a>
-                                    <span style={{ color: "black", fontWeight: 900 }}>
+                                    <span style={{ color: "red", fontWeight: 900 }}>
                                         {val.last_date ? `  Last Date : ${formattedDate(val.last_date)}` : null}
                                         </span>
                                 </li>
