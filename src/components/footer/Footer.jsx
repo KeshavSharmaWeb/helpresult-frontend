@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Typography, makeStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
-import Bounce from "react-reveal";
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -10,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
         background: "url('/images/footer-bg.jpg')",
         padding: "8%",
         display: "flex",
+        maxWidth: "1200px",
+        margin: "auto",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column"
         },
@@ -122,33 +123,25 @@ export default function Footer() {
                 null)
                 :
                 (
-                    <Bounce left>
                         <Box className={classes.box}>
                             <Box >
-                                <Bounce left>
                                     <Typography style={{ color: "white", fontSize: "25px" }} >  CONTACT  </Typography>
-                                </Bounce>
                                 <Box className={classes.contact}>
-                                    <Bounce left>
                                         <Typography style={{ color: "#f1ecec" }}>
                                             Address: <br />
                                             KHASRA NO-4331/,FLAT <br />
                                             NO-14,SKHUNTLA APARTMENT, RANI <br />
                                             KHERA ROAD,MUNDKA,DELHI-110041 <br />
                                         </Typography>
-                                    </Bounce>
                                     <Box style={{ margin: "20px 0px", color: "#f1ecec" }} >
-                                        <Bounce left>
                                             <Typography>
                                                 Phone: +91-7210363680, 7210363681 <br />
                                                 Email: srinfotech9238@gmail.com
                                             </Typography>
-                                        </Bounce>
                                     </Box>
                                 </Box>
                             </Box>
                             <Box style={{ marginLeft: "10px" }}>
-                                <Bounce left>
                                     <Typography style={{ color: "white", fontSize: "25px" }}> USEFUL lINKS </Typography>
                                     <Box className={classes.links} >
 
@@ -160,10 +153,8 @@ export default function Footer() {
                                             })
                                         }
                                     </Box>
-                                </Bounce>
                             </Box>
                         </Box>
-                    </Bounce>
                 )
             }
         </Box>

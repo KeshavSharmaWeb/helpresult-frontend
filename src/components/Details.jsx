@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import Flip from "react-reveal";
 import axios from 'axios';
 import { url } from '../config';
 import parse from 'html-react-parser';
@@ -45,7 +44,7 @@ export default function Details() {
             width: "100%",
             fontSize: "medium",
             [theme.breakpoints.down("sm")]: {
-                width: "80%"
+                width: "100%"
             }
         }
     })
@@ -64,13 +63,13 @@ export default function Details() {
             setData(res.data[0]);
             setReady(true);
             document.title = res.data[0].name;
-            setMoreDataHtml((res.data[0].more_data_html).replaceAll("WWW.SARKARIRESULT.COM", '').replaceAll('sarkariresult.com', 'HelpResult.com').replaceAll('sarkari result', '').replaceAll('https://t.me/sarkari', '').replaceAll('sarkari-result', 'help-result.com').replaceAll('https://itunes.apple.com/us/app/sarkari-result/id1051363935?ls=1&mt=8', '').replaceAll('https://itunes.apple.com/us', '').replaceAll('id1051363935', '').replaceAll('https://play.google.com/store/apps/details?id=com.app.app14f269771c01', '').replaceAll('com.app.app14f269771c01', '').replaceAll('android apps', '').replaceAll('apple ios apps', '').replaceAll('window apps', '').replaceAll('9nblggh6cm69', ''));
+            setMoreDataHtml((res.data[0].more_data_html).replaceAll("WWW.SARKARIRESULT.COM", '').replaceAll('sarkariresult.com', 'HelpResult.com').replaceAll('sarkari result', '').replaceAll('https://t.me/sarkari', '').replaceAll('sarkari-result', 'help-result.com').replaceAll('https://itunes.apple.com/us/app/sarkari-result/id1051363935?ls=1&mt=8', '').replaceAll('https://itunes.apple.com/us', '').replaceAll('id1051363935', '').replaceAll('https://play.google.com/store/apps/details?id=com.app.app14f269771c01', '').replaceAll('com.app.app14f269771c01', '').replaceAll('android apps', '').replaceAll('apple ios apps', '').replaceAll('window apps', '').replaceAll('9nblggh6cm69', '').replaceAll('https://www.youtube.com/watch?v=', '#').replaceAll('<center>', '<center style="display: none;">').replaceAll('#ff00ff', '#002bff'));
         }
         )
     }, [id])
 
     return (
-        <Flip right>
+        <Box marginTop={"75px"}>
             {ready ?
             <Box className={classes.box}>
                 <Box className={classes.row}>
@@ -78,7 +77,7 @@ export default function Details() {
                         Name of Post :
                     </Box>
                     <Box className={classes.desc}>
-                        <Typography style={{ fontSize: "medium" }}>{data.name}</Typography>
+                        <Typography style={{ fontSize: "large", fontWeight: 600 }}>{data.name}</Typography>
                     </Box>
                 </Box>
                     <Box className={classes.row}>
@@ -104,6 +103,6 @@ export default function Details() {
             </Box>
             : ''}
 
-        </Flip>
+        </Box>
     )
 }

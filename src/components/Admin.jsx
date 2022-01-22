@@ -35,7 +35,7 @@ const Dashboard = () => {
 
                                 {
                                     !loading &&
-                                    logs.map((log, index) => (
+                                    logs.reverse().map((log, index) => (
 
                                         <tr>
                                             <td>{index + 1}</td>

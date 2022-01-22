@@ -134,7 +134,11 @@ const AddRecord = () => {
             <Box className={classes.box1}>
                 <h3 style={{ textAlign: "center" }}>Add new Post</h3>
                 <Form onSubmit={handleFormSubmit}>
+
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Table HTML</Form.Label>
+                        <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" onChange={(e) => setTableHTML(e.target.value)} required />
+
                         <Form.Label>Post Name</Form.Label>
                         <Form.Control type="text" name="name" placeholder="Enter post name" onChange={(e) => document.getElementById("record_display_name").value = e.target.value} required />
 
@@ -183,8 +187,7 @@ const AddRecord = () => {
                             <Form.Label>Last Date to apply</Form.Label>
                             <Form.Control type="date" name="last_date" placeholder="Pick date" />
                         </div>
-                        <Form.Label>Table HTML</Form.Label>
-                        <Form.Control type="text" name="more_data_html" as="textarea" placeholder="Enter table html" onChange={(e) => setTableHTML(e.target.value)} required />
+
                     </Form.Group>
                     <Button variant="outline-dark" type="submit" style={{ width: "100%" }}>
                         Submit

@@ -3,7 +3,6 @@ import Details from "./components/Details";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Result from "./components/ResultPage/Result";
-import Footer from './components/footer/Footer';
 import SocialIcons from './components/footer/SocialIcons';
 import Admin from "./components/Admin";
 import Categories from "./components/Admin/Categories";
@@ -16,6 +15,8 @@ import AddUser from "./components/Admin/AddUser";
 import EditUser from "./components/Admin/EditUser";
 import Users from "./components/Admin/Users";
 import NewsRecord from "./components/Admin/NewsRecord";
+import {useState} from "react"
+import ExtraNav from "./components/Navbar/ExtraNav";
 
 function App() {
 
@@ -27,9 +28,12 @@ function App() {
     }
   }
 
+  const [drop,setDrop] = useState(false)
+
   return (
     <Router>
-      <Navbar />
+      <Navbar open={drop} setOpen={setDrop} />
+      <ExtraNav open={drop} setOpen={setDrop} />
       <Route path="/" exact component={Home} />
       <Route path="/details/:name" exact component={Details} />
       <Route path="/more/:name" exact component={Result} />
@@ -51,7 +55,7 @@ function App() {
       <Route path="/admin/news-records" exact render={() => changeComponentToLogin(NewsRecord)} />
 
       <Route path="/admin/login" exact render={(props) => <Login {...props} />} />
-      <Footer />
+      {/* <Footer /> */}
       <SocialIcons />
     </Router>
   );

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button,Box, makeStyles} from "@material-ui/core";
 import Data from "./data.json"
-import Rotate from "react-reveal";
 
 
 
@@ -26,7 +25,7 @@ export default function Card() {
     )
     const classes = useStyles()
     return (
-        <Rotate bottom right>
+        <>
             {
                 Data.map((val, id) => {
                     return (
@@ -44,6 +43,6 @@ export default function Card() {
                     )
                 })
             }
-        </Rotate>
+        </>
     )
 }

@@ -2,91 +2,25 @@ import React, { useState } from "react";
 import {
   Drawer,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  makeStyles,
   Box
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
+import ExtraNav from "./ExtraNav";
 
 
 function DrawerComponent() {
-  const useStyles = makeStyles(() => ({
-    link: {
-      textDecoration: "none",
-      color: "blue",
-      fontSize: "14px",
-      "&:hover": {
-        color: "Red",
-        border: "none",
-        borderBottom: "1px solid black",
-      }
-    },
-    icon: {
-      color: "white"
-    },
 
-  }));
-  const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
-    <Box style={{marginTop: "20px"}}>
+    <Box>
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
-        style={{marginTop: "20px"}}
+        style={{marginTop: "20px",width: "200%"}}
       >
-        <List>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>Home</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/result" className={classes.link}>RESULT</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>ADMIT CARD</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>LATEST JOBS</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>ADMISSION</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>SYLLABUS</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>ANSWER KEY</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>JOB ALERTS</Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>CONTACT</Link>
-            </ListItemText>
-          </ListItem>
-        </List>
+      <ExtraNav open={openDrawer} setdrop={setOpenDrawer} />
       </Drawer>
-      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)} style={{ position: "absolute", left: "-22vw" }}>
         <MenuIcon />
       </IconButton>
     </Box>

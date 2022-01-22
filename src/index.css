@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  background: whitesmoke !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Open Sans', sans-serif !important;

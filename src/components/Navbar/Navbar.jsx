@@ -2,41 +2,52 @@ import React from "react";
 import {
   AppBar,
   Toolbar,
-  CssBaseline,
   Typography,
   makeStyles,
   useTheme,
   useMediaQuery,
   Box,
+  IconButton
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import DrawerComponent from "./Drawer";
-import Fade from "react-reveal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "../../config";
 import { useLocation } from "react-router-dom";
 import AdminNav from "../Admin/Navbar";
+import MenuIcon from "@material-ui/icons/Menu";
 
 
-function Navbar() {
+function Navbar({ open, setOpen }) {
   const useStyles = makeStyles((theme) => ({
     appbar: {
       background: "white",
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      position: "fixed",
+      // [theme.breakpoints.down("xs")]: {
+      // background: "white",
+      // width: "unset",
+      // display: "block",
+      // alignItems: "center",
+      // }
     },
     navlinks: {
       display: "flex",
-      width: "80%",
-      justifycontent: "space-evenly",
-      margin: "0px 10px",
+      width: "60%",
+      justifyContent: "space-evenly",
+      margin: "0",
     },
     logo: {
       flexGrow: "1",
       cursor: "pointer",
       [theme.breakpoints.down("xs")]: {
         fontSize: "50px",
+        // marginLeft: "3vw",
         height: "auto",
-        width: "65vw",
+        width: "55vw",
       }
     },
     link: {
@@ -46,8 +57,10 @@ function Navbar() {
       padding: "3px 3px",
       display: "flex",
       justifyContent: "center",
-      width: "50%",
+      // width: "50%",
       fontWeight: "600",
+      textTransform: "uppercase",
+      transition: "0.15s ease-in-out all",
       "&:hover": {
         color: "blue",
         border: "none",
@@ -65,7 +78,14 @@ function Navbar() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingLeft: "6%"
+        paddingLeft: "0%",
+        paddingRight: "0%",
+      }
+    },
+    innerBox: {
+      [theme.breakpoints.down("xs")]: {
+        minWidth: "0px",
+        maxWidth: "0px"
       }
     }
   }));
@@ -94,41 +114,34 @@ function Navbar() {
   }, [])
 
   return (
-    <Box >
+    <Box sx={{ width: "100%" }} >
       {currentLocation.startsWith('/admin') ? (
         <AdminNav />)
         :
         (
-          <Fade left >
-            <AppBar id="top" position="sticky" className={classes.appbar} >
-              <CssBaseline />
-              {
-                isReady ? (
-                  isMobile ? <Toolbar className={classes.toolbar} >
-                    <DrawerComponent />
-                    {isMobile ? (
-                      <Typography variant="h4" className={classes.logo}>
+          <AppBar id="top" position="sticky" className={classes.appbar} >
+            {
+              isMobile ?
+              <Toolbar className={classes.toolbar} >
+                    {/* <DrawerComponent/> */}
+                    <IconButton onClick={() => setOpen(!open)} style={{ position: "absolute", left: "-22vw" }}>
+                      <MenuIcon />
+                    </IconButton>
+                    <Box>
                         <img src="/images/logo.png" alt="logo" className={classes.logo} />
-                      </Typography>
-                    ) : (
-                      <div className={classes.navlinks}>
-                        <Link to="/" className={classes.link}>
-                          HOME
-                        </Link>
-                        {categoryData.map((data, index) => (
-                          <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
-                            {data.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                    </Box>
                   </Toolbar>
-                    :
+                  : null
+            }
+            <Box sx={{ minWidth: "1200px", maxWidth: "1200px" }} className={classes.innerBox}>
+              {
+                isReady && !isMobile ? (
                     <Toolbar >
                       <Typography variant="h4" className={classes.logo}>
                         <img src="/images/logo.png" alt="logo" style={{ verticalAlign: "none !important" }} />
 
                       </Typography>
+                      {/* <ExtraNav open={showDrop} setdrop={setDrop} /> */}
                       {isMobile ? (
                         <DrawerComponent />
                       ) : (
@@ -137,7 +150,7 @@ function Navbar() {
                             HOME
                           </Link>
                           {categoryData.map((data, index) => (
-                            <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
+                            <Link key={index} to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>
                               {data.name}
                             </Link>
                           ))}
@@ -147,8 +160,8 @@ function Navbar() {
                 )
                   :
                   null}
-            </AppBar>
-          </Fade>
+            </Box>
+          </AppBar>
         )
       }
     </Box>
