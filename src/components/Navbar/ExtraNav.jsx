@@ -27,10 +27,14 @@ const useStyles = makeStyles(() => ({
     },
     hideBox:{
         display: "none"
+    },
+    listItem: {
+      paddingTop: "0px !important",
+      paddingBottom: "0px !important",
     }
   }));
 
-export default function ExtraNav({open}) {
+export default function ExtraNav({open,setOpen}) {
     const classes = useStyles();
     const [categoryData, setCategoryData] = useState([]);
   
@@ -45,14 +49,14 @@ export default function ExtraNav({open}) {
     return (
         <Box className={`${open ? classes.showBox : classes.hideBox}`} marginTop={"55px"}>
             <List>
-          <ListItem >
-            <ListItemText>
+          <ListItem className={classes.listItem}>
+            <ListItemText onClick={() => setOpen(false)}>
               <Link to="/" className={classes.link}>Home</Link>
             </ListItemText>
           </ListItem>
           {categoryData.map((data, index) => (
-          <ListItem key={index} >
-            <ListItemText>
+          <ListItem key={index} className={classes.listItem}>
+            <ListItemText onClick={() => setOpen(false)}>
               <Link to={`/more/${data.slug}?id=${data._id}`} className={classes.link}>{data.name}</Link>
             </ListItemText>
           </ListItem>

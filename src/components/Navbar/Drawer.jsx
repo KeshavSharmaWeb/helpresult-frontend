@@ -20,7 +20,7 @@ function DrawerComponent() {
       >
       <ExtraNav open={openDrawer} setdrop={setOpenDrawer} />
       </Drawer>
-      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)} style={{ position: "absolute", left: "-22vw" }}>
         <MenuIcon />
       </IconButton>
     </Box>

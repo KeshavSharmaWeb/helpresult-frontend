@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, makeStyles } from "@material-ui/core";
-import {FaCheckSquare} from "react-icons/fa"
+import { FaCheckSquare } from "react-icons/fa"
 
 import { Link } from "react-router-dom";
 
@@ -110,34 +110,34 @@ const useStyles = makeStyles((theme) => ({
 })
 );
 
-export default function Card({ title, records, extend, side, categoryId }) {
+export default function Card({ title, records, extend, side, categoryId, px }) {
     const classes = useStyles();
     return (
         <Box className={extend ? classes.extendCol : ""}>
-      <Box className={classes.box}>
-                    <Box className={classes.top}>
-                        {title}
-                    </Box>
-                    <Box className={classes.mid}>
-                        {
-                            records.map((val, id) => {
-                                return (
-                                    <li key={id} className={classes.li}>
-                                        <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
-                                            <FaCheckSquare style={{ background: "white",color: "#0868fe", fontSize: "15px", marginRight: "5px" }} />
-                                            {val.post_display_name}
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        }
-                    </Box>
-                    <Box style={{ textAlign: "end" }}>
-                        <button className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </button>
-                    </Box>
-
+            <Box className={classes.box} sx={{ minHeight: px ? "390px !important" : "", maxHeight: px ? "390px !important" : "" }}>
+                <Box className={classes.top}>
+                    {title}
                 </Box>
-            
+                <Box className={classes.mid}>
+                    {
+                        records.map((val, id) => {
+                            return (
+                                <li key={id} className={classes.li}>
+                                    <a href={`/details/${val.slug}?id=${val._id}`} rel="noreferrer" className={classes.navLink} target={"_blank"}>
+                                        <FaCheckSquare style={{ background: "white", color: "#0868fe", fontSize: "15px", marginRight: "5px" }} />
+                                        {val.post_display_name}
+                                    </a>
+                                </li>
+                            )
+                        })
+                    }
+                </Box>
+                <Box style={{ textAlign: "end" }}>
+                    <button className={classes.button}> <Link to={`/more/posts/?id=${categoryId}`} className={classes.links} > Read More </Link> </button>
+                </Box>
+
+            </Box>
+
         </Box>
     )
 }

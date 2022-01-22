@@ -124,7 +124,7 @@ function Navbar({ open, setOpen }) {
               isMobile ?
               <Toolbar className={classes.toolbar} >
                     {/* <DrawerComponent/> */}
-                    <IconButton onClick={() => setOpen(!open)} >
+                    <IconButton onClick={() => setOpen(!open)} style={{ position: "absolute", left: "-22vw" }}>
                       <MenuIcon />
                     </IconButton>
                     <Box>
