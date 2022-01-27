@@ -26,7 +26,7 @@ export default function Result() {
 
     return (
         <Box marginTop={"75px"}>
-            {ready ? <TableBox title={categoryName} data={data} /> : ''}
+            {ready ? <TableBox title={categoryName} data={data} /> : <Box style={{ textAlign: "center" }}>Loading...</Box>}
         </Box>
     )
 }

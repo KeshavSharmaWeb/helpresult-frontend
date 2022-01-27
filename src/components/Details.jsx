@@ -101,7 +101,7 @@ export default function Details() {
                     {parse(more_data_html)}
                 </Box>
             </Box>
-            : ''}
+            : <Box style={{ textAlign: "center" }}>Loading...</Box>}
 
         </Box>
     )

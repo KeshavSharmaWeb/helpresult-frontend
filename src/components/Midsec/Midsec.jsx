@@ -9,6 +9,7 @@ import { url } from '../../config';
 export default function Midsec() {
     const [records, setRecords] = useState([])
     const [isReady, setIsReady] = useState(false)
+    const [newsRecords, setNewsRecords] = useState([])
 
     const useStyles = makeStyles((theme) => ({
         box: {
@@ -63,8 +64,12 @@ export default function Midsec() {
     }))
 
     useEffect(() => {
-        axios.get(`${url}/news-records`).then(res => {
+        axios.get(`${url}/news-records?box=yes`).then(res => {
             setRecords(res.data)
+        }
+        )
+        axios.get(`${url}/news-records?box=no`).then(res => {
+            setNewsRecords(res.data)
             setIsReady(true)
         }
         )
@@ -72,32 +77,34 @@ export default function Midsec() {
     const classes = useStyles();
     return (
         <Box className={classes.box}>
+            {isReady ? 
                 <Box className={classes.upperBox}>
                     {/* eslint-disable-next-line */}
                     <marquee behavior="alternate" direction="ltr" align="center" id="marquee-1">
                         <Box onMouseOver={() => document.getElementById('marquee-1').stop()} onMouseOut={() => document.getElementById('marquee-1').start()}>
-                            <Link to="/" className={classes.lineOne}> UP NTSE Online 2020 </Link> ||
-                            <Link to="/" className={classes.lineOne}> UP NTSE Online 2020 </Link> ||
-                            <Link to="/" className={classes.lineOne}> UP NTSE Online 2020 </Link>
+                            <Link to={`/details/${newsRecords[0].name}/?id=${newsRecords[0].recordId}`} className={classes.lineOne}> {newsRecords[0].name} </Link> ||
+                            <Link to={`/details/${newsRecords[1].name}/?id=${newsRecords[1].recordId}`} className={classes.lineOne}> {newsRecords[1].name} </Link> ||
+                            <Link to={`/details/${newsRecords[2].name}/?id=${newsRecords[2].recordId}`} className={classes.lineOne}> {newsRecords[2].name} </Link>
                         </Box>
                     </marquee>
                     {/* eslint-disable-next-line */}
                     <marquee behavior="alternate" direction="ltr" align="center" id="marquee-2">
                     <Box onMouseOver={() => document.getElementById('marquee-2').stop()} onMouseOut={() => document.getElementById('marquee-2').start()}>
-                            <Link to="/" className={classes.lineTwo}> UP NTSE Online 2020 </Link> ||
-                            <Link to="/" className={classes.lineTwo}> Allahabad University Online Counseling 2020 </Link> ||
-                            <Link to="/" className={classes.lineTwo}> UP NTSE Online 2020 </Link>
+                            <Link to={`/details/${newsRecords[3].name}/?id=${newsRecords[3].recordId}`} className={classes.lineTwo}> {newsRecords[3].name} </Link> ||
+                            <Link to={`/details/${newsRecords[4].name}/?id=${newsRecords[4].recordId}`} className={classes.lineTwo}> {newsRecords[4].name} </Link> ||
+                            <Link to={`/details/${newsRecords[5].name}/?id=${newsRecords[5].recordId}`} className={classes.lineTwo}> {newsRecords[5].name} </Link>
                         </Box>
                     </marquee>
                     {/* eslint-disable-next-line */}
                     <marquee behavior="alternate" direction="ltr" align="center" id="marquee-3">
                         <Box onMouseOver={() => document.getElementById('marquee-3').stop()} onMouseOut={() => document.getElementById('marquee-3').start()}>
-                            <Link to="/" className={classes.lineThree}> Allahabad University Online Counseling 2020 </Link> ||
-                            <Link to="/" className={classes.lineThree}> Allahabad University Online Counseling 2020 </Link> ||
-                            <Link to="/" className={classes.lineThree}> UP NTSE Online 2020 </Link>
+                            <Link to={`/details/${newsRecords[6].name}/?id=${newsRecords[6].recordId}`} className={classes.lineThree}> {newsRecords[6].name} </Link> ||
+                            <Link to={`/details/${newsRecords[7].name}/?id=${newsRecords[7].recordId}`} className={classes.lineThree}> {newsRecords[7].name} </Link> ||
+                            <Link to={`/details/${newsRecords[8].name}/?id=${newsRecords[8].recordId}`} className={classes.lineThree}> {newsRecords[8].name} </Link>
                         </Box>
                     </marquee>
                 </Box>
+                : null}
                 <Box className={classes.lowerBox}>
                     {isReady && records.map((record, index) => {
                             return ( <Boxex record={record} key={index} backcolor={record.fillColor} /> )

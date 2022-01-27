@@ -70,9 +70,10 @@ const NewsRecord = () => {
                                             <td>{index + 1}</td>
                                             <td><input type="text" defaultValue={newsRecord.name} id={`name-${newsRecord._id}`} style={{ textAlign: "center" }} /></td>
                                             <td><input type="text" defaultValue={newsRecord.recordId} id={`record-${newsRecord._id}`} style={{ textAlign: "center" }} /> </td>
-                                            <td><input type="text" defaultValue={newsRecord.fillColor} id={`color-${newsRecord._id}`} style={{ textAlign: "center" }} /></td>
+                                            <td>{newsRecord.box ? <input type="text" defaultValue={newsRecord.fillColor} id={`color-${newsRecord._id}`} style={{ textAlign: "center" }} />: <><p>N/A</p>
+                                            <input type="hidden" id={`color-${newsRecord._id}`} value={"NA"}/></>}</td>
                                             <td>{newsRecord.datetime}</td>
-                                            <td>Box</td>
+                                            <td>{newsRecord.box ? "Box": "Moving Text"}</td>
                                             <td><Button variant="outline-dark" size="sm" onClick={() => updateNewsRecord(
                                                 newsRecord._id,
                                                 document.getElementById(`name-${newsRecord._id}`).value === "" ? newsRecord.name : document.getElementById(`name-${newsRecord._id}`).value,
